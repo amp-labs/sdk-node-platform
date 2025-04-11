@@ -1,0 +1,38 @@
+speakeasyVersion: 1.468.7
+sources:
+    sdk-node-platform-OAS:
+        sourceNamespace: sdk-node-platform-oas
+        sourceRevisionDigest: sha256:ad3acd57e3d92f34c74c9a295dcc8f18c53d2dab168ebd99d7155119ded3b857
+        sourceBlobDigest: sha256:ecf1fb4109d56a4d95f4be0c7c4f8385c95bbd66da10290b75f7def0e6225572
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    sdk-node-platform:
+        source: sdk-node-platform-OAS
+        sourceNamespace: sdk-node-platform-oas
+        sourceRevisionDigest: sha256:ad3acd57e3d92f34c74c9a295dcc8f18c53d2dab168ebd99d7155119ded3b857
+        sourceBlobDigest: sha256:ecf1fb4109d56a4d95f4be0c7c4f8385c95bbd66da10290b75f7def0e6225572
+        codeSamplesNamespace: sdk-node-platform-oas-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:f1814e4e0a9359089f42aaca4dcf0928d2b1f45f3a604979e3809399c06c7c0d
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        sdk-node-platform-OAS:
+            inputs:
+                - location: https://raw.githubusercontent.com/amp-labs/openapi/main/api/generated/api.json
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/ampersand/ts/sdk-node-platform-oas
+    targets:
+        sdk-node-platform:
+            target: typescript
+            source: sdk-node-platform-OAS
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/ampersand/ts/sdk-node-platform-oas-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

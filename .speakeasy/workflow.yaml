@@ -1,0 +1,20 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    sdk-node-platform-OAS:
+        inputs:
+            - location: https://raw.githubusercontent.com/amp-labs/openapi/main/api/generated/api.json
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/ampersand/ts/sdk-node-platform-oas
+targets:
+    sdk-node-platform:
+        target: typescript
+        source: sdk-node-platform-OAS
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/ampersand/ts/sdk-node-platform-oas-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

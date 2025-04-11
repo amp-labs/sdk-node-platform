@@ -1,0 +1,587 @@
+overlay: 1.0.0
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/projects/{projectIdOrName}/provider-apps/{providerAppId}"]["delete"]
+    update:
+      x-speakeasy-group: providerApps
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Provider App.deleteProviderApp()
+      after: sdk.providerApps.delete()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/orgs/{orgId}"]["patch"]
+    update:
+      x-speakeasy-group: orgs
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Org.updateOrg()
+      after: sdk.orgs.update()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/consumers"]["post"]
+    update:
+      x-speakeasy-group: consumers
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Consumer.createConsumer()
+      after: sdk.consumers.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/api-keys"]["get"]
+    update:
+      x-speakeasy-group: apiKeys
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.API Key.listApiKeys()
+      after: sdk.apiKeys.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/revisions/{revisionId}:hydrate"]["get"]
+    update:
+      x-speakeasy-group: revisions
+      x-speakeasy-name-override: hydrate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Revision.getHydratedRevision()
+      after: sdk.revisions.hydrate()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/revisions"]["post"]
+    update:
+      x-speakeasy-group: revisions
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Revision.createRevision()
+      after: sdk.revisions.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations"]["post"]
+    update:
+      x-speakeasy-group: integrations
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Integration.createIntegration()
+      after: sdk.integrations.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/installations"]["get"]
+    update:
+      x-speakeasy-group: installations
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Installation.listInstallations()
+      after: sdk.installations.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/orgs/{orgId}/builders"]["get"]
+    update:
+      x-speakeasy-group: orgBuilders
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Org.listOrgBuilders()
+      after: sdk.orgBuilders.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/provider-apps"]["post"]
+    update:
+      x-speakeasy-group: providerApps
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Provider App.createProviderApp()
+      after: sdk.providerApps.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects"]["post"]
+    update:
+      x-speakeasy-group: projects
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Project.createProject()
+      after: sdk.projects.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/api-keys/{apiKey}"]["delete"]
+    update:
+      x-speakeasy-group: apiKeys
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.API Key.deleteApiKey()
+      after: sdk.apiKeys.delete()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/operations/{operationId}"]["get"]
+    update:
+      x-speakeasy-group: operations
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Operation.getOperation()
+      after: sdk.operations.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/connections"]["get"]
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Connection.listConnections()
+      after: sdk.connections.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/installations/{installationId}"]["get"]
+    update:
+      x-speakeasy-group: installations
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Installation.getInstallation()
+      after: sdk.installations.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/connections/{connectionId}"]["get"]
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Connection.getConnection()
+      after: sdk.connections.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/objects/{objectName}/metadata"]["get"]
+    update:
+      x-speakeasy-group: objectsAndFields
+      x-speakeasy-name-override: getMetadata
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Objects & Fields.getObjectMetadataForInstallation()
+      after: sdk.objectsAndFields.getMetadata()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}"]["delete"]
+    update:
+      x-speakeasy-group: projects
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Project.deleteProject()
+      after: sdk.projects.delete()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/provider-apps"]["get"]
+    update:
+      x-speakeasy-group: providerApps
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Provider App.listProviderApps()
+      after: sdk.providerApps.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/generate-upload-url"]["get"]
+    update:
+      x-speakeasy-group: uploadUrls
+      x-speakeasy-name-override: generate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Upload URL.generateUploadUrl()
+      after: sdk.uploadUrls.generate()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/connections:generate"]["post"]
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: generate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Connection.generateConnection()
+      after: sdk.connections.generate()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/installations/{installationId}"]["delete"]
+    update:
+      x-speakeasy-group: installations
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Installation.deleteInstallation()
+      after: sdk.installations.delete()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/connections/{connectionId}"]["patch"]
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Connection.updateConnection()
+      after: sdk.connections.update()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects"]["get"]
+    update:
+      x-speakeasy-group: projects
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Project.listProjects()
+      after: sdk.projects.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}"]["patch"]
+    update:
+      x-speakeasy-group: projects
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Project.updateProject()
+      after: sdk.projects.update()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/providers"]["get"]
+    update:
+      x-speakeasy-group: providers
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Provider.listProviders()
+      after: sdk.providers.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/orgs"]["post"]
+    update:
+      x-speakeasy-group: orgs
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Org.createOrg()
+      after: sdk.orgs.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/providers/{provider}/objects/{objectName}/metadata"]["get"]
+    update:
+      x-speakeasy-group: objectsAndFields
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Objects & Fields.getObjectMetadataForConnection()
+      after: sdk.objectsAndFields.getObjectMetadataForConnection()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/billingAccounts/{billingAccountId}/portalSession"]["post"]
+    update:
+      x-speakeasy-group: billingAccounts
+      x-speakeasy-name-override: createSession
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Billing Account.createBillingAccountSession()
+      after: sdk.billingAccounts.createSession()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/orgs/{orgId}/invites"]["get"]
+    update:
+      x-speakeasy-group: orgInvites
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Org.listOrgInvites()
+      after: sdk.orgInvites.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/installations"]["post"]
+    update:
+      x-speakeasy-group: installations
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Installation.createInstallation()
+      after: sdk.installations.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/connections/{connectionId}"]["delete"]
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Connection.deleteConnection()
+      after: sdk.connections.delete()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/groups"]["post"]
+    update:
+      x-speakeasy-group: groups
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Group.createGroup()
+      after: sdk.groups.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/providers/{provider}"]["get"]
+    update:
+      x-speakeasy-group: providers
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Provider.getProvider()
+      after: sdk.providers.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/api-keys/{apiKey}"]["patch"]
+    update:
+      x-speakeasy-group: apiKeys
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.API Key.updateApiKey()
+      after: sdk.apiKeys.update()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/installations/{installationId}/operations"]["get"]
+    update:
+      x-speakeasy-group: operations
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Operation.listOperations()
+      after: sdk.operations.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations"]["get"]
+    update:
+      x-speakeasy-group: integrations
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Integration.listIntegrations()
+      after: sdk.integrations.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/connections/{connectionId}:oauth-update"]["patch"]
+    update:
+      x-speakeasy-group: oauth
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.OAuth.oauthUpdate()
+      after: sdk.oauth.update()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/orgs/{orgId}/invites/{inviteId}"]["delete"]
+    update:
+      x-speakeasy-group: orgs
+      x-speakeasy-name-override: deleteInvite
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Org.deleteOrgInvite()
+      after: sdk.orgs.deleteInvite()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/destinations"]["get"]
+    update:
+      x-speakeasy-group: destinations
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Destination.listDestinations()
+      after: sdk.destinations.list()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}/installations/{installationId}"]["patch"]
+    update:
+      x-speakeasy-group: installations
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Installation.updateInstallation()
+      after: sdk.installations.update()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/api-keys/{apiKey}"]["get"]
+    update:
+      x-speakeasy-group: apiKeys
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.API Key.getApiKey()
+      after: sdk.apiKeys.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations:batch"]["put"]
+    update:
+      x-speakeasy-group: integrations
+      x-speakeasy-name-override: batchUpsert
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Integration.batchUpsertIntegrations()
+      after: sdk.integrations.batchUpsert()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/destinations"]["post"]
+    update:
+      x-speakeasy-group: destinations
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Destination.createDestination()
+      after: sdk.destinations.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/operations/{operationId}/logs"]["get"]
+    update:
+      x-speakeasy-group: operations
+      x-speakeasy-name-override: listLogs
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Operation.listOperationLogs()
+      after: sdk.operations.listLogs()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/orgs/{orgId}/billingAccount"]["get"]
+    update:
+      x-speakeasy-group: billingAccounts
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Billing Account.getOrgBillingAccount()
+      after: sdk.billingAccounts.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/oauth-connect"]["post"]
+    update:
+      x-speakeasy-group: oauth
+      x-speakeasy-name-override: connect
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.OAuth.oauthConnect()
+      after: sdk.oauth.connect()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/destinations/{destination}"]["patch"]
+    update:
+      x-speakeasy-group: destinations
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Destination.updateDestination()
+      after: sdk.destinations.update()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/invites:accept"]["post"]
+    update:
+      x-speakeasy-group: users
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.User.acceptInvite()
+      after: sdk.users.acceptInvite()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}"]["get"]
+    update:
+      x-speakeasy-group: projects
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Project.getProject()
+      after: sdk.projects.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/integrations/{integrationId}"]["delete"]
+    update:
+      x-speakeasy-group: integrations
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Integration.deleteIntegration()
+      after: sdk.integrations.delete()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/api-keys"]["post"]
+    update:
+      x-speakeasy-group: apiKeys
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.API Key.createApiKey()
+      after: sdk.apiKeys.create()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/orgs/{orgId}/invites"]["post"]
+    update:
+      x-speakeasy-group: orgs
+      x-speakeasy-name-override: createInvite
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Org.createOrgInvite()
+      after: sdk.orgs.createInvite()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/orgs/{orgId}/invites/{inviteId}"]["get"]
+    update:
+      x-speakeasy-group: orgInvites
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Org.getOrgInvite()
+      after: sdk.orgInvites.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/orgs/{orgId}"]["get"]
+    update:
+      x-speakeasy-group: orgs
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Org.getOrg()
+      after: sdk.orgs.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063642
+  - target: $["paths"]["/projects/{projectIdOrName}/destinations/{destination}"]["get"]
+    update:
+      x-speakeasy-group: destinations
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Destination.getDestination()
+      after: sdk.destinations.get()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/destinations/{destination}"]["delete"]
+    update:
+      x-speakeasy-group: destinations
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Destination.deleteDestination()
+      after: sdk.destinations.delete()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
+  - target: $["paths"]["/projects/{projectIdOrName}/provider-apps/{providerAppId}"]["patch"]
+    update:
+      x-speakeasy-group: providerApps
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Provider App.updateProviderApp()
+      after: sdk.providerApps.update()
+      reviewed_at: 1744378074766
+      created_at: 1744378063643
