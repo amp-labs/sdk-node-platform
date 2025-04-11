@@ -44,7 +44,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: commonjs
   outputModelSuffix: output
-  packageName: @amp-labs/sdk-node-platform
+  packageName: "@amp-labs/sdk-node-platform"
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true
