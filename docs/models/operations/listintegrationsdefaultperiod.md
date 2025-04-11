@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ListIntegrationsDefaultPeriod } from "sdk-node-platform/models/operations";
+import { ListIntegrationsDefaultPeriod } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListIntegrationsDefaultPeriod = {
   days: 30,

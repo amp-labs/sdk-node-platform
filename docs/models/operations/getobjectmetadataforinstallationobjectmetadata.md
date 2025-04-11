@@ -5,7 +5,7 @@ The retrieved object metadata
 ## Example Usage
 
 ```typescript
-import { GetObjectMetadataForInstallationObjectMetadata } from "sdk-node-platform/models/operations";
+import { GetObjectMetadataForInstallationObjectMetadata } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetObjectMetadataForInstallationObjectMetadata = {
   name: "contact",

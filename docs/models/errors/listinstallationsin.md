@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { ListInstallationsIn } from "sdk-node-platform/models/errors";
+import { ListInstallationsIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: ListInstallationsIn = "body";
+let value: ListInstallationsIn = "query";
 ```
 
 ## Values

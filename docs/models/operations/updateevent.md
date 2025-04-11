@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { UpdateEvent } from "sdk-node-platform/models/operations";
+import { UpdateEvent } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateEvent = {
   watchFieldsAuto: "all",

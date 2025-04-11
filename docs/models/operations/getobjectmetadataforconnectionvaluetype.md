@@ -5,9 +5,9 @@ A normalized field type
 ## Example Usage
 
 ```typescript
-import { GetObjectMetadataForConnectionValueType } from "sdk-node-platform/models/operations";
+import { GetObjectMetadataForConnectionValueType } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: GetObjectMetadataForConnectionValueType = "int";
+let value: GetObjectMetadataForConnectionValueType = "datetime";
 ```
 
 ## Values

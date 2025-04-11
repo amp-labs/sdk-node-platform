@@ -18,7 +18,7 @@ List connections
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -42,8 +42,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { connectionsList } from "sdk-node-platform/funcs/connectionsList.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { connectionsList } from "@amp-labs/sdk-node-platform/funcs/connectionsList.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -97,7 +97,7 @@ For providers which support OAuth2 Authorization Code, it is recommended that yo
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -125,8 +125,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { connectionsGenerate } from "sdk-node-platform/funcs/connectionsGenerate.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { connectionsGenerate } from "@amp-labs/sdk-node-platform/funcs/connectionsGenerate.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -185,7 +185,7 @@ Get a connection
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -209,8 +209,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { connectionsGet } from "sdk-node-platform/funcs/connectionsGet.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { connectionsGet } from "@amp-labs/sdk-node-platform/funcs/connectionsGet.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -264,7 +264,7 @@ Update an existing connection.
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -291,8 +291,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { connectionsUpdate } from "sdk-node-platform/funcs/connectionsUpdate.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { connectionsUpdate } from "@amp-labs/sdk-node-platform/funcs/connectionsUpdate.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -349,7 +349,7 @@ Delete a connection
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -373,8 +373,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { connectionsDelete } from "sdk-node-platform/funcs/connectionsDelete.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { connectionsDelete } from "@amp-labs/sdk-node-platform/funcs/connectionsDelete.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

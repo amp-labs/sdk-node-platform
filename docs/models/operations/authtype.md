@@ -5,9 +5,9 @@ The type of authentication required by the provider.
 ## Example Usage
 
 ```typescript
-import { AuthType } from "sdk-node-platform/models/operations";
+import { AuthType } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: AuthType = "jwt";
+let value: AuthType = "basic";
 ```
 
 ## Values

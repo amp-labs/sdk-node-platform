@@ -17,7 +17,7 @@ const value: operations.ListDestinationsDestination[] = [
         "Authorization": "Bearer 1234",
       },
     },
-    createTime: new Date("2025-08-08T13:10:49.877Z"),
+    createTime: new Date("2023-01-10T16:13:34.430Z"),
   },
 ];
 ```
@@ -26,7 +26,6 @@ const value: operations.ListDestinationsDestination[] = [
 
 ```typescript
 const value: operations.ListDestinationsAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

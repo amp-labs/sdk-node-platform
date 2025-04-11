@@ -5,7 +5,7 @@ The project fields to update. (Only include the fields you'd like to update.)
 ## Example Usage
 
 ```typescript
-import { Project } from "sdk-node-platform/models/operations";
+import { Project } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Project = {
   appName: "MailMonkey",

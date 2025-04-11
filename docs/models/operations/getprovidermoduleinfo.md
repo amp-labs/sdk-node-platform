@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { GetProviderModuleInfo } from "sdk-node-platform/models/operations";
+import { GetProviderModuleInfo } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProviderModuleInfo = {
-  displayName: "Caesar_Borer",
-  baseURL: "https://torn-railway.biz",
+  displayName: "Tressie55",
+  baseURL: "https://free-gloom.name/",
   support: {
     bulkWrite: {
       insert: false,

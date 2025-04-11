@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsBackfill } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsBackfill } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsBackfill = {
   defaultPeriod: {

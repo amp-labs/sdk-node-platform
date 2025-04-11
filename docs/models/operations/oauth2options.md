@@ -5,10 +5,10 @@ Configuration for OAuth2.0. Must be provided if authType is oauth2.
 ## Example Usage
 
 ```typescript
-import { OAuth2Options } from "sdk-node-platform/models/operations";
+import { OAuth2Options } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: OAuth2Options = {
-  grantType: "clientCredentials",
+  grantType: "authorizationCodePKCE",
   authURL: "https://login.salesforce.com/services/oauth2/authorize",
   tokenURL: "https://login.salesforce.com/services/oauth2/token",
   explicitScopesRequired: true,

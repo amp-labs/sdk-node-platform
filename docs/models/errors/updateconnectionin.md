@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { UpdateConnectionIn } from "sdk-node-platform/models/errors";
+import { UpdateConnectionIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: UpdateConnectionIn = "path";
+let value: UpdateConnectionIn = "query";
 ```
 
 ## Values

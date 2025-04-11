@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { OauthUpdateRequest } from "sdk-node-platform/models/operations";
+import { OauthUpdateRequest } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: OauthUpdateRequest = {
   projectIdOrName: "<value>",

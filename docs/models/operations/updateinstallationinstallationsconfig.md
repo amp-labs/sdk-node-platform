@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { UpdateInstallationInstallationsConfig } from "sdk-node-platform/models/operations";
+import { UpdateInstallationInstallationsConfig } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateInstallationInstallationsConfig = {
   id: "config-123",
   revisionId: "revision-123",
-  createTime: new Date("2024-08-28T04:52:14.624Z"),
+  createTime: new Date("2025-03-04T11:04:45.626Z"),
   createdBy: "builder:builder-123",
   content: {
     provider: "salesforce",

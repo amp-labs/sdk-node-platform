@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetHydratedRevisionDefaultPeriod } from "sdk-node-platform/models/operations";
+import { GetHydratedRevisionDefaultPeriod } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetHydratedRevisionDefaultPeriod = {
   days: 30,

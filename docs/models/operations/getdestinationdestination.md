@@ -5,7 +5,7 @@ OK
 ## Example Usage
 
 ```typescript
-import { GetDestinationDestination } from "sdk-node-platform/models/operations";
+import { GetDestinationDestination } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetDestinationDestination = {
   id: "<id>",
@@ -17,7 +17,7 @@ let value: GetDestinationDestination = {
       "Authorization": "Bearer 1234",
     },
   },
-  createTime: new Date("2025-10-27T11:16:32.408Z"),
+  createTime: new Date("2025-07-27T19:45:11.516Z"),
 };
 ```
 

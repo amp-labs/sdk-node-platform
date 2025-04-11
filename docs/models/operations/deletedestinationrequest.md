@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { DeleteDestinationRequest } from "sdk-node-platform/models/operations";
+import { DeleteDestinationRequest } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: DeleteDestinationRequest = {
   projectIdOrName: "my-project",

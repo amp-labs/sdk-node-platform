@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CreateDestinationRequestBody } from "sdk-node-platform/models/operations";
+import { CreateDestinationRequestBody } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateDestinationRequestBody = {
   name: "leadConvertedWebhook",

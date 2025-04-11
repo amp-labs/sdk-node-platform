@@ -5,7 +5,7 @@ Configuration for API key. Must be provided if authType is apiKey.
 ## Example Usage
 
 ```typescript
-import { APIKeyOptions } from "sdk-node-platform/models/operations";
+import { APIKeyOptions } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: APIKeyOptions = {
   attachmentType: "query",

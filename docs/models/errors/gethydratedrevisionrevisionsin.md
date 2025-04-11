@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { GetHydratedRevisionRevisionsIn } from "sdk-node-platform/models/errors";
+import { GetHydratedRevisionRevisionsIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: GetHydratedRevisionRevisionsIn = "header";
+let value: GetHydratedRevisionRevisionsIn = "path";
 ```
 
 ## Values

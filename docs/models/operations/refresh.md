@@ -5,9 +5,9 @@ Whether to refresh the access token. If value is `ifExpired`, the access token w
 ## Example Usage
 
 ```typescript
-import { Refresh } from "sdk-node-platform/models/operations";
+import { Refresh } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: Refresh = "force";
+let value: Refresh = "ifExpired";
 ```
 
 ## Values

@@ -21,6 +21,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 export enum UpdateAcceptEnum {
@@ -31,11 +32,11 @@ export enum UpdateAcceptEnum {
 /**
  * Update a destination
  */
-export async function destinationsUpdate(
+export function destinationsUpdate(
   client: SDKNodePlatformCore,
   request: operations.UpdateDestinationRequest,
   options?: RequestOptions & { acceptHeaderOverride?: UpdateAcceptEnum },
-): Promise<
+): APIPromise<
   Result<
     operations.UpdateDestinationResponse,
     | errors.UpdateDestinationInputValidationProblem
@@ -50,13 +51,42 @@ export async function destinationsUpdate(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.UpdateDestinationRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: UpdateAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.UpdateDestinationResponse,
+      | errors.UpdateDestinationInputValidationProblem
+      | errors.UpdateDestinationDestinationsInputValidationProblem
+      | errors.UpdateDestinationDestinationsResponseInputValidationProblem
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.UpdateDestinationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
@@ -87,6 +117,7 @@ export async function destinationsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "updateDestination",
     oAuth2Scopes: [],
 
@@ -109,7 +140,7 @@ export async function destinationsUpdate(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -120,7 +151,7 @@ export async function destinationsUpdate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -158,14 +189,15 @@ export async function destinationsUpdate(
         .UpdateDestinationDestinationsResponseInputValidationProblem$inboundSchema,
       { ctype: "application/problem+json" },
     ),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json("default", operations.UpdateDestinationResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

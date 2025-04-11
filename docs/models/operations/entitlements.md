@@ -5,7 +5,7 @@ The entitlements for the project.
 ## Example Usage
 
 ```typescript
-import { Entitlements } from "sdk-node-platform/models/operations";
+import { Entitlements } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Entitlements = {};
 ```

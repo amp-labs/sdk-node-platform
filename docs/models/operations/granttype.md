@@ -3,9 +3,9 @@
 ## Example Usage
 
 ```typescript
-import { GrantType } from "sdk-node-platform/models/operations";
+import { GrantType } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: GrantType = "authorizationCodePKCE";
+let value: GrantType = "authorizationCode";
 ```
 
 ## Values

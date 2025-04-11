@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { DeleteIntegrationIn } from "sdk-node-platform/models/errors";
+import { DeleteIntegrationIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: DeleteIntegrationIn = "header";
+let value: DeleteIntegrationIn = "path";
 ```
 
 ## Values

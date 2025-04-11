@@ -11,7 +11,7 @@ const value: operations.GetProjectProject = {
   name: "mailmonkey-staging",
   appName: "MailMonkey",
   orgId: "9f7c3e2a-61b8-4f5c-8d1a-eb24f3b05d79",
-  createTime: new Date("2024-12-08T21:35:55.501Z"),
+  createTime: new Date("2025-04-09T00:17:49.338Z"),
 };
 ```
 
@@ -19,7 +19,6 @@ const value: operations.GetProjectProject = {
 
 ```typescript
 const value: operations.GetProjectAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

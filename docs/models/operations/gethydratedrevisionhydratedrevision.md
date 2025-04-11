@@ -5,12 +5,12 @@ Hydrated revision
 ## Example Usage
 
 ```typescript
-import { GetHydratedRevisionHydratedRevision } from "sdk-node-platform/models/operations";
+import { GetHydratedRevisionHydratedRevision } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetHydratedRevisionHydratedRevision = {
   id: "revision-id-1",
   specVersion: "1.0.0",
-  createTime: new Date("2025-12-05T04:07:03.604Z"),
+  createTime: new Date("2024-02-24T07:08:05.783Z"),
   content: {
     name: "<value>",
     provider: "<value>",
@@ -19,7 +19,7 @@ let value: GetHydratedRevisionHydratedRevision = {
         {
           error: "Failed to fetch fields from provider",
           objectName: "<value>",
-          displayName: "Russ_Hessel",
+          displayName: "Emily_Sporer",
           mapToName: "people",
           mapToDisplayName: "People",
           destination: "<value>",
@@ -27,7 +27,7 @@ let value: GetHydratedRevisionHydratedRevision = {
           requiredFields: [
             {
               fieldName: "<value>",
-              displayName: "Cody34",
+              displayName: "Berta.Fisher",
               mapToName: "account_id",
               mapToDisplayName: "Account ID",
             },
@@ -40,7 +40,7 @@ let value: GetHydratedRevisionHydratedRevision = {
           allFields: [
             {
               fieldName: "<value>",
-              displayName: "Casimer.Mayert",
+              displayName: "Ernest_Doyle",
               mapToName: "account_id",
               mapToDisplayName: "Account ID",
             },
@@ -72,7 +72,7 @@ let value: GetHydratedRevisionHydratedRevision = {
       objects: [
         {
           objectName: "<value>",
-          displayName: "Kailee.Renner39",
+          displayName: "Presley_Jerde",
           valueDefaults: {
             allowAnyFields: true,
           },

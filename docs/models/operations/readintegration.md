@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ReadIntegration } from "sdk-node-platform/models/operations";
+import { ReadIntegration } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ReadIntegration = {
   objects: [
@@ -15,7 +15,9 @@ let value: ReadIntegration = {
       mapToDisplayName: "People",
       requiredFields: [
         {
-          mapToName: "<value>",
+          fieldName: "<value>",
+          mapToName: "account_id",
+          mapToDisplayName: "Account ID",
         },
       ],
       optionalFields: [

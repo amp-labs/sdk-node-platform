@@ -5,7 +5,7 @@ Connection
 ## Example Usage
 
 ```typescript
-import { GetConnectionConnection } from "sdk-node-platform/models/operations";
+import { GetConnectionConnection } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetConnectionConnection = {
   id: "connection-123",
@@ -20,7 +20,7 @@ let value: GetConnectionConnection = {
     scopes: [
       "[\"oauth\",\"offline\",\"crm.read\"]",
     ],
-    createTime: new Date("2023-01-18T21:30:17.764Z"),
+    createTime: new Date("2023-07-17T23:29:37.976Z"),
   },
   group: {
     groupRef: "group-123",

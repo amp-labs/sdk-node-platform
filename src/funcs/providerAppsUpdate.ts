@@ -21,6 +21,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 export enum UpdateAcceptEnum {
@@ -31,11 +32,11 @@ export enum UpdateAcceptEnum {
 /**
  * Update a provider app
  */
-export async function providerAppsUpdate(
+export function providerAppsUpdate(
   client: SDKNodePlatformCore,
   request: operations.UpdateProviderAppRequest,
   options?: RequestOptions & { acceptHeaderOverride?: UpdateAcceptEnum },
-): Promise<
+): APIPromise<
   Result<
     operations.UpdateProviderAppResponse,
     | errors.UpdateProviderAppInputValidationProblem
@@ -48,13 +49,40 @@ export async function providerAppsUpdate(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.UpdateProviderAppRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: UpdateAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.UpdateProviderAppResponse,
+      | errors.UpdateProviderAppInputValidationProblem
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.UpdateProviderAppRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
@@ -85,6 +113,7 @@ export async function providerAppsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "updateProviderApp",
     oAuth2Scopes: [],
 
@@ -107,7 +136,7 @@ export async function providerAppsUpdate(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -118,7 +147,7 @@ export async function providerAppsUpdate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -143,14 +172,15 @@ export async function providerAppsUpdate(
       errors.UpdateProviderAppInputValidationProblem$inboundSchema,
       { ctype: "application/problem+json" },
     ),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json("default", operations.UpdateProviderAppResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

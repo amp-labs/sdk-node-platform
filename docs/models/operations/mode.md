@@ -5,9 +5,9 @@ The data delivery mode for this object. If not specified, defaults to automatic.
 ## Example Usage
 
 ```typescript
-import { Mode } from "sdk-node-platform/models/operations";
+import { Mode } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: Mode = "onRequest";
+let value: Mode = "auto";
 ```
 
 ## Values

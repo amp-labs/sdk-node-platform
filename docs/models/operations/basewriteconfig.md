@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BaseWriteConfig } from "sdk-node-platform/models/operations";
+import { BaseWriteConfig } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BaseWriteConfig = {
   objects: {

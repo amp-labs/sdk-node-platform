@@ -3,18 +3,18 @@
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsIntegration } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsIntegration } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsIntegration = {
   id: "<id>",
   projectId: "project-456",
   name: "read-accounts",
   provider: "salesforce",
-  createTime: new Date("2023-06-26T19:05:08.010Z"),
+  createTime: new Date("2024-12-09T22:45:46.008Z"),
   latestRevision: {
     id: "revision-id-1",
     specVersion: "1.0.0",
-    createTime: new Date("2024-12-16T19:21:41.015Z"),
+    createTime: new Date("2024-07-27T02:07:09.841Z"),
     content: {
       name: "<value>",
       provider: "<value>",

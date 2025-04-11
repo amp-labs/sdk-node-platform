@@ -31,7 +31,6 @@ const value: operations.GetObjectMetadataForInstallationObjectMetadata = {
 
 ```typescript
 const value: operations.GetObjectMetadataForInstallationAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

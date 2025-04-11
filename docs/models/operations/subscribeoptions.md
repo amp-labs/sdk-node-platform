@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { SubscribeOptions } from "sdk-node-platform/models/operations";
+import { SubscribeOptions } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: SubscribeOptions = {
-  subscriptionScope: "installation",
+  subscriptionScope: "integration",
   targetURLScope: "integration",
   registrationTiming: "installation",
 };

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetHydratedRevisionBackfill } from "sdk-node-platform/models/operations";
+import { GetHydratedRevisionBackfill } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetHydratedRevisionBackfill = {
   defaultPeriod: {

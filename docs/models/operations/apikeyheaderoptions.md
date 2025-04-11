@@ -5,7 +5,7 @@ Configuration for API key in header. Must be provided if type is in-header.
 ## Example Usage
 
 ```typescript
-import { APIKeyHeaderOptions } from "sdk-node-platform/models/operations";
+import { APIKeyHeaderOptions } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: APIKeyHeaderOptions = {
   name: "X-Api-Key",

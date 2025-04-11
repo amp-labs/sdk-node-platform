@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { UpdateProjectProjectsIn } from "sdk-node-platform/models/errors";
+import { UpdateProjectProjectsIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: UpdateProjectProjectsIn = "header";
+let value: UpdateProjectProjectsIn = "query";
 ```
 
 ## Values

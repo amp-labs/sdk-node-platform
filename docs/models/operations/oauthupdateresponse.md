@@ -13,7 +13,6 @@ const value: string = "<value>";
 
 ```typescript
 const value: operations.OauthUpdateAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

@@ -8,10 +8,9 @@ Additional properties specific to the problem type may be present.
 ## Example Usage
 
 ```typescript
-import { DeleteConnectionAPIProblem } from "sdk-node-platform/models/operations";
+import { DeleteConnectionAPIProblem } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: DeleteConnectionAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

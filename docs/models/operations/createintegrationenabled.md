@@ -5,7 +5,7 @@ If always, the integration will subscribe to update events.
 ## Example Usage
 
 ```typescript
-import { CreateIntegrationEnabled } from "sdk-node-platform/models/operations";
+import { CreateIntegrationEnabled } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateIntegrationEnabled = "always";
 ```

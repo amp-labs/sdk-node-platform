@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { LatestRevision } from "sdk-node-platform/models/operations";
+import { LatestRevision } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: LatestRevision = {
   specVersion: "1.0.0",
@@ -20,7 +20,9 @@ let value: LatestRevision = {
           mapToDisplayName: "People",
           requiredFields: [
             {
-              mapToName: "<value>",
+              fieldName: "<value>",
+              mapToName: "account_id",
+              mapToDisplayName: "Account ID",
             },
           ],
           optionalFields: [

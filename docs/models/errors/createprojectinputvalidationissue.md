@@ -6,10 +6,9 @@ An issue detected during input validation.
 ## Example Usage
 
 ```typescript
-import { CreateProjectInputValidationIssue } from "sdk-node-platform/models/errors";
+import { CreateProjectInputValidationIssue } from "@amp-labs/sdk-node-platform/models/errors";
 
 let value: CreateProjectInputValidationIssue = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

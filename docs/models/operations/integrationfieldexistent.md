@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { IntegrationFieldExistent } from "sdk-node-platform/models/operations";
+import { IntegrationFieldExistent } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: IntegrationFieldExistent = {
   fieldName: "<value>",

@@ -5,7 +5,7 @@ Represents a field value
 ## Example Usage
 
 ```typescript
-import { GetHydratedRevisionFieldValue } from "sdk-node-platform/models/operations";
+import { GetHydratedRevisionFieldValue } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetHydratedRevisionFieldValue = {
   value: "outbound",

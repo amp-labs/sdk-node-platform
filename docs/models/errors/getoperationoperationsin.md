@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { GetOperationOperationsIn } from "sdk-node-platform/models/errors";
+import { GetOperationOperationsIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: GetOperationOperationsIn = "path";
+let value: GetOperationOperationsIn = "header";
 ```
 
 ## Values

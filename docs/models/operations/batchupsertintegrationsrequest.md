@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsRequest } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsRequest } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsRequest = {
   projectIdOrName: "my-project",

@@ -5,9 +5,9 @@ The timing of the registration.
 ## Example Usage
 
 ```typescript
-import { GetProviderRegistrationTiming } from "sdk-node-platform/models/operations";
+import { GetProviderRegistrationTiming } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: GetProviderRegistrationTiming = "providerApp";
+let value: GetProviderRegistrationTiming = "integration";
 ```
 
 ## Values

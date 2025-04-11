@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CreateIntegrationRequest } from "sdk-node-platform/models/operations";
+import { CreateIntegrationRequest } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateIntegrationRequest = {
   projectIdOrName: "my-project",
@@ -25,9 +25,7 @@ let value: CreateIntegrationRequest = {
               mapToDisplayName: "People",
               requiredFields: [
                 {
-                  fieldName: "<value>",
-                  mapToName: "account_id",
-                  mapToDisplayName: "Account ID",
+                  mapToName: "<value>",
                 },
               ],
               optionalFields: [

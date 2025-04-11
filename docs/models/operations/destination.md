@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Destination } from "sdk-node-platform/models/operations";
+import { Destination } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Destination = {
   name: "leadConvertedWebhook",

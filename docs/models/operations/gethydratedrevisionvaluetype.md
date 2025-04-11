@@ -5,9 +5,9 @@ A normalized field type
 ## Example Usage
 
 ```typescript
-import { GetHydratedRevisionValueType } from "sdk-node-platform/models/operations";
+import { GetHydratedRevisionValueType } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: GetHydratedRevisionValueType = "int";
+let value: GetHydratedRevisionValueType = "float";
 ```
 
 ## Values

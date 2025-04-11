@@ -5,7 +5,7 @@ Updated
 ## Example Usage
 
 ```typescript
-import { UpdateDestinationDestination } from "sdk-node-platform/models/operations";
+import { UpdateDestinationDestination } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateDestinationDestination = {
   id: "<id>",
@@ -17,7 +17,7 @@ let value: UpdateDestinationDestination = {
       "Authorization": "Bearer 1234",
     },
   },
-  createTime: new Date("2025-02-05T17:37:20.583Z"),
+  createTime: new Date("2023-10-29T09:52:46.073Z"),
 };
 ```
 

@@ -15,7 +15,7 @@ const value: operations.CreateProviderAppProviderApp = {
   scopes: [
     "[\"oauth\",\"offline\",\"crm.read\"]",
   ],
-  createTime: new Date("2024-08-02T16:03:07.089Z"),
+  createTime: new Date("2024-02-28T07:51:52.473Z"),
 };
 ```
 
@@ -23,7 +23,6 @@ const value: operations.CreateProviderAppProviderApp = {
 
 ```typescript
 const value: operations.CreateProviderAppAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

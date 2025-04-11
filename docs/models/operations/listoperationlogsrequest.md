@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ListOperationLogsRequest } from "sdk-node-platform/models/operations";
+import { ListOperationLogsRequest } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListOperationLogsRequest = {
   projectIdOrName: "my-project",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { WriteIntegration } from "sdk-node-platform/models/operations";
+import { WriteIntegration } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: WriteIntegration = {
   objects: [

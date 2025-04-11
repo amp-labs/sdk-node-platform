@@ -5,7 +5,7 @@ Metadata associated with the operation.
 ## Example Usage
 
 ```typescript
-import { GetOperationMetadata } from "sdk-node-platform/models/operations";
+import { GetOperationMetadata } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetOperationMetadata = {};
 ```

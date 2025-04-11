@@ -5,7 +5,7 @@ whether the API key should be used as the username or password.
 ## Example Usage
 
 ```typescript
-import { GetProviderFieldUsed } from "sdk-node-platform/models/operations";
+import { GetProviderFieldUsed } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProviderFieldUsed = "username";
 ```

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ValueDefaultString } from "sdk-node-platform/models/operations";
+import { ValueDefaultString } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ValueDefaultString = {
   value: "<value>",

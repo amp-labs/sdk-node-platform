@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ListDestinationsDestination } from "sdk-node-platform/models/operations";
+import { ListDestinationsDestination } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListDestinationsDestination = {
   id: "<id>",
@@ -15,7 +15,7 @@ let value: ListDestinationsDestination = {
       "Authorization": "Bearer 1234",
     },
   },
-  createTime: new Date("2024-11-25T20:40:31.589Z"),
+  createTime: new Date("2024-01-12T03:36:16.826Z"),
 };
 ```
 

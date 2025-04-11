@@ -17,7 +17,7 @@ const value: operations.ValueDefaultString = {
 
 ```typescript
 const value: operations.ValueDefaultInteger = {
-  value: 940432,
+  value: 215118,
 };
 ```
 

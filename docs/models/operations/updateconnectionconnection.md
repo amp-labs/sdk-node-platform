@@ -5,7 +5,7 @@ Connection updated successfully.
 ## Example Usage
 
 ```typescript
-import { UpdateConnectionConnection } from "sdk-node-platform/models/operations";
+import { UpdateConnectionConnection } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateConnectionConnection = {
   id: "connection-123",
@@ -20,7 +20,7 @@ let value: UpdateConnectionConnection = {
     scopes: [
       "[\"oauth\",\"offline\",\"crm.read\"]",
     ],
-    createTime: new Date("2025-07-08T18:01:50.419Z"),
+    createTime: new Date("2024-03-07T23:31:11.033Z"),
   },
   group: {
     groupRef: "group-123",

@@ -32,7 +32,6 @@ const value: operations.ListOperationsResponseBody = {
 
 ```typescript
 const value: operations.ListOperationsAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { FieldSetting } from "sdk-node-platform/models/operations";
+import { FieldSetting } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: FieldSetting = {};
 ```

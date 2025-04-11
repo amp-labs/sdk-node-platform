@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsIntegrationWriteObject } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsIntegrationWriteObject } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsIntegrationWriteObject = {
   objectName: "<value>",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GenerateConnectionConsumer } from "sdk-node-platform/models/operations";
+import { GenerateConnectionConsumer } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GenerateConnectionConsumer = {
   consumerRef: "consumer-123",

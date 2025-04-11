@@ -5,7 +5,7 @@ The status of the connection.
 ## Example Usage
 
 ```typescript
-import { ListInstallationsStatus } from "sdk-node-platform/models/operations";
+import { ListInstallationsStatus } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListInstallationsStatus = "working";
 ```

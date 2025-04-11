@@ -5,14 +5,14 @@ ProviderInfo
 ## Example Usage
 
 ```typescript
-import { GetProviderProviderInfo } from "sdk-node-platform/models/operations";
+import { GetProviderProviderInfo } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProviderProviderInfo = {
   name: "<value>",
   authType: "oauth2",
-  baseURL: "https://frizzy-diversity.info/",
+  baseURL: "https://sardonic-season.biz",
   oauth2Opts: {
-    grantType: "clientCredentials",
+    grantType: "password",
     authURL: "https://login.salesforce.com/services/oauth2/authorize",
     tokenURL: "https://login.salesforce.com/services/oauth2/token",
     explicitScopesRequired: true,

@@ -5,9 +5,9 @@ The timing of the registration.
 ## Example Usage
 
 ```typescript
-import { RegistrationTiming } from "sdk-node-platform/models/operations";
+import { RegistrationTiming } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: RegistrationTiming = "integration";
+let value: RegistrationTiming = "installation";
 ```
 
 ## Values

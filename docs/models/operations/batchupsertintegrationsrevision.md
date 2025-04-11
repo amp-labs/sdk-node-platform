@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsRevision } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsRevision } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsRevision = {
   id: "revision-id-1",
   specVersion: "1.0.0",
-  createTime: new Date("2025-12-19T06:11:07.571Z"),
+  createTime: new Date("2024-12-18T04:13:35.748Z"),
   content: {
     name: "<value>",
     provider: "<value>",
@@ -22,9 +22,7 @@ let value: BatchUpsertIntegrationsRevision = {
           mapToDisplayName: "People",
           requiredFields: [
             {
-              fieldName: "<value>",
-              mapToName: "account_id",
-              mapToDisplayName: "Account ID",
+              mapToName: "<value>",
             },
           ],
           optionalFields: [

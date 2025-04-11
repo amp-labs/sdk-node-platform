@@ -5,12 +5,12 @@ Signed URL
 ## Example Usage
 
 ```typescript
-import { GenerateUploadURLSignedURL } from "sdk-node-platform/models/operations";
+import { GenerateUploadURLSignedURL } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GenerateUploadURLSignedURL = {
-  url: "https://known-begonia.biz",
+  url: "https://marvelous-tomography.org",
   bucket: "<value>",
-  path: "/etc/periodic",
+  path: "/usr/lib",
 };
 ```
 

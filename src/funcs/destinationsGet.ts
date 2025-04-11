@@ -21,6 +21,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 export enum GetAcceptEnum {
@@ -31,11 +32,11 @@ export enum GetAcceptEnum {
 /**
  * Get a destination
  */
-export async function destinationsGet(
+export function destinationsGet(
   client: SDKNodePlatformCore,
   request: operations.GetDestinationRequest,
   options?: RequestOptions & { acceptHeaderOverride?: GetAcceptEnum },
-): Promise<
+): APIPromise<
   Result<
     operations.GetDestinationResponse,
     | errors.GetDestinationInputValidationProblem
@@ -48,13 +49,40 @@ export async function destinationsGet(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.GetDestinationRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: GetAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.GetDestinationResponse,
+      | errors.GetDestinationInputValidationProblem
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.GetDestinationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -84,6 +112,7 @@ export async function destinationsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "getDestination",
     oAuth2Scopes: [],
 
@@ -106,7 +135,7 @@ export async function destinationsGet(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -117,7 +146,7 @@ export async function destinationsGet(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -140,14 +169,15 @@ export async function destinationsGet(
     M.jsonErr(404, errors.GetDestinationInputValidationProblem$inboundSchema, {
       ctype: "application/problem+json",
     }),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json("default", operations.GetDestinationResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

@@ -3,13 +3,13 @@
 ## Example Usage
 
 ```typescript
-import { Write } from "sdk-node-platform/models/operations";
+import { Write } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Write = {
   objects: [
     {
       objectName: "<value>",
-      displayName: "Simeon91",
+      displayName: "Jerrell.Johns",
       valueDefaults: {
         allowAnyFields: true,
       },

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { IntegrationSubscribeObject } from "sdk-node-platform/models/operations";
+import { IntegrationSubscribeObject } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: IntegrationSubscribeObject = {
   objectName: "<value>",

@@ -3,14 +3,14 @@
 ## Example Usage
 
 ```typescript
-import { ProviderInfo } from "sdk-node-platform/models/operations";
+import { ProviderInfo } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ProviderInfo = {
   name: "<value>",
-  authType: "none",
-  baseURL: "https://mammoth-paintwork.info/",
+  authType: "apiKey",
+  baseURL: "https://angelic-pharmacopoeia.net/",
   oauth2Opts: {
-    grantType: "authorizationCode",
+    grantType: "authorizationCodePKCE",
     authURL: "https://login.salesforce.com/services/oauth2/authorize",
     tokenURL: "https://login.salesforce.com/services/oauth2/token",
     explicitScopesRequired: true,

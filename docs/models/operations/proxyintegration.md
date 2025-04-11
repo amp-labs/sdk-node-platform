@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ProxyIntegration } from "sdk-node-platform/models/operations";
+import { ProxyIntegration } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ProxyIntegration = {};
 ```

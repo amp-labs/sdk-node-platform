@@ -5,7 +5,7 @@ The retrieved object metadata
 ## Example Usage
 
 ```typescript
-import { GetObjectMetadataForConnectionObjectMetadata } from "sdk-node-platform/models/operations";
+import { GetObjectMetadataForConnectionObjectMetadata } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetObjectMetadataForConnectionObjectMetadata = {
   name: "contact",

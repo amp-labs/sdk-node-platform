@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { UpdateInstallationRequestBody } from "sdk-node-platform/models/operations";
+import { UpdateInstallationRequestBody } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateInstallationRequestBody = {
   updateMask: [

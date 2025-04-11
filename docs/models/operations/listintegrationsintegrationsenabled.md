@@ -5,7 +5,7 @@ If always, the integration will subscribe to delete events.
 ## Example Usage
 
 ```typescript
-import { ListIntegrationsIntegrationsEnabled } from "sdk-node-platform/models/operations";
+import { ListIntegrationsIntegrationsEnabled } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListIntegrationsIntegrationsEnabled = "always";
 ```

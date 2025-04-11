@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CreateInstallationRequest } from "sdk-node-platform/models/operations";
+import { CreateInstallationRequest } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateInstallationRequest = {
   projectIdOrName: "my-project",

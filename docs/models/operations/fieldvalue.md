@@ -5,7 +5,7 @@ Represents a field value
 ## Example Usage
 
 ```typescript
-import { FieldValue } from "sdk-node-platform/models/operations";
+import { FieldValue } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: FieldValue = {
   value: "outbound",

@@ -10,9 +10,9 @@ If unspecified, then `always` is assumed.
 ## Example Usage
 
 ```typescript
-import { ApplyOnUpdate } from "sdk-node-platform/models/operations";
+import { ApplyOnUpdate } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: ApplyOnUpdate = "always";
+let value: ApplyOnUpdate = "never";
 ```
 
 ## Values

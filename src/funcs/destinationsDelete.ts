@@ -20,16 +20,17 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
  * Delete a destination
  */
-export async function destinationsDelete(
+export function destinationsDelete(
   client: SDKNodePlatformCore,
   request: operations.DeleteDestinationRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.DeleteDestinationAPIProblem | undefined,
     | APIError
@@ -41,13 +42,39 @@ export async function destinationsDelete(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.DeleteDestinationRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.DeleteDestinationAPIProblem | undefined,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.DeleteDestinationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -76,6 +103,7 @@ export async function destinationsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "deleteDestination",
     oAuth2Scopes: [],
 
@@ -98,7 +126,7 @@ export async function destinationsDelete(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -109,7 +137,7 @@ export async function destinationsDelete(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -124,7 +152,8 @@ export async function destinationsDelete(
     | ConnectionError
   >(
     M.nil(204, operations.DeleteDestinationAPIProblem$inboundSchema.optional()),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json(
       "default",
       operations.DeleteDestinationAPIProblem$inboundSchema.optional(),
@@ -132,8 +161,8 @@ export async function destinationsDelete(
     ),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

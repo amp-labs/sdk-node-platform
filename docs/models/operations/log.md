@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Log } from "sdk-node-platform/models/operations";
+import { Log } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Log = {
   timestamp: "2023-07-13T21:34:44.816354Z",

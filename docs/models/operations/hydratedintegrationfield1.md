@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { HydratedIntegrationField1 } from "sdk-node-platform/models/operations";
+import { HydratedIntegrationField1 } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: HydratedIntegrationField1 = {
   fieldName: "<value>",
-  displayName: "Easter.Gulgowski",
+  displayName: "Derrick.Hills18",
   mapToName: "account_id",
   mapToDisplayName: "Account ID",
 };

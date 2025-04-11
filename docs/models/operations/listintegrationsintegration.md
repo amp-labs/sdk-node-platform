@@ -3,18 +3,18 @@
 ## Example Usage
 
 ```typescript
-import { ListIntegrationsIntegration } from "sdk-node-platform/models/operations";
+import { ListIntegrationsIntegration } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListIntegrationsIntegration = {
   id: "<id>",
   projectId: "project-456",
   name: "read-accounts",
   provider: "salesforce",
-  createTime: new Date("2023-05-10T15:05:25.793Z"),
+  createTime: new Date("2025-01-21T06:11:53.473Z"),
   latestRevision: {
     id: "revision-id-1",
     specVersion: "1.0.0",
-    createTime: new Date("2024-12-02T08:28:57.162Z"),
+    createTime: new Date("2024-01-06T05:49:55.837Z"),
     content: {
       name: "<value>",
       provider: "<value>",

@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { UpdateConnectionOauth2Password } from "sdk-node-platform/models/operations";
+import { UpdateConnectionOauth2Password } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateConnectionOauth2Password = {
-  username: "Edmund82",
-  password: "7Bnv87bftEDh71K",
+  username: "Amiya.Lockman",
+  password: "h64adsh6TTKQheC",
   clientId: "<id>",
   clientSecret: "<value>",
 };
