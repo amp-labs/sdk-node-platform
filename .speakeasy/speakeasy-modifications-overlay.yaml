@@ -21,6 +21,7 @@ actions:
     update:
       x-speakeasy-group: orgs
       x-speakeasy-name-override: update
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.updateOrg()
@@ -91,6 +92,7 @@ actions:
     update:
       x-speakeasy-group: orgBuilders
       x-speakeasy-name-override: list
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.listOrgBuilders()
@@ -201,6 +203,7 @@ actions:
     update:
       x-speakeasy-group: uploadUrls
       x-speakeasy-name-override: generate
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Upload URL.generateUploadUrl()
@@ -271,6 +274,7 @@ actions:
     update:
       x-speakeasy-group: orgs
       x-speakeasy-name-override: create
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.createOrg()
@@ -290,6 +294,7 @@ actions:
     update:
       x-speakeasy-group: billingAccounts
       x-speakeasy-name-override: createSession
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Billing Account.createBillingAccountSession()
@@ -300,6 +305,7 @@ actions:
     update:
       x-speakeasy-group: orgInvites
       x-speakeasy-name-override: list
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.listOrgInvites()
@@ -390,6 +396,7 @@ actions:
     update:
       x-speakeasy-group: orgs
       x-speakeasy-name-override: deleteInvite
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.deleteOrgInvite()
@@ -430,12 +437,16 @@ actions:
     update:
       x-speakeasy-group: integrations
       x-speakeasy-name-override: batchUpsert
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Integration.batchUpsertIntegrations()
       after: sdk.integrations.batchUpsert()
       reviewed_at: 1744378074766
       created_at: 1744378063643
+  - target: $["paths"]["/myInfo"]["get"]
+    update:
+      x-internal: true
   - target: $["paths"]["/projects/{projectIdOrName}/destinations"]["post"]
     update:
       x-speakeasy-group: destinations
@@ -460,6 +471,7 @@ actions:
     update:
       x-speakeasy-group: billingAccounts
       x-speakeasy-name-override: get
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Billing Account.getOrgBillingAccount()
@@ -489,6 +501,7 @@ actions:
   - target: $["paths"]["/invites:accept"]["post"]
     update:
       x-speakeasy-group: users
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.User.acceptInvite()
@@ -529,6 +542,7 @@ actions:
     update:
       x-speakeasy-group: orgs
       x-speakeasy-name-override: createInvite
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.createOrgInvite()
@@ -539,6 +553,7 @@ actions:
     update:
       x-speakeasy-group: orgInvites
       x-speakeasy-name-override: get
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.getOrgInvite()
@@ -549,6 +564,7 @@ actions:
     update:
       x-speakeasy-group: orgs
       x-speakeasy-name-override: get
+      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.getOrg()
