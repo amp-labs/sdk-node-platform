@@ -19,7 +19,7 @@ const value: operations.GenerateConnectionConnection = {
     scopes: [
       "[\"oauth\",\"offline\",\"crm.read\"]",
     ],
-    createTime: new Date("2025-11-17T01:04:53.458Z"),
+    createTime: new Date("2024-01-08T21:56:09.280Z"),
   },
   group: {
     groupRef: "group-123",
@@ -61,7 +61,6 @@ const value: operations.GenerateConnectionConnection = {
 
 ```typescript
 const value: operations.GenerateConnectionAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

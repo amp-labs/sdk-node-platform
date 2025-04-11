@@ -5,14 +5,14 @@ The updated project.
 ## Example Usage
 
 ```typescript
-import { UpdateProjectProject } from "sdk-node-platform/models/operations";
+import { UpdateProjectProject } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateProjectProject = {
   id: "my-project",
   name: "mailmonkey-staging",
   appName: "MailMonkey",
   orgId: "9f7c3e2a-61b8-4f5c-8d1a-eb24f3b05d79",
-  createTime: new Date("2024-04-24T14:17:38.418Z"),
+  createTime: new Date("2025-08-26T06:04:07.363Z"),
 };
 ```
 

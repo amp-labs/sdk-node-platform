@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { IntegrationObject } from "sdk-node-platform/models/operations";
+import { IntegrationObject } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: IntegrationObject = {
   objectName: "<value>",
@@ -13,7 +13,9 @@ let value: IntegrationObject = {
   mapToDisplayName: "People",
   requiredFields: [
     {
-      mapToName: "<value>",
+      fieldName: "<value>",
+      mapToName: "account_id",
+      mapToDisplayName: "Account ID",
     },
   ],
   optionalFields: [

@@ -21,16 +21,17 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
  * Delete a project
  */
-export async function projectsDelete(
+export function projectsDelete(
   client: SDKNodePlatformCore,
   request: operations.DeleteProjectRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.DeleteProjectAPIProblem | undefined,
     | errors.DeleteProjectInputValidationProblem
@@ -43,13 +44,40 @@ export async function projectsDelete(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.DeleteProjectRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.DeleteProjectAPIProblem | undefined,
+      | errors.DeleteProjectInputValidationProblem
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.DeleteProjectRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -72,6 +100,7 @@ export async function projectsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "deleteProject",
     oAuth2Scopes: [],
 
@@ -94,7 +123,7 @@ export async function projectsDelete(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -105,7 +134,7 @@ export async function projectsDelete(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -128,7 +157,8 @@ export async function projectsDelete(
     M.jsonErr(422, errors.DeleteProjectInputValidationProblem$inboundSchema, {
       ctype: "application/problem+json",
     }),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json(
       "default",
       operations.DeleteProjectAPIProblem$inboundSchema.optional(),
@@ -136,8 +166,8 @@ export async function projectsDelete(
     ),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

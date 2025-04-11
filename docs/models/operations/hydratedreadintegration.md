@@ -3,27 +3,30 @@
 ## Example Usage
 
 ```typescript
-import { HydratedReadIntegration } from "sdk-node-platform/models/operations";
+import { HydratedReadIntegration } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: HydratedReadIntegration = {
   objects: [
     {
       error: "Failed to fetch fields from provider",
       objectName: "<value>",
-      displayName: "Verlie_Kassulke1",
+      displayName: "Carlie_Hirthe13",
       mapToName: "people",
       mapToDisplayName: "People",
       destination: "<value>",
       schedule: "<value>",
       requiredFields: [
         {
-          mapToName: "<value>",
+          fieldName: "<value>",
+          displayName: "Nona24",
+          mapToName: "account_id",
+          mapToDisplayName: "Account ID",
         },
       ],
       optionalFields: [
         {
           fieldName: "<value>",
-          displayName: "Liana.Collins",
+          displayName: "Hoyt_Willms",
           mapToName: "account_id",
           mapToDisplayName: "Account ID",
         },

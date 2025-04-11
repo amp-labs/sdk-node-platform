@@ -20,16 +20,17 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
  * Delete an installation
  */
-export async function installationsDelete(
+export function installationsDelete(
   client: SDKNodePlatformCore,
   request: operations.DeleteInstallationRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.DeleteInstallationAPIProblem | undefined,
     | APIError
@@ -41,13 +42,39 @@ export async function installationsDelete(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.DeleteInstallationRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.DeleteInstallationAPIProblem | undefined,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.DeleteInstallationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -80,6 +107,7 @@ export async function installationsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "deleteInstallation",
     oAuth2Scopes: [],
 
@@ -102,7 +130,7 @@ export async function installationsDelete(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -113,7 +141,7 @@ export async function installationsDelete(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -131,7 +159,8 @@ export async function installationsDelete(
       204,
       operations.DeleteInstallationAPIProblem$inboundSchema.optional(),
     ),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json(
       "default",
       operations.DeleteInstallationAPIProblem$inboundSchema.optional(),
@@ -139,8 +168,8 @@ export async function installationsDelete(
     ),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

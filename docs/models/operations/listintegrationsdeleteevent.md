@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ListIntegrationsDeleteEvent } from "sdk-node-platform/models/operations";
+import { ListIntegrationsDeleteEvent } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListIntegrationsDeleteEvent = {};
 ```

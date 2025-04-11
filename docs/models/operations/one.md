@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { One } from "sdk-node-platform/models/operations";
+import { One } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: One = {
   fieldName: "<value>",
-  displayName: "Britney9",
+  displayName: "Jerrell_Homenick74",
   mapToName: "account_id",
   mapToDisplayName: "Account ID",
 };

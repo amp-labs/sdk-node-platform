@@ -3,14 +3,14 @@
 ## Example Usage
 
 ```typescript
-import { ListProjectsProject } from "sdk-node-platform/models/operations";
+import { ListProjectsProject } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListProjectsProject = {
   id: "my-project",
   name: "mailmonkey-staging",
   appName: "MailMonkey",
   orgId: "9f7c3e2a-61b8-4f5c-8d1a-eb24f3b05d79",
-  createTime: new Date("2024-08-24T11:59:25.466Z"),
+  createTime: new Date("2024-07-21T06:49:55.425Z"),
 };
 ```
 

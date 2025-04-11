@@ -5,7 +5,7 @@ Operation
 ## Example Usage
 
 ```typescript
-import { GetOperationOperation } from "sdk-node-platform/models/operations";
+import { GetOperationOperation } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetOperationOperation = {
   projectId: "project-456",

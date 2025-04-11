@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetProviderRequest } from "sdk-node-platform/models/operations";
+import { GetProviderRequest } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProviderRequest = {
   provider: "hubspot",

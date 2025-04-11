@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Connection } from "sdk-node-platform/models/operations";
+import { Connection } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Connection = {
   id: "connection-123",
@@ -18,7 +18,7 @@ let value: Connection = {
     scopes: [
       "[\"oauth\",\"offline\",\"crm.read\"]",
     ],
-    createTime: new Date("2023-10-12T07:51:04.077Z"),
+    createTime: new Date("2024-04-07T16:27:00.895Z"),
   },
   group: {
     groupRef: "group-123",

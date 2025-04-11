@@ -31,7 +31,7 @@ const value: operations.CreateInstallationInstallation = {
       scopes: [
         "[\"oauth\",\"offline\",\"crm.read\"]",
       ],
-      createTime: new Date("2024-04-10T10:55:35.652Z"),
+      createTime: new Date("2023-09-06T02:27:26.124Z"),
     },
     group: {
       groupRef: "group-123",
@@ -67,12 +67,12 @@ const value: operations.CreateInstallationInstallation = {
     },
     apiKey: "api-key-123",
   },
-  createTime: new Date("2024-02-15T02:10:01.786Z"),
+  createTime: new Date("2024-10-24T02:33:36.001Z"),
   createdBy: "consumer:consumer-123",
   config: {
     id: "config-123",
     revisionId: "revision-123",
-    createTime: new Date("2024-05-23T01:53:16.665Z"),
+    createTime: new Date("2025-03-06T08:20:54.897Z"),
     createdBy: "builder:builder-123",
     content: {
       provider: "salesforce",
@@ -85,7 +85,6 @@ const value: operations.CreateInstallationInstallation = {
 
 ```typescript
 const value: operations.CreateInstallationAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

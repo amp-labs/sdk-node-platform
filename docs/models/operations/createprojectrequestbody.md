@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CreateProjectRequestBody } from "sdk-node-platform/models/operations";
+import { CreateProjectRequestBody } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateProjectRequestBody = {
   appName: "MailMonkey",

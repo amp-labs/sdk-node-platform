@@ -21,6 +21,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 export enum ListAcceptEnum {
@@ -31,11 +32,11 @@ export enum ListAcceptEnum {
 /**
  * List provider apps
  */
-export async function providerAppsList(
+export function providerAppsList(
   client: SDKNodePlatformCore,
   request: operations.ListProviderAppsRequest,
   options?: RequestOptions & { acceptHeaderOverride?: ListAcceptEnum },
-): Promise<
+): APIPromise<
   Result<
     operations.ListProviderAppsResponse,
     | errors.ListProviderAppsInputValidationProblem
@@ -48,13 +49,40 @@ export async function providerAppsList(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.ListProviderAppsRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: ListAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.ListProviderAppsResponse,
+      | errors.ListProviderAppsInputValidationProblem
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.ListProviderAppsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -80,6 +108,7 @@ export async function providerAppsList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "listProviderApps",
     oAuth2Scopes: [],
 
@@ -102,7 +131,7 @@ export async function providerAppsList(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -113,7 +142,7 @@ export async function providerAppsList(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -138,14 +167,15 @@ export async function providerAppsList(
       errors.ListProviderAppsInputValidationProblem$inboundSchema,
       { ctype: "application/problem+json" },
     ),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json("default", operations.ListProviderAppsResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

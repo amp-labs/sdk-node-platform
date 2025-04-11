@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ListIntegrationsReadIntegration } from "sdk-node-platform/models/operations";
+import { ListIntegrationsReadIntegration } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListIntegrationsReadIntegration = {
   objects: [
@@ -15,12 +15,16 @@ let value: ListIntegrationsReadIntegration = {
       mapToDisplayName: "People",
       requiredFields: [
         {
-          mapToName: "<value>",
+          fieldName: "<value>",
+          mapToName: "account_id",
+          mapToDisplayName: "Account ID",
         },
       ],
       optionalFields: [
         {
-          mapToName: "<value>",
+          fieldName: "<value>",
+          mapToName: "account_id",
+          mapToDisplayName: "Account ID",
         },
       ],
       backfill: {

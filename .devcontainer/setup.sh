@@ -10,7 +10,7 @@ mkdir samples
 npm install
 npm install -g ts-node
 npm link
-npm link sdk-node-platform
+npm link @amp-labs/sdk-node-platform
 TS_CONFIG_CONTENT=$(cat <<EOL
 {
   "compilerOptions": {

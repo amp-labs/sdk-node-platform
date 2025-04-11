@@ -5,14 +5,14 @@ Project
 ## Example Usage
 
 ```typescript
-import { GetProjectProject } from "sdk-node-platform/models/operations";
+import { GetProjectProject } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProjectProject = {
   id: "my-project",
   name: "mailmonkey-staging",
   appName: "MailMonkey",
   orgId: "9f7c3e2a-61b8-4f5c-8d1a-eb24f3b05d79",
-  createTime: new Date("2024-04-09T07:48:57.030Z"),
+  createTime: new Date("2023-10-10T22:17:44.240Z"),
 };
 ```
 

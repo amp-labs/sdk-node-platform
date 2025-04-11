@@ -5,7 +5,7 @@ The authentication scheme used for this connection.
 ## Example Usage
 
 ```typescript
-import { CreateInstallationAuthScheme } from "sdk-node-platform/models/operations";
+import { CreateInstallationAuthScheme } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateInstallationAuthScheme = "oauth2/authorizationCode";
 ```

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Media } from "sdk-node-platform/models/operations";
+import { Media } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Media = {
   regular: {

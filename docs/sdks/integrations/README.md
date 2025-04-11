@@ -17,7 +17,7 @@ List integrations
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -40,8 +40,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { integrationsList } from "sdk-node-platform/funcs/integrationsList.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { integrationsList } from "@amp-labs/sdk-node-platform/funcs/integrationsList.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -94,7 +94,7 @@ Create a new integration.
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -121,10 +121,9 @@ async function run() {
                 mapToDisplayName: "People",
                 requiredFields: [
                   {
-                    mapToName: "<value>",
-                  },
-                  {
-                    mapToName: "<value>",
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
                   },
                   {
                     fieldName: "<value>",
@@ -133,7 +132,50 @@ async function run() {
                   },
                 ],
                 optionalFields: [
-
+                  {
+                    mapToName: "<value>",
+                  },
+                ],
+                backfill: {
+                  defaultPeriod: {
+                    days: 30,
+                    fullHistory: false,
+                  },
+                },
+              },
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                schedule: "<value>",
+                mapToName: "people",
+                mapToDisplayName: "People",
+                requiredFields: [
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
+                ],
+                optionalFields: [
+                  {
+                    mapToName: "<value>",
+                  },
+                  {
+                    mapToName: "<value>",
+                  },
+                  {
+                    mapToName: "<value>",
+                  },
                 ],
                 backfill: {
                   defaultPeriod: {
@@ -160,11 +202,45 @@ async function run() {
                   allowAnyFields: true,
                 },
               },
+              {
+                objectName: "<value>",
+                inheritMapping: true,
+                valueDefaults: {
+                  allowAnyFields: true,
+                },
+              },
             ],
           },
           subscribe: {
             objects: [
-
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                inheritFieldsAndMapping: true,
+                updateEvent: {
+                  watchFieldsAuto: "all",
+                  requiredWatchFields: [
+                    "[\"name\",\"domain\"]",
+                  ],
+                },
+                otherEvents: [
+                  "[\"object.merged\",\"object.restored\"]",
+                ],
+              },
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                inheritFieldsAndMapping: true,
+                updateEvent: {
+                  watchFieldsAuto: "all",
+                  requiredWatchFields: [
+                    "[\"name\",\"domain\"]",
+                  ],
+                },
+                otherEvents: [
+                  "[\"object.merged\",\"object.restored\"]",
+                ],
+              },
             ],
           },
         },
@@ -184,8 +260,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { integrationsCreate } from "sdk-node-platform/funcs/integrationsCreate.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { integrationsCreate } from "@amp-labs/sdk-node-platform/funcs/integrationsCreate.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -214,10 +290,9 @@ async function run() {
                 mapToDisplayName: "People",
                 requiredFields: [
                   {
-                    mapToName: "<value>",
-                  },
-                  {
-                    mapToName: "<value>",
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
                   },
                   {
                     fieldName: "<value>",
@@ -226,7 +301,50 @@ async function run() {
                   },
                 ],
                 optionalFields: [
-  
+                  {
+                    mapToName: "<value>",
+                  },
+                ],
+                backfill: {
+                  defaultPeriod: {
+                    days: 30,
+                    fullHistory: false,
+                  },
+                },
+              },
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                schedule: "<value>",
+                mapToName: "people",
+                mapToDisplayName: "People",
+                requiredFields: [
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
+                ],
+                optionalFields: [
+                  {
+                    mapToName: "<value>",
+                  },
+                  {
+                    mapToName: "<value>",
+                  },
+                  {
+                    mapToName: "<value>",
+                  },
                 ],
                 backfill: {
                   defaultPeriod: {
@@ -253,11 +371,45 @@ async function run() {
                   allowAnyFields: true,
                 },
               },
+              {
+                objectName: "<value>",
+                inheritMapping: true,
+                valueDefaults: {
+                  allowAnyFields: true,
+                },
+              },
             ],
           },
           subscribe: {
             objects: [
-  
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                inheritFieldsAndMapping: true,
+                updateEvent: {
+                  watchFieldsAuto: "all",
+                  requiredWatchFields: [
+                    "[\"name\",\"domain\"]",
+                  ],
+                },
+                otherEvents: [
+                  "[\"object.merged\",\"object.restored\"]",
+                ],
+              },
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                inheritFieldsAndMapping: true,
+                updateEvent: {
+                  watchFieldsAuto: "all",
+                  requiredWatchFields: [
+                    "[\"name\",\"domain\"]",
+                  ],
+                },
+                otherEvents: [
+                  "[\"object.merged\",\"object.restored\"]",
+                ],
+              },
             ],
           },
         },
@@ -306,7 +458,7 @@ Delete an integration
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -330,8 +482,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { integrationsDelete } from "sdk-node-platform/funcs/integrationsDelete.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { integrationsDelete } from "@amp-labs/sdk-node-platform/funcs/integrationsDelete.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -386,7 +538,7 @@ Batch upsert a group of integrations
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -412,8 +564,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { integrationsBatchUpsert } from "sdk-node-platform/funcs/integrationsBatchUpsert.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { integrationsBatchUpsert } from "@amp-labs/sdk-node-platform/funcs/integrationsBatchUpsert.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

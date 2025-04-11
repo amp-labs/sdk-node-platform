@@ -12,11 +12,11 @@ const value: operations.ListIntegrationsIntegration[] = [
     projectId: "project-456",
     name: "read-accounts",
     provider: "salesforce",
-    createTime: new Date("2024-07-25T22:41:53.719Z"),
+    createTime: new Date("2023-12-18T11:55:49.254Z"),
     latestRevision: {
       id: "revision-id-1",
       specVersion: "1.0.0",
-      createTime: new Date("2024-03-30T11:16:03.610Z"),
+      createTime: new Date("2025-04-29T08:24:35.598Z"),
       content: {
         name: "<value>",
         provider: "<value>",
@@ -37,7 +37,9 @@ const value: operations.ListIntegrationsIntegration[] = [
               ],
               optionalFields: [
                 {
-                  mapToName: "<value>",
+                  fieldName: "<value>",
+                  mapToName: "account_id",
+                  mapToDisplayName: "Account ID",
                 },
               ],
               backfill: {
@@ -88,7 +90,6 @@ const value: operations.ListIntegrationsIntegration[] = [
 
 ```typescript
 const value: operations.ListIntegrationsAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

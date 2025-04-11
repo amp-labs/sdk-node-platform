@@ -5,7 +5,7 @@ The installation fields to update. (Only include the fields you'd like to update
 ## Example Usage
 
 ```typescript
-import { Installation } from "sdk-node-platform/models/operations";
+import { Installation } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Installation = {
   connectionId: "connection-123",

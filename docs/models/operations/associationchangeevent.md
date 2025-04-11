@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { AssociationChangeEvent } from "sdk-node-platform/models/operations";
+import { AssociationChangeEvent } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: AssociationChangeEvent = {};
 ```

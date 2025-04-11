@@ -8,7 +8,7 @@ Additional properties specific to the problem type may be present.
 ## Example Usage
 
 ```typescript
-import { GetHydratedRevisionRevisionsInputValidationProblem } from "sdk-node-platform/models/errors";
+import { GetHydratedRevisionRevisionsInputValidationProblem } from "@amp-labs/sdk-node-platform/models/errors";
 
 // No examples available for this model
 ```

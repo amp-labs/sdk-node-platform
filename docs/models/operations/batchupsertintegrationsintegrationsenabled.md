@@ -5,7 +5,7 @@ If always, the integration will subscribe to update events.
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsIntegrationsEnabled } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsIntegrationsEnabled } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsIntegrationsEnabled = "always";
 ```

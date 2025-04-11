@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.GenerateUploadURLSignedURL = {
-  url: "https://competent-newsstand.info/",
+  url: "https://sugary-brace.name",
   bucket: "<value>",
   path: "/usr/src",
 };
@@ -17,7 +17,6 @@ const value: operations.GenerateUploadURLSignedURL = {
 
 ```typescript
 const value: operations.GenerateUploadUrlAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

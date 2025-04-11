@@ -21,6 +21,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 export enum UpdateAcceptEnum {
@@ -34,11 +35,11 @@ export enum UpdateAcceptEnum {
  * @remarks
  * Generate a URL for the browser to render to kick off OAuth flow that updates an existing connection.
  */
-export async function oauthUpdate(
+export function oauthUpdate(
   client: SDKNodePlatformCore,
   request: operations.OauthUpdateRequest,
   options?: RequestOptions & { acceptHeaderOverride?: UpdateAcceptEnum },
-): Promise<
+): APIPromise<
   Result<
     operations.OauthUpdateResponse,
     | errors.OauthUpdateInputValidationProblem
@@ -51,13 +52,40 @@ export async function oauthUpdate(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.OauthUpdateRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: UpdateAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.OauthUpdateResponse,
+      | errors.OauthUpdateInputValidationProblem
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.OauthUpdateRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -87,6 +115,7 @@ export async function oauthUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "oauthUpdate",
     oAuth2Scopes: [],
 
@@ -109,7 +138,7 @@ export async function oauthUpdate(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -120,7 +149,7 @@ export async function oauthUpdate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -143,14 +172,15 @@ export async function oauthUpdate(
     M.jsonErr(400, errors.OauthUpdateInputValidationProblem$inboundSchema, {
       ctype: "application/problem+json",
     }),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json("default", operations.OauthUpdateResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

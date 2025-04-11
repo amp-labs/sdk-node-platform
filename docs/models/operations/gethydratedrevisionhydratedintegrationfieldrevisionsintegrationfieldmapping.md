@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetHydratedRevisionHydratedIntegrationFieldRevisionsIntegrationFieldMapping } from "sdk-node-platform/models/operations";
+import { GetHydratedRevisionHydratedIntegrationFieldRevisionsIntegrationFieldMapping } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value:
   GetHydratedRevisionHydratedIntegrationFieldRevisionsIntegrationFieldMapping =

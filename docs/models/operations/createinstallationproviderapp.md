@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CreateInstallationProviderApp } from "sdk-node-platform/models/operations";
+import { CreateInstallationProviderApp } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateInstallationProviderApp = {
   id: "provider-app-123",
@@ -14,7 +14,7 @@ let value: CreateInstallationProviderApp = {
   scopes: [
     "[\"oauth\",\"offline\",\"crm.read\"]",
   ],
-  createTime: new Date("2025-03-12T00:25:52.109Z"),
+  createTime: new Date("2024-09-28T03:24:56.123Z"),
 };
 ```
 

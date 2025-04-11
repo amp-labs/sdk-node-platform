@@ -5,7 +5,7 @@ The config of the installation.
 ## Example Usage
 
 ```typescript
-import { Config } from "sdk-node-platform/models/operations";
+import { Config } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Config = {
   content: {

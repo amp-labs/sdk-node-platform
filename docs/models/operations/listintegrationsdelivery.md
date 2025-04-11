@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ListIntegrationsDelivery } from "sdk-node-platform/models/operations";
+import { ListIntegrationsDelivery } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListIntegrationsDelivery = {};
 ```

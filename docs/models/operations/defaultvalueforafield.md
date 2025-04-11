@@ -5,7 +5,7 @@ Only use one of stringValue, integerValue, booleanValue.
 ## Example Usage
 
 ```typescript
-import { DefaultValueForAField } from "sdk-node-platform/models/operations";
+import { DefaultValueForAField } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: DefaultValueForAField = {};
 ```

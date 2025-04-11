@@ -5,7 +5,7 @@ Represents a field value
 ## Example Usage
 
 ```typescript
-import { GetObjectMetadataForConnectionFieldValue } from "sdk-node-platform/models/operations";
+import { GetObjectMetadataForConnectionFieldValue } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetObjectMetadataForConnectionFieldValue = {
   value: "outbound",

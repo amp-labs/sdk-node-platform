@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetProviderGrantType } from "sdk-node-platform/models/operations";
+import { GetProviderGrantType } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProviderGrantType = "password";
 ```

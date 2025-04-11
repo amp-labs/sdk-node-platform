@@ -16,7 +16,7 @@ const value: operations.CreateDestinationDestination = {
       "Authorization": "Bearer 1234",
     },
   },
-  createTime: new Date("2025-10-30T01:43:08.424Z"),
+  createTime: new Date("2024-12-12T19:55:27.204Z"),
 };
 ```
 
@@ -24,7 +24,6 @@ const value: operations.CreateDestinationDestination = {
 
 ```typescript
 const value: operations.CreateDestinationAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

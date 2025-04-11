@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { ModuleInfo } from "sdk-node-platform/models/operations";
+import { ModuleInfo } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ModuleInfo = {
-  displayName: "Troy29",
-  baseURL: "https://afraid-folklore.com",
+  displayName: "Dorris62",
+  baseURL: "https://staid-entry.biz/",
   support: {
     bulkWrite: {
       insert: false,

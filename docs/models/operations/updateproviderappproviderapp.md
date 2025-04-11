@@ -5,7 +5,7 @@ The updated provider app
 ## Example Usage
 
 ```typescript
-import { UpdateProviderAppProviderApp } from "sdk-node-platform/models/operations";
+import { UpdateProviderAppProviderApp } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateProviderAppProviderApp = {
   id: "provider-app-123",
@@ -16,7 +16,7 @@ let value: UpdateProviderAppProviderApp = {
   scopes: [
     "[\"oauth\",\"offline\",\"crm.read\"]",
   ],
-  createTime: new Date("2024-09-14T13:50:38.886Z"),
+  createTime: new Date("2023-02-27T19:50:22.236Z"),
 };
 ```
 

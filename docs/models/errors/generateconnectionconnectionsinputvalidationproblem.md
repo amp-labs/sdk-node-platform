@@ -8,7 +8,7 @@ Additional properties specific to the problem type may be present.
 ## Example Usage
 
 ```typescript
-import { GenerateConnectionConnectionsInputValidationProblem } from "sdk-node-platform/models/errors";
+import { GenerateConnectionConnectionsInputValidationProblem } from "@amp-labs/sdk-node-platform/models/errors";
 
 // No examples available for this model
 ```

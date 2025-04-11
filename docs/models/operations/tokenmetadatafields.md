@@ -5,7 +5,7 @@ Fields to be used to extract token metadata from the token response.
 ## Example Usage
 
 ```typescript
-import { TokenMetadataFields } from "sdk-node-platform/models/operations";
+import { TokenMetadataFields } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: TokenMetadataFields = {
   workspaceRefField: "account-id",

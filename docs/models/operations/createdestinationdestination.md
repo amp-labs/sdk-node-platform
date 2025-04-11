@@ -5,7 +5,7 @@ Created
 ## Example Usage
 
 ```typescript
-import { CreateDestinationDestination } from "sdk-node-platform/models/operations";
+import { CreateDestinationDestination } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateDestinationDestination = {
   id: "<id>",
@@ -17,7 +17,7 @@ let value: CreateDestinationDestination = {
       "Authorization": "Bearer 1234",
     },
   },
-  createTime: new Date("2024-07-04T14:51:08.243Z"),
+  createTime: new Date("2024-10-21T10:46:58.986Z"),
 };
 ```
 

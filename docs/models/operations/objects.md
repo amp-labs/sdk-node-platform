@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { Objects } from "sdk-node-platform/models/operations";
+import { Objects } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Objects = {
   objectName: "<value>",
-  displayName: "Madaline_Kemmer",
+  displayName: "Celestino.Batz",
   valueDefaults: {
     allowAnyFields: true,
   },

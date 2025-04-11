@@ -5,7 +5,7 @@ The newly created provider app
 ## Example Usage
 
 ```typescript
-import { CreateProviderAppProviderApp } from "sdk-node-platform/models/operations";
+import { CreateProviderAppProviderApp } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateProviderAppProviderApp = {
   id: "provider-app-123",
@@ -16,7 +16,7 @@ let value: CreateProviderAppProviderApp = {
   scopes: [
     "[\"oauth\",\"offline\",\"crm.read\"]",
   ],
-  createTime: new Date("2025-05-17T17:32:07.447Z"),
+  createTime: new Date("2023-04-24T15:40:49.783Z"),
 };
 ```
 

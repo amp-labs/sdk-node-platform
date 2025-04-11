@@ -5,7 +5,7 @@ Configuration to set default write values for object fields.
 ## Example Usage
 
 ```typescript
-import { ListIntegrationsValueDefaults } from "sdk-node-platform/models/operations";
+import { ListIntegrationsValueDefaults } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListIntegrationsValueDefaults = {
   allowAnyFields: true,

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetProviderMedia } from "sdk-node-platform/models/operations";
+import { GetProviderMedia } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProviderMedia = {
   regular: {

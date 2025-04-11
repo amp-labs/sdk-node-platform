@@ -8,7 +8,7 @@
 ```typescript
 const value: operations.One = {
   fieldName: "<value>",
-  displayName: "Austyn_Koss-Wolff73",
+  displayName: "Vesta_Keebler",
   mapToName: "account_id",
   mapToDisplayName: "Account ID",
 };

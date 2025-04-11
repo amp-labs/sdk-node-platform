@@ -10,7 +10,7 @@ If unspecified, then `always` is assumed.
 ## Example Usage
 
 ```typescript
-import { UpdateInstallationValueDefaultLegacyApplyOnUpdate } from "sdk-node-platform/models/operations";
+import { UpdateInstallationValueDefaultLegacyApplyOnUpdate } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateInstallationValueDefaultLegacyApplyOnUpdate = "always";
 ```

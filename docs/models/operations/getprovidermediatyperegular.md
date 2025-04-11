@@ -5,7 +5,7 @@ Media for light/regular mode.
 ## Example Usage
 
 ```typescript
-import { GetProviderMediaTypeRegular } from "sdk-node-platform/models/operations";
+import { GetProviderMediaTypeRegular } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProviderMediaTypeRegular = {
   iconURL: "https://example.com/icon.png",

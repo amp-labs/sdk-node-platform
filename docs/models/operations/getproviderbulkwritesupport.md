@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetProviderBulkWriteSupport } from "sdk-node-platform/models/operations";
+import { GetProviderBulkWriteSupport } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: GetProviderBulkWriteSupport = {
   insert: false,

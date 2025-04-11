@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { CreateDestinationDestinationsIn } from "sdk-node-platform/models/errors";
+import { CreateDestinationDestinationsIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: CreateDestinationDestinationsIn = "header";
+let value: CreateDestinationDestinationsIn = "query";
 ```
 
 ## Values

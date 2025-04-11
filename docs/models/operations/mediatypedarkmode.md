@@ -5,7 +5,7 @@ Media to be used in dark mode.
 ## Example Usage
 
 ```typescript
-import { MediaTypeDarkMode } from "sdk-node-platform/models/operations";
+import { MediaTypeDarkMode } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: MediaTypeDarkMode = {
   iconURL: "https://example.com/icon.png",

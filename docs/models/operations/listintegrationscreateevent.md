@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ListIntegrationsCreateEvent } from "sdk-node-platform/models/operations";
+import { ListIntegrationsCreateEvent } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ListIntegrationsCreateEvent = {};
 ```

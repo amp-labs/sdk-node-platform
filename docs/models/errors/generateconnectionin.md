@@ -5,7 +5,7 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { GenerateConnectionIn } from "sdk-node-platform/models/errors";
+import { GenerateConnectionIn } from "@amp-labs/sdk-node-platform/models/errors";
 
 let value: GenerateConnectionIn = "body";
 ```

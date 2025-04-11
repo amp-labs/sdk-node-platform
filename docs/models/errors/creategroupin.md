@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { CreateGroupIn } from "sdk-node-platform/models/errors";
+import { CreateGroupIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: CreateGroupIn = "query";
+let value: CreateGroupIn = "header";
 ```
 
 ## Values

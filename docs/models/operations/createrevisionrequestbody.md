@@ -5,7 +5,7 @@ The source of the revision to create. One of sourceZipUrl or sourceYaml is requi
 ## Example Usage
 
 ```typescript
-import { CreateRevisionRequestBody } from "sdk-node-platform/models/operations";
+import { CreateRevisionRequestBody } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateRevisionRequestBody = {
   sourceZipUrl:

@@ -5,7 +5,7 @@ The updated installation
 ## Example Usage
 
 ```typescript
-import { UpdateInstallationInstallation } from "sdk-node-platform/models/operations";
+import { UpdateInstallationInstallation } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateInstallationInstallation = {
   id: "<id>",
@@ -32,7 +32,7 @@ let value: UpdateInstallationInstallation = {
       scopes: [
         "[\"oauth\",\"offline\",\"crm.read\"]",
       ],
-      createTime: new Date("2024-10-02T14:03:30.664Z"),
+      createTime: new Date("2023-11-30T11:37:06.676Z"),
     },
     group: {
       groupRef: "group-123",
@@ -68,12 +68,12 @@ let value: UpdateInstallationInstallation = {
     },
     apiKey: "api-key-123",
   },
-  createTime: new Date("2025-11-20T06:46:28.205Z"),
+  createTime: new Date("2025-10-31T08:46:47.565Z"),
   createdBy: "consumer:consumer-123",
   config: {
     id: "config-123",
     revisionId: "revision-123",
-    createTime: new Date("2023-11-17T04:38:54.761Z"),
+    createTime: new Date("2023-06-01T18:36:40.232Z"),
     createdBy: "builder:builder-123",
     content: {
       provider: "salesforce",

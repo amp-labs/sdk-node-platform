@@ -19,9 +19,9 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { oauthConnect } from "sdk-node-platform/funcs/oauthConnect.js";
-import { SDKValidationError } from "sdk-node-platform/models/errors/sdkvalidationerror.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { oauthConnect } from "@amp-labs/sdk-node-platform/funcs/oauthConnect.js";
+import { SDKValidationError } from "@amp-labs/sdk-node-platform/models/errors/sdkvalidationerror.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

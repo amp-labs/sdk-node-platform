@@ -5,7 +5,7 @@ Whether branding can be removed from the UI library.
 ## Example Usage
 
 ```typescript
-import { BrandingRemoval } from "sdk-node-platform/models/operations";
+import { BrandingRemoval } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BrandingRemoval = {
   value: false,

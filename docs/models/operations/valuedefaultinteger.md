@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { ValueDefaultInteger } from "sdk-node-platform/models/operations";
+import { ValueDefaultInteger } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: ValueDefaultInteger = {
-  value: 488056,
+  value: 771066,
 };
 ```
 

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Oauth2ClientCredentials } from "sdk-node-platform/models/operations";
+import { Oauth2ClientCredentials } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Oauth2ClientCredentials = {
   clientId: "<id>",

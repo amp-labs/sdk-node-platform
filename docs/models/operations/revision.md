@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { Revision } from "sdk-node-platform/models/operations";
+import { Revision } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Revision = {
   id: "revision-id-1",
   specVersion: "1.0.0",
-  createTime: new Date("2025-05-25T21:04:00.744Z"),
+  createTime: new Date("2025-01-14T03:58:52.058Z"),
   content: {
     name: "<value>",
     provider: "<value>",
@@ -22,14 +22,14 @@ let value: Revision = {
           mapToDisplayName: "People",
           requiredFields: [
             {
-              fieldName: "<value>",
-              mapToName: "account_id",
-              mapToDisplayName: "Account ID",
+              mapToName: "<value>",
             },
           ],
           optionalFields: [
             {
-              mapToName: "<value>",
+              fieldName: "<value>",
+              mapToName: "account_id",
+              mapToDisplayName: "Account ID",
             },
           ],
           backfill: {

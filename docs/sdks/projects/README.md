@@ -18,7 +18,7 @@ List all projects that the API key or user credential has access to.
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -39,8 +39,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { projectsList } from "sdk-node-platform/funcs/projectsList.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { projectsList } from "@amp-labs/sdk-node-platform/funcs/projectsList.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -89,7 +89,7 @@ Create a new project
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -114,8 +114,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { projectsCreate } from "sdk-node-platform/funcs/projectsCreate.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { projectsCreate } from "@amp-labs/sdk-node-platform/funcs/projectsCreate.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -170,7 +170,7 @@ Get a project
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -193,8 +193,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { projectsGet } from "sdk-node-platform/funcs/projectsGet.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { projectsGet } from "@amp-labs/sdk-node-platform/funcs/projectsGet.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -247,7 +247,7 @@ Delete a project
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -270,8 +270,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { projectsDelete } from "sdk-node-platform/funcs/projectsDelete.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { projectsDelete } from "@amp-labs/sdk-node-platform/funcs/projectsDelete.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -324,7 +324,7 @@ Update a project
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -356,8 +356,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { projectsUpdate } from "sdk-node-platform/funcs/projectsUpdate.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { projectsUpdate } from "@amp-labs/sdk-node-platform/funcs/projectsUpdate.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

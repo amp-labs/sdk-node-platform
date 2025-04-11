@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsIntegrationObject } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsIntegrationObject } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsIntegrationObject = {
   objectName: "<value>",
@@ -13,9 +13,7 @@ let value: BatchUpsertIntegrationsIntegrationObject = {
   mapToDisplayName: "People",
   requiredFields: [
     {
-      fieldName: "<value>",
-      mapToName: "account_id",
-      mapToDisplayName: "Account ID",
+      mapToName: "<value>",
     },
   ],
   optionalFields: [

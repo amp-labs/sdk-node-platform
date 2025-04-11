@@ -5,7 +5,7 @@ The refresh token to use for the connection.
 ## Example Usage
 
 ```typescript
-import { UpdateConnectionRefreshToken } from "sdk-node-platform/models/operations";
+import { UpdateConnectionRefreshToken } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateConnectionRefreshToken = {
   token: "<value>",

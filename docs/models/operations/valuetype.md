@@ -5,9 +5,9 @@ A normalized field type
 ## Example Usage
 
 ```typescript
-import { ValueType } from "sdk-node-platform/models/operations";
+import { ValueType } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: ValueType = "other";
+let value: ValueType = "multiSelect";
 ```
 
 ## Values

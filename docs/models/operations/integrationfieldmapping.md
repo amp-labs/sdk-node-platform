@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { IntegrationFieldMapping } from "sdk-node-platform/models/operations";
+import { IntegrationFieldMapping } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: IntegrationFieldMapping = {
   mapToName: "<value>",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { HydratedIntegration } from "sdk-node-platform/models/operations";
+import { HydratedIntegration } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: HydratedIntegration = {
   name: "<value>",
@@ -13,24 +13,33 @@ let value: HydratedIntegration = {
       {
         error: "Failed to fetch fields from provider",
         objectName: "<value>",
-        displayName: "Zoila.Stroman61",
+        displayName: "Dorian_Donnelly37",
         mapToName: "people",
         mapToDisplayName: "People",
         destination: "<value>",
         schedule: "<value>",
         requiredFields: [
           {
-            mapToName: "<value>",
+            fieldName: "<value>",
+            displayName: "Darby.Hessel",
+            mapToName: "account_id",
+            mapToDisplayName: "Account ID",
           },
         ],
         optionalFields: [
           {
-            mapToName: "<value>",
+            fieldName: "<value>",
+            displayName: "Jolie.Lang20",
+            mapToName: "account_id",
+            mapToDisplayName: "Account ID",
           },
         ],
         allFields: [
           {
-            mapToName: "<value>",
+            fieldName: "<value>",
+            displayName: "Carissa_Hudson6",
+            mapToName: "account_id",
+            mapToDisplayName: "Account ID",
           },
         ],
         allFieldsMetadata: {
@@ -60,7 +69,7 @@ let value: HydratedIntegration = {
     objects: [
       {
         objectName: "<value>",
-        displayName: "Gwendolyn72",
+        displayName: "Jimmy.Crona72",
         valueDefaults: {
           allowAnyFields: true,
         },

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CreateInstallationOAuth2AuthorizationCodeToken } from "sdk-node-platform/models/operations";
+import { CreateInstallationOAuth2AuthorizationCodeToken } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateInstallationOAuth2AuthorizationCodeToken = {
   accessToken: {

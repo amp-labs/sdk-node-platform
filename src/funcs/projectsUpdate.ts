@@ -21,6 +21,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 export enum UpdateAcceptEnum {
@@ -31,11 +32,11 @@ export enum UpdateAcceptEnum {
 /**
  * Update a project
  */
-export async function projectsUpdate(
+export function projectsUpdate(
   client: SDKNodePlatformCore,
   request: operations.UpdateProjectRequest,
   options?: RequestOptions & { acceptHeaderOverride?: UpdateAcceptEnum },
-): Promise<
+): APIPromise<
   Result<
     operations.UpdateProjectResponse,
     | errors.UpdateProjectInputValidationProblem
@@ -49,13 +50,41 @@ export async function projectsUpdate(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.UpdateProjectRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: UpdateAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.UpdateProjectResponse,
+      | errors.UpdateProjectInputValidationProblem
+      | errors.UpdateProjectProjectsInputValidationProblem
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.UpdateProjectRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
@@ -80,6 +109,7 @@ export async function projectsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "updateProject",
     oAuth2Scopes: [],
 
@@ -102,7 +132,7 @@ export async function projectsUpdate(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -113,7 +143,7 @@ export async function projectsUpdate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -142,14 +172,15 @@ export async function projectsUpdate(
       errors.UpdateProjectProjectsInputValidationProblem$inboundSchema,
       { ctype: "application/problem+json" },
     ),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json("default", operations.UpdateProjectResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

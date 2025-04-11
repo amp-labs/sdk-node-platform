@@ -5,7 +5,7 @@ Configuration to set default write values for object fields.
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsValueDefaults } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsValueDefaults } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsValueDefaults = {
   allowAnyFields: true,

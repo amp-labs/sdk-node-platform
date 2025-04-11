@@ -8,7 +8,7 @@ Additional properties specific to the problem type may be present.
 ## Example Usage
 
 ```typescript
-import { ListOperationLogsOperationsInputValidationProblem } from "sdk-node-platform/models/errors";
+import { ListOperationLogsOperationsInputValidationProblem } from "@amp-labs/sdk-node-platform/models/errors";
 
 // No examples available for this model
 ```

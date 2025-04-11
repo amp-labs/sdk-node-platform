@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsIntegrationFieldIntegrationFieldExistent } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsIntegrationFieldIntegrationFieldExistent } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsIntegrationFieldIntegrationFieldExistent = {
   fieldName: "<value>",

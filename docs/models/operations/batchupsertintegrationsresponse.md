@@ -12,11 +12,11 @@ const value: operations.BatchUpsertIntegrationsIntegration[] = [
     projectId: "project-456",
     name: "read-accounts",
     provider: "salesforce",
-    createTime: new Date("2023-09-25T21:22:14.779Z"),
+    createTime: new Date("2023-12-08T03:50:24.686Z"),
     latestRevision: {
       id: "revision-id-1",
       specVersion: "1.0.0",
-      createTime: new Date("2023-06-24T05:32:09.341Z"),
+      createTime: new Date("2025-08-07T11:58:16.738Z"),
       content: {
         name: "<value>",
         provider: "<value>",
@@ -30,14 +30,14 @@ const value: operations.BatchUpsertIntegrationsIntegration[] = [
               mapToDisplayName: "People",
               requiredFields: [
                 {
-                  fieldName: "<value>",
-                  mapToName: "account_id",
-                  mapToDisplayName: "Account ID",
+                  mapToName: "<value>",
                 },
               ],
               optionalFields: [
                 {
-                  mapToName: "<value>",
+                  fieldName: "<value>",
+                  mapToName: "account_id",
+                  mapToDisplayName: "Account ID",
                 },
               ],
               backfill: {
@@ -88,7 +88,6 @@ const value: operations.BatchUpsertIntegrationsIntegration[] = [
 
 ```typescript
 const value: operations.BatchUpsertIntegrationsAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

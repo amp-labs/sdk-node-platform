@@ -5,9 +5,9 @@ The location of the invalid input
 ## Example Usage
 
 ```typescript
-import { OauthUpdateIn } from "sdk-node-platform/models/errors";
+import { OauthUpdateIn } from "@amp-labs/sdk-node-platform/models/errors";
 
-let value: OauthUpdateIn = "path";
+let value: OauthUpdateIn = "header";
 ```
 
 ## Values

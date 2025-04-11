@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Consumer } from "sdk-node-platform/models/operations";
+import { Consumer } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Consumer = {
   consumerRef: "consumer-123",

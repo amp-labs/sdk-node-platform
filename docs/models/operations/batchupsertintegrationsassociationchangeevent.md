@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BatchUpsertIntegrationsAssociationChangeEvent } from "sdk-node-platform/models/operations";
+import { BatchUpsertIntegrationsAssociationChangeEvent } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: BatchUpsertIntegrationsAssociationChangeEvent = {};
 ```

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Metadata } from "sdk-node-platform/models/operations";
+import { Metadata } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: Metadata = {
   url: "https://webhooks.mailmonkey.com/salesforce-lead-converted",

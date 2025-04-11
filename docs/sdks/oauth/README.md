@@ -15,7 +15,7 @@ Generate a URL for the browser to render to kick off OAuth flow.
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -45,8 +45,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { oauthConnect } from "sdk-node-platform/funcs/oauthConnect.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { oauthConnect } from "@amp-labs/sdk-node-platform/funcs/oauthConnect.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -106,7 +106,7 @@ Generate a URL for the browser to render to kick off OAuth flow that updates an 
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -130,8 +130,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { oauthUpdate } from "sdk-node-platform/funcs/oauthUpdate.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { oauthUpdate } from "@amp-labs/sdk-node-platform/funcs/oauthUpdate.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

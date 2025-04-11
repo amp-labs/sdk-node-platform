@@ -18,6 +18,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 export enum ListAcceptEnum {
@@ -28,10 +29,10 @@ export enum ListAcceptEnum {
 /**
  * List all projects that the API key or user credential has access to.
  */
-export async function projectsList(
+export function projectsList(
   client: SDKNodePlatformCore,
   options?: RequestOptions & { acceptHeaderOverride?: ListAcceptEnum },
-): Promise<
+): APIPromise<
   Result<
     operations.ListProjectsResponse,
     | APIError
@@ -42,6 +43,30 @@ export async function projectsList(
     | RequestTimeoutError
     | ConnectionError
   >
+> {
+  return new APIPromise($do(
+    client,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  options?: RequestOptions & { acceptHeaderOverride?: ListAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.ListProjectsResponse,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
 > {
   const path = pathToFunc("/projects")();
 
@@ -55,6 +80,7 @@ export async function projectsList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "listProjects",
     oAuth2Scopes: [],
 
@@ -76,7 +102,7 @@ export async function projectsList(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -87,7 +113,7 @@ export async function projectsList(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -102,14 +128,15 @@ export async function projectsList(
     | ConnectionError
   >(
     M.json(200, operations.ListProjectsResponse$inboundSchema),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json("default", operations.ListProjectsResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

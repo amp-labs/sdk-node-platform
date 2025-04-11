@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { UpdateConnectionBasicAuth } from "sdk-node-platform/models/operations";
+import { UpdateConnectionBasicAuth } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateConnectionBasicAuth = {
-  username: "Greta_Bradtke",
-  password: "7I869G0Ok7_8RIU",
+  username: "Elizabeth17",
+  password: "2zo4l5CQcj_OTIR",
 };
 ```
 

@@ -20,6 +20,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 export enum GetObjectMetadataForConnectionAcceptEnum {
@@ -35,13 +36,13 @@ export enum GetObjectMetadataForConnectionAcceptEnum {
  * This endpoint only requires that a Connection exists for the given groupRef.
  * It does not apply any object mappings.
  */
-export async function objectsAndFieldsGetObjectMetadataForConnection(
+export function objectsAndFieldsGetObjectMetadataForConnection(
   client: SDKNodePlatformCore,
   request: operations.GetObjectMetadataForConnectionRequest,
   options?: RequestOptions & {
     acceptHeaderOverride?: GetObjectMetadataForConnectionAcceptEnum;
   },
-): Promise<
+): APIPromise<
   Result<
     operations.GetObjectMetadataForConnectionResponse,
     | APIError
@@ -53,6 +54,34 @@ export async function objectsAndFieldsGetObjectMetadataForConnection(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SDKNodePlatformCore,
+  request: operations.GetObjectMetadataForConnectionRequest,
+  options?: RequestOptions & {
+    acceptHeaderOverride?: GetObjectMetadataForConnectionAcceptEnum;
+  },
+): Promise<
+  [
+    Result<
+      operations.GetObjectMetadataForConnectionResponse,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -62,7 +91,7 @@ export async function objectsAndFieldsGetObjectMetadataForConnection(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -100,6 +129,7 @@ export async function objectsAndFieldsGetObjectMetadataForConnection(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "getObjectMetadataForConnection",
     oAuth2Scopes: [],
 
@@ -123,7 +153,7 @@ export async function objectsAndFieldsGetObjectMetadataForConnection(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -134,7 +164,7 @@ export async function objectsAndFieldsGetObjectMetadataForConnection(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -152,7 +182,8 @@ export async function objectsAndFieldsGetObjectMetadataForConnection(
       200,
       operations.GetObjectMetadataForConnectionResponse$inboundSchema,
     ),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
     M.json(
       "default",
       operations.GetObjectMetadataForConnectionResponse$inboundSchema,
@@ -160,8 +191,8 @@ export async function objectsAndFieldsGetObjectMetadataForConnection(
     ),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

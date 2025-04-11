@@ -8,10 +8,10 @@
 ```typescript
 const value: operations.GetProviderProviderInfo = {
   name: "<value>",
-  authType: "apiKey",
-  baseURL: "https://delirious-scorpion.com/",
+  authType: "none",
+  baseURL: "https://difficult-fisherman.info/",
   oauth2Opts: {
-    grantType: "clientCredentials",
+    grantType: "password",
     authURL: "https://login.salesforce.com/services/oauth2/authorize",
     tokenURL: "https://login.salesforce.com/services/oauth2/token",
     explicitScopesRequired: true,
@@ -83,7 +83,6 @@ const value: operations.GetProviderProviderInfo = {
 
 ```typescript
 const value: operations.GetProviderAPIProblem = {
-  type: "urn:problem-type:exampleOrganization:exampleProblem",
   href:
     "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
   title: "Description of the type of problem that occurred",

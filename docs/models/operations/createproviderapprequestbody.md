@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CreateProviderAppRequestBody } from "sdk-node-platform/models/operations";
+import { CreateProviderAppRequestBody } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateProviderAppRequestBody = {
   externalRef: "external-id-123",

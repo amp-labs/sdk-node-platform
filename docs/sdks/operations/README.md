@@ -16,7 +16,7 @@ List operations
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -41,8 +41,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { operationsList } from "sdk-node-platform/funcs/operationsList.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { operationsList } from "@amp-labs/sdk-node-platform/funcs/operationsList.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -98,7 +98,7 @@ Get an operation
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -122,8 +122,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { operationsGet } from "sdk-node-platform/funcs/operationsGet.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { operationsGet } from "@amp-labs/sdk-node-platform/funcs/operationsGet.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -178,7 +178,7 @@ List logs for an operation
 ### Example Usage
 
 ```typescript
-import { SDKNodePlatform } from "sdk-node-platform";
+import { SDKNodePlatform } from "@amp-labs/sdk-node-platform";
 
 const sdkNodePlatform = new SDKNodePlatform({
   apiKeyHeader: process.env["SDKNODEPLATFORM_API_KEY_HEADER"] ?? "",
@@ -202,8 +202,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKNodePlatformCore } from "sdk-node-platform/core.js";
-import { operationsListLogs } from "sdk-node-platform/funcs/operationsListLogs.js";
+import { SDKNodePlatformCore } from "@amp-labs/sdk-node-platform/core.js";
+import { operationsListLogs } from "@amp-labs/sdk-node-platform/funcs/operationsListLogs.js";
 
 // Use `SDKNodePlatformCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

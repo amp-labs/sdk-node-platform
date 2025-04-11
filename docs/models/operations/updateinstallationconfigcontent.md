@@ -5,7 +5,7 @@ The content of the config.
 ## Example Usage
 
 ```typescript
-import { UpdateInstallationConfigContent } from "sdk-node-platform/models/operations";
+import { UpdateInstallationConfigContent } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateInstallationConfigContent = {
   provider: "salesforce",

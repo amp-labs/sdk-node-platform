@@ -5,7 +5,7 @@ Created
 ## Example Usage
 
 ```typescript
-import { CreateInstallationInstallation } from "sdk-node-platform/models/operations";
+import { CreateInstallationInstallation } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: CreateInstallationInstallation = {
   id: "<id>",
@@ -32,7 +32,7 @@ let value: CreateInstallationInstallation = {
       scopes: [
         "[\"oauth\",\"offline\",\"crm.read\"]",
       ],
-      createTime: new Date("2024-07-21T22:45:05.685Z"),
+      createTime: new Date("2024-03-03T18:36:16.968Z"),
     },
     group: {
       groupRef: "group-123",
@@ -68,12 +68,12 @@ let value: CreateInstallationInstallation = {
     },
     apiKey: "api-key-123",
   },
-  createTime: new Date("2023-01-29T03:01:55.688Z"),
+  createTime: new Date("2024-10-12T18:11:00.495Z"),
   createdBy: "consumer:consumer-123",
   config: {
     id: "config-123",
     revisionId: "revision-123",
-    createTime: new Date("2023-08-16T09:17:34.312Z"),
+    createTime: new Date("2023-06-07T23:57:11.785Z"),
     createdBy: "builder:builder-123",
     content: {
       provider: "salesforce",

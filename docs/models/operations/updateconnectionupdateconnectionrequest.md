@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { UpdateConnectionUpdateConnectionRequest } from "sdk-node-platform/models/operations";
+import { UpdateConnectionUpdateConnectionRequest } from "@amp-labs/sdk-node-platform/models/operations";
 
 let value: UpdateConnectionUpdateConnectionRequest = {
   groupRef: "group-123",
