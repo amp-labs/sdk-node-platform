@@ -8,9 +8,12 @@ import { GenerateConnectionRequest } from "@amp-labs/sdk-node-platform/models/op
 let value: GenerateConnectionRequest = {
   projectIdOrName: "my-project",
   requestBody: {
-    groupRef: "group-123",
-    consumerRef: "<value>",
-    provider: "<value>",
+    updateMask: [
+      "<value>",
+    ],
+    connection: {
+      groupRef: "group-123",
+    },
   },
 };
 ```

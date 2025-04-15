@@ -18,7 +18,7 @@ const value: operations.ListOperationsResponseBody = {
       status: "success",
       result: "[object] No changes",
       metadata: {},
-      createTime: new Date("2023-07-13T21:34:44.816354Z"),
+      createTime: new Date("2023-07-13T21:34:44.816Z"),
     },
   ],
   pagination: {

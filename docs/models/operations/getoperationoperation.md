@@ -17,7 +17,7 @@ let value: GetOperationOperation = {
   status: "success",
   result: "[object] No changes",
   metadata: {},
-  createTime: new Date("2023-07-13T21:34:44.816354Z"),
+  createTime: new Date("2023-07-13T21:34:44.816Z"),
 };
 ```
 
@@ -34,4 +34,4 @@ let value: GetOperationOperation = {
 | `status`                                                                                      | *string*                                                                                      | :heavy_check_mark:                                                                            | The status of the operation.                                                                  | success                                                                                       |
 | `result`                                                                                      | *string*                                                                                      | :heavy_minus_sign:                                                                            | The result of the operation.                                                                  | [object] No changes                                                                           |
 | `metadata`                                                                                    | [operations.GetOperationMetadata](../../models/operations/getoperationmetadata.md)            | :heavy_minus_sign:                                                                            | Metadata associated with the operation.                                                       | {}                                                                                            |
-| `createTime`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The time the operation was created.                                                           | 2023-07-13T21:34:44.816354Z                                                                   |
+| `createTime`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The time the operation was created.                                                           | 2023-07-13T21:34:44.816Z                                                                      |

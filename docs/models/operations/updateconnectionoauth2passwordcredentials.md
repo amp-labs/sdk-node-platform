@@ -1,13 +1,13 @@
-# Oauth2Password
+# UpdateConnectionOauth2PasswordCredentials
 
 ## Example Usage
 
 ```typescript
-import { Oauth2Password } from "@amp-labs/sdk-node-platform/models/operations";
+import { UpdateConnectionOauth2PasswordCredentials } from "@amp-labs/sdk-node-platform/models/operations";
 
-let value: Oauth2Password = {
-  username: "Jamil_Thiel",
-  password: "0y6N0YcfJP2I9Ea",
+let value: UpdateConnectionOauth2PasswordCredentials = {
+  username: "Maxime36",
+  password: "XNpPAv8wm24TXIa",
   clientId: "<id>",
   clientSecret: "<value>",
 };

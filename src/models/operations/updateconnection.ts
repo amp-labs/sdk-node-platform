@@ -35,7 +35,7 @@ export type UpdateConnectionOauth2ClientCredentials = {
   scopes?: Array<string> | undefined;
 };
 
-export type UpdateConnectionOauth2Password = {
+export type UpdateConnectionOauth2PasswordCredentials = {
   /**
    * The username to use for the connection.
    */
@@ -91,7 +91,7 @@ export type UpdateConnectionOAuth2AuthorizationCode = {
   scopes?: Array<string> | undefined;
 };
 
-export type UpdateConnectionUpdateConnectionRequest = {
+export type UpdateConnectionConnectionRequestBody = {
   /**
    * The ID of the provider workspace that this connection belongs to.
    */
@@ -122,8 +122,18 @@ export type UpdateConnectionUpdateConnectionRequest = {
   apiKey?: string | undefined;
   basicAuth?: UpdateConnectionBasicAuth | undefined;
   oauth2ClientCredentials?: UpdateConnectionOauth2ClientCredentials | undefined;
-  oauth2Password?: UpdateConnectionOauth2Password | undefined;
+  oauth2PasswordCredentials?:
+    | UpdateConnectionOauth2PasswordCredentials
+    | undefined;
   oauth2AuthorizationCode?: UpdateConnectionOAuth2AuthorizationCode | undefined;
+};
+
+export type UpdateConnectionUpdateConnectionRequest = {
+  /**
+   * The fields to update.
+   */
+  updateMask: Array<string>;
+  connection: UpdateConnectionConnectionRequestBody;
 };
 
 export type UpdateConnectionRequest = {
@@ -550,8 +560,8 @@ export function updateConnectionOauth2ClientCredentialsFromJSON(
 }
 
 /** @internal */
-export const UpdateConnectionOauth2Password$inboundSchema: z.ZodType<
-  UpdateConnectionOauth2Password,
+export const UpdateConnectionOauth2PasswordCredentials$inboundSchema: z.ZodType<
+  UpdateConnectionOauth2PasswordCredentials,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -563,7 +573,7 @@ export const UpdateConnectionOauth2Password$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateConnectionOauth2Password$Outbound = {
+export type UpdateConnectionOauth2PasswordCredentials$Outbound = {
   username: string;
   password: string;
   clientId: string;
@@ -572,48 +582,58 @@ export type UpdateConnectionOauth2Password$Outbound = {
 };
 
 /** @internal */
-export const UpdateConnectionOauth2Password$outboundSchema: z.ZodType<
-  UpdateConnectionOauth2Password$Outbound,
-  z.ZodTypeDef,
-  UpdateConnectionOauth2Password
-> = z.object({
-  username: z.string(),
-  password: z.string(),
-  clientId: z.string(),
-  clientSecret: z.string(),
-  scopes: z.array(z.string()).optional(),
-});
+export const UpdateConnectionOauth2PasswordCredentials$outboundSchema:
+  z.ZodType<
+    UpdateConnectionOauth2PasswordCredentials$Outbound,
+    z.ZodTypeDef,
+    UpdateConnectionOauth2PasswordCredentials
+  > = z.object({
+    username: z.string(),
+    password: z.string(),
+    clientId: z.string(),
+    clientSecret: z.string(),
+    scopes: z.array(z.string()).optional(),
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateConnectionOauth2Password$ {
-  /** @deprecated use `UpdateConnectionOauth2Password$inboundSchema` instead. */
-  export const inboundSchema = UpdateConnectionOauth2Password$inboundSchema;
-  /** @deprecated use `UpdateConnectionOauth2Password$outboundSchema` instead. */
-  export const outboundSchema = UpdateConnectionOauth2Password$outboundSchema;
-  /** @deprecated use `UpdateConnectionOauth2Password$Outbound` instead. */
-  export type Outbound = UpdateConnectionOauth2Password$Outbound;
+export namespace UpdateConnectionOauth2PasswordCredentials$ {
+  /** @deprecated use `UpdateConnectionOauth2PasswordCredentials$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateConnectionOauth2PasswordCredentials$inboundSchema;
+  /** @deprecated use `UpdateConnectionOauth2PasswordCredentials$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateConnectionOauth2PasswordCredentials$outboundSchema;
+  /** @deprecated use `UpdateConnectionOauth2PasswordCredentials$Outbound` instead. */
+  export type Outbound = UpdateConnectionOauth2PasswordCredentials$Outbound;
 }
 
-export function updateConnectionOauth2PasswordToJSON(
-  updateConnectionOauth2Password: UpdateConnectionOauth2Password,
+export function updateConnectionOauth2PasswordCredentialsToJSON(
+  updateConnectionOauth2PasswordCredentials:
+    UpdateConnectionOauth2PasswordCredentials,
 ): string {
   return JSON.stringify(
-    UpdateConnectionOauth2Password$outboundSchema.parse(
-      updateConnectionOauth2Password,
+    UpdateConnectionOauth2PasswordCredentials$outboundSchema.parse(
+      updateConnectionOauth2PasswordCredentials,
     ),
   );
 }
 
-export function updateConnectionOauth2PasswordFromJSON(
+export function updateConnectionOauth2PasswordCredentialsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateConnectionOauth2Password, SDKValidationError> {
+): SafeParseResult<
+  UpdateConnectionOauth2PasswordCredentials,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => UpdateConnectionOauth2Password$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateConnectionOauth2Password' from JSON`,
+    (x) =>
+      UpdateConnectionOauth2PasswordCredentials$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateConnectionOauth2PasswordCredentials' from JSON`,
   );
 }
 
@@ -821,8 +841,8 @@ export function updateConnectionOAuth2AuthorizationCodeFromJSON(
 }
 
 /** @internal */
-export const UpdateConnectionUpdateConnectionRequest$inboundSchema: z.ZodType<
-  UpdateConnectionUpdateConnectionRequest,
+export const UpdateConnectionConnectionRequestBody$inboundSchema: z.ZodType<
+  UpdateConnectionConnectionRequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -837,15 +857,16 @@ export const UpdateConnectionUpdateConnectionRequest$inboundSchema: z.ZodType<
   oauth2ClientCredentials: z.lazy(() =>
     UpdateConnectionOauth2ClientCredentials$inboundSchema
   ).optional(),
-  oauth2Password: z.lazy(() => UpdateConnectionOauth2Password$inboundSchema)
-    .optional(),
+  oauth2PasswordCredentials: z.lazy(() =>
+    UpdateConnectionOauth2PasswordCredentials$inboundSchema
+  ).optional(),
   oauth2AuthorizationCode: z.lazy(() =>
     UpdateConnectionOAuth2AuthorizationCode$inboundSchema
   ).optional(),
 });
 
 /** @internal */
-export type UpdateConnectionUpdateConnectionRequest$Outbound = {
+export type UpdateConnectionConnectionRequestBody$Outbound = {
   providerWorkspaceRef?: string | undefined;
   groupName?: string | undefined;
   groupRef?: string | undefined;
@@ -857,17 +878,19 @@ export type UpdateConnectionUpdateConnectionRequest$Outbound = {
   oauth2ClientCredentials?:
     | UpdateConnectionOauth2ClientCredentials$Outbound
     | undefined;
-  oauth2Password?: UpdateConnectionOauth2Password$Outbound | undefined;
+  oauth2PasswordCredentials?:
+    | UpdateConnectionOauth2PasswordCredentials$Outbound
+    | undefined;
   oauth2AuthorizationCode?:
     | UpdateConnectionOAuth2AuthorizationCode$Outbound
     | undefined;
 };
 
 /** @internal */
-export const UpdateConnectionUpdateConnectionRequest$outboundSchema: z.ZodType<
-  UpdateConnectionUpdateConnectionRequest$Outbound,
+export const UpdateConnectionConnectionRequestBody$outboundSchema: z.ZodType<
+  UpdateConnectionConnectionRequestBody$Outbound,
   z.ZodTypeDef,
-  UpdateConnectionUpdateConnectionRequest
+  UpdateConnectionConnectionRequestBody
 > = z.object({
   providerWorkspaceRef: z.string().optional(),
   groupName: z.string().optional(),
@@ -880,11 +903,76 @@ export const UpdateConnectionUpdateConnectionRequest$outboundSchema: z.ZodType<
   oauth2ClientCredentials: z.lazy(() =>
     UpdateConnectionOauth2ClientCredentials$outboundSchema
   ).optional(),
-  oauth2Password: z.lazy(() => UpdateConnectionOauth2Password$outboundSchema)
-    .optional(),
+  oauth2PasswordCredentials: z.lazy(() =>
+    UpdateConnectionOauth2PasswordCredentials$outboundSchema
+  ).optional(),
   oauth2AuthorizationCode: z.lazy(() =>
     UpdateConnectionOAuth2AuthorizationCode$outboundSchema
   ).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateConnectionConnectionRequestBody$ {
+  /** @deprecated use `UpdateConnectionConnectionRequestBody$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateConnectionConnectionRequestBody$inboundSchema;
+  /** @deprecated use `UpdateConnectionConnectionRequestBody$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateConnectionConnectionRequestBody$outboundSchema;
+  /** @deprecated use `UpdateConnectionConnectionRequestBody$Outbound` instead. */
+  export type Outbound = UpdateConnectionConnectionRequestBody$Outbound;
+}
+
+export function updateConnectionConnectionRequestBodyToJSON(
+  updateConnectionConnectionRequestBody: UpdateConnectionConnectionRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateConnectionConnectionRequestBody$outboundSchema.parse(
+      updateConnectionConnectionRequestBody,
+    ),
+  );
+}
+
+export function updateConnectionConnectionRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateConnectionConnectionRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateConnectionConnectionRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateConnectionConnectionRequestBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateConnectionUpdateConnectionRequest$inboundSchema: z.ZodType<
+  UpdateConnectionUpdateConnectionRequest,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  updateMask: z.array(z.string()),
+  connection: z.lazy(() => UpdateConnectionConnectionRequestBody$inboundSchema),
+});
+
+/** @internal */
+export type UpdateConnectionUpdateConnectionRequest$Outbound = {
+  updateMask: Array<string>;
+  connection: UpdateConnectionConnectionRequestBody$Outbound;
+};
+
+/** @internal */
+export const UpdateConnectionUpdateConnectionRequest$outboundSchema: z.ZodType<
+  UpdateConnectionUpdateConnectionRequest$Outbound,
+  z.ZodTypeDef,
+  UpdateConnectionUpdateConnectionRequest
+> = z.object({
+  updateMask: z.array(z.string()),
+  connection: z.lazy(() =>
+    UpdateConnectionConnectionRequestBody$outboundSchema
+  ),
 });
 
 /**
