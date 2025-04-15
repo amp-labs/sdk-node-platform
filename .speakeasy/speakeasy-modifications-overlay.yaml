@@ -92,7 +92,6 @@ actions:
     update:
       x-speakeasy-group: orgBuilders
       x-speakeasy-name-override: list
-      x-internal: true
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Org.listOrgBuilders()
