@@ -9,7 +9,12 @@ let value: UpdateConnectionRequest = {
   projectIdOrName: "<value>",
   connectionId: "<id>",
   requestBody: {
-    groupRef: "group-123",
+    updateMask: [
+      "<value>",
+    ],
+    connection: {
+      groupRef: "group-123",
+    },
   },
 };
 ```

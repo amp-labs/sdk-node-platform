@@ -107,9 +107,13 @@ async function run() {
   const result = await sdkNodePlatform.connections.generate({
     projectIdOrName: "my-project",
     requestBody: {
-      groupRef: "group-123",
-      consumerRef: "<value>",
-      provider: "<value>",
+      updateMask: [
+        "<value>",
+        "<value>",
+      ],
+      connection: {
+        groupRef: "group-123",
+      },
     },
   });
 
@@ -138,9 +142,13 @@ async function run() {
   const res = await connectionsGenerate(sdkNodePlatform, {
     projectIdOrName: "my-project",
     requestBody: {
-      groupRef: "group-123",
-      consumerRef: "<value>",
-      provider: "<value>",
+      updateMask: [
+        "<value>",
+        "<value>",
+      ],
+      connection: {
+        groupRef: "group-123",
+      },
     },
   });
 
@@ -275,7 +283,14 @@ async function run() {
     projectIdOrName: "<value>",
     connectionId: "<id>",
     requestBody: {
-      groupRef: "group-123",
+      updateMask: [
+        "<value>",
+        "<value>",
+        "<value>",
+      ],
+      connection: {
+        groupRef: "group-123",
+      },
     },
   });
 
@@ -305,7 +320,14 @@ async function run() {
     projectIdOrName: "<value>",
     connectionId: "<id>",
     requestBody: {
-      groupRef: "group-123",
+      updateMask: [
+        "<value>",
+        "<value>",
+        "<value>",
+      ],
+      connection: {
+        groupRef: "group-123",
+      },
     },
   });
 

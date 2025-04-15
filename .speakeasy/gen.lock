@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3a38888c-d574-484d-a97d-aad10316099b
 management:
-  docChecksum: 65af432b1457cae6f05c17d17ab7e570
+  docChecksum: 2f7e6f7638ca307ece40f80fe8e68ae0
   docVersion: 1.0.0
-  speakeasyVersion: 1.531.3
-  generationVersion: 2.570.3
-  releaseVersion: 0.2.0
-  configChecksum: f097625badeb2b6ac479feed21a8eabc
+  speakeasyVersion: 1.532.0
+  generationVersion: 2.578.0
+  releaseVersion: 0.2.1
+  configChecksum: b121cad58481fbcd4f46ad8dfeb8cf5d
   repoURL: https://github.com/amp-labs/sdk-node-platform.git
   installationURL: https://github.com/amp-labs/sdk-node-platform
   published: true
@@ -248,6 +248,7 @@ generatedFiles:
   - docs/models/operations/config.md
   - docs/models/operations/configcontent.md
   - docs/models/operations/connection.md
+  - docs/models/operations/connectionrequestbody.md
   - docs/models/operations/consumer.md
   - docs/models/operations/createconsumerapiproblem.md
   - docs/models/operations/createconsumerrequest.md
@@ -555,7 +556,7 @@ generatedFiles:
   - docs/models/operations/oauth2authorizationcodetoken.md
   - docs/models/operations/oauth2clientcredentials.md
   - docs/models/operations/oauth2options.md
-  - docs/models/operations/oauth2password.md
+  - docs/models/operations/oauth2passwordcredentials.md
   - docs/models/operations/oauthconnectapiproblem.md
   - docs/models/operations/oauthconnectrequestbody.md
   - docs/models/operations/oauthconnectresponse.md
@@ -590,6 +591,7 @@ generatedFiles:
   - docs/models/operations/updateconnectionauthscheme.md
   - docs/models/operations/updateconnectionbasicauth.md
   - docs/models/operations/updateconnectionconnection.md
+  - docs/models/operations/updateconnectionconnectionrequestbody.md
   - docs/models/operations/updateconnectionconnectionsaccesstoken.md
   - docs/models/operations/updateconnectionconnectionsrefreshtoken.md
   - docs/models/operations/updateconnectionconsumer.md
@@ -597,7 +599,7 @@ generatedFiles:
   - docs/models/operations/updateconnectionoauth2authorizationcode.md
   - docs/models/operations/updateconnectionoauth2authorizationcodetoken.md
   - docs/models/operations/updateconnectionoauth2clientcredentials.md
-  - docs/models/operations/updateconnectionoauth2password.md
+  - docs/models/operations/updateconnectionoauth2passwordcredentials.md
   - docs/models/operations/updateconnectionproviderapp.md
   - docs/models/operations/updateconnectionrefreshtoken.md
   - docs/models/operations/updateconnectionrequest.md
@@ -1312,12 +1314,12 @@ examples:
         path:
           projectIdOrName: "my-project"
       requestBody:
-        application/json: {"groupRef": "group-123", "consumerRef": "<value>", "provider": "<value>"}
+        application/json: {"updateMask": ["<value>", "<value>"], "connection": {"groupRef": "group-123"}}
       responses:
         "201":
           application/json: {"id": "connection-123", "projectId": "project-456", "provider": "salesforce", "providerApp": {"id": "provider-app-123", "projectId": "project-456", "externalRef": "external-id-123", "provider": "salesforce", "clientId": "client-id-123", "scopes": ["[\"oauth\",\"offline\",\"crm.read\"]"], "createTime": "2025-03-22T06:10:11.639Z"}, "group": {"groupRef": "group-123", "groupName": "Super Customer", "projectId": "project-456", "createTime": "2023-07-13T21:34:44.816354Z", "updateTime": "2023-07-13T21:34:44.816354Z"}, "consumer": {"consumerRef": "consumer-123", "consumerName": "Super Customer", "projectId": "project-456", "createTime": "2023-07-13T21:34:44.816354Z", "updateTime": "2023-07-13T21:34:44.816354Z"}, "providerWorkspaceRef": "provider-workspace-123", "providerConsumerRef": "provider-consumer-123", "createTime": "2023-07-13T21:34:44.816354Z", "updateTime": "2023-07-13T21:34:44.816354Z", "authScheme": "oauth2/authorizationCode", "status": "working", "oauth2AuthorizationCode": {"accessToken": {"token": "<value>", "issuedAt": "2024-04-22T18:55:28.456076Z", "expiresAt": "2024-10-22T18:55:28.456076Z"}, "refreshToken": {"token": "<value>", "issuedAt": "2024-04-22T18:55:28.456076Z", "expiresAt": "2024-10-22T18:55:28.456076Z"}}, "apiKey": "api-key-123"}
         "400":
-          application/problem+json: {"type": "about:blank", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Bad Request", "status": 400, "detail": "The input message is incorrect", "instance": "123456-1234-1235-4567489798", "issues": [{"type": "about:blank", "detail": "exampleNumericProperty should be numeric", "in": "path", "name": "exampleNumericProperty", "value": "abc"}, {"type": "about:blank", "title": "Input isn't valid with respect to schema", "detail": "examplePropertyWithPattern a2345678901 doesn't match pattern '^\\d{11}$'", "in": "body", "name": "items[0].examplePropertyWithPattern", "value": "a2345678901"}]}
+          application/problem+json: {"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Description of the type of problem that occurred", "status": 400, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000", "issues": [{"type": "about:blank", "detail": "exampleNumericProperty should be numeric", "in": "path", "name": "exampleNumericProperty", "value": "abc"}, {"type": "about:blank", "title": "Input isn't valid with respect to schema", "detail": "examplePropertyWithPattern a2345678901 doesn't match pattern '^\\d{11}$'", "in": "body", "name": "items[0].examplePropertyWithPattern", "value": "a2345678901"}]}
         "422":
           application/problem+json: {"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Description of the type of problem that occurred", "status": 400, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"}
         default:
@@ -1343,12 +1345,12 @@ examples:
           projectIdOrName: "<value>"
           connectionId: "<id>"
       requestBody:
-        application/json: {"groupRef": "group-123"}
+        application/json: {"updateMask": ["<value>", "<value>", "<value>"], "connection": {"groupRef": "group-123"}}
       responses:
         "200":
           application/json: {"id": "connection-123", "projectId": "project-456", "provider": "salesforce", "providerApp": {"id": "provider-app-123", "projectId": "project-456", "externalRef": "external-id-123", "provider": "salesforce", "clientId": "client-id-123", "scopes": ["[\"oauth\",\"offline\",\"crm.read\"]"], "createTime": "2025-07-28T19:04:48.565Z"}, "group": {"groupRef": "group-123", "groupName": "Super Customer", "projectId": "project-456", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z"}, "consumer": {"consumerRef": "consumer-123", "consumerName": "Super Customer", "projectId": "project-456", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z"}, "providerWorkspaceRef": "provider-workspace-123", "providerConsumerRef": "provider-consumer-123", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z", "authScheme": "oauth2/authorizationCode", "status": "working", "oauth2AuthorizationCode": {"accessToken": {"token": "<value>", "issuedAt": "2024-04-22T18:55:28.456076Z", "expiresAt": "2024-10-22T18:55:28.456076Z"}, "refreshToken": {"token": "<value>", "issuedAt": "2024-04-22T18:55:28.456076Z", "expiresAt": "2024-10-22T18:55:28.456076Z"}}, "apiKey": "api-key-123"}
         "400":
-          application/problem+json: {"type": "about:blank", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Service Unavailable", "status": 503, "detail": "The input message is incorrect", "instance": "123456-1234-1235-4567489798", "subsystem": "api", "time": "2024-04-22T18:55:28.456076Z", "requestId": "89eb1ffb-2a54-4105-aaae-7bf990f1aa69#87715", "causes": ["database connection failed"], "remedy": "Shorten your input to be under 100 characters", "supportEmail": "support@withampersand.com", "supportPhone": "+1-555-555-5555", "supportUrl": "https://withampersand.com/support", "retryable": false, "retryAfter": "2024-04-22T18:55:28.456076Z", "context": {"name": "Rick Sanchez"}, "issues": [{"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Description of the type of problem that occurred", "status": 400, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"}]}
+          application/problem+json: {"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Service Unavailable", "status": 503, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000", "subsystem": "api", "time": "2024-04-22T18:55:28.456076Z", "requestId": "89eb1ffb-2a54-4105-aaae-7bf990f1aa69#87715", "causes": ["database connection failed"], "remedy": "Shorten your input to be under 100 characters", "supportEmail": "support@withampersand.com", "supportPhone": "+1-555-555-5555", "supportUrl": "https://withampersand.com/support", "retryable": false, "retryAfter": "2024-04-22T18:55:28.456076Z", "context": {"name": "Rick Sanchez"}, "issues": [{"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Description of the type of problem that occurred", "status": 400, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"}]}
         default:
           application/problem+json: {"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Service Unavailable", "status": 503, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000", "subsystem": "api", "time": "2024-04-22T18:55:28.456076Z", "requestId": "89eb1ffb-2a54-4105-aaae-7bf990f1aa69#87715", "causes": ["database connection failed"], "remedy": "Shorten your input to be under 100 characters", "supportEmail": "support@withampersand.com", "supportPhone": "+1-555-555-5555", "supportUrl": "https://withampersand.com/support", "retryable": false, "retryAfter": "2024-04-22T18:55:28.456076Z", "context": {"name": "Rick Sanchez"}}
   deleteConnection:
