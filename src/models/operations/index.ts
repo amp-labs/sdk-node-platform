@@ -34,6 +34,7 @@ export * from "./listinstallations.js";
 export * from "./listintegrations.js";
 export * from "./listoperationlogs.js";
 export * from "./listoperations.js";
+export * from "./listorgbuilders.js";
 export * from "./listprojects.js";
 export * from "./listproviderapps.js";
 export * from "./listproviders.js";

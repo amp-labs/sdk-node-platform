@@ -107,13 +107,9 @@ async function run() {
   const result = await sdkNodePlatform.connections.generate({
     projectIdOrName: "my-project",
     requestBody: {
-      updateMask: [
-        "<value>",
-        "<value>",
-      ],
-      connection: {
-        groupRef: "group-123",
-      },
+      groupRef: "group-123",
+      consumerRef: "<value>",
+      provider: "<value>",
     },
   });
 
@@ -142,13 +138,9 @@ async function run() {
   const res = await connectionsGenerate(sdkNodePlatform, {
     projectIdOrName: "my-project",
     requestBody: {
-      updateMask: [
-        "<value>",
-        "<value>",
-      ],
-      connection: {
-        groupRef: "group-123",
-      },
+      groupRef: "group-123",
+      consumerRef: "<value>",
+      provider: "<value>",
     },
   });
 

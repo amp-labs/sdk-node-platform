@@ -91,7 +91,7 @@ export type OAuth2AuthorizationCode = {
   scopes?: Array<string> | undefined;
 };
 
-export type ConnectionRequestBody = {
+export type GenerateConnectionGenerateConnectionRequest = {
   /**
    * The ID of the provider workspace that this connection belongs to.
    */
@@ -103,7 +103,7 @@ export type ConnectionRequestBody = {
   /**
    * The ID of the user group that has access to this installation.
    */
-  groupRef?: string | undefined;
+  groupRef: string;
   /**
    * The name of the consumer that has access to this installation.
    */
@@ -111,11 +111,11 @@ export type ConnectionRequestBody = {
   /**
    * The consumer reference.
    */
-  consumerRef?: string | undefined;
+  consumerRef: string;
   /**
    * The provider name (e.g. "salesforce", "hubspot")
    */
-  provider?: string | undefined;
+  provider: string;
   /**
    * The API key to use for the connection.
    */
@@ -124,14 +124,6 @@ export type ConnectionRequestBody = {
   oauth2ClientCredentials?: Oauth2ClientCredentials | undefined;
   oauth2PasswordCredentials?: Oauth2PasswordCredentials | undefined;
   oauth2AuthorizationCode?: OAuth2AuthorizationCode | undefined;
-};
-
-export type GenerateConnectionGenerateConnectionRequest = {
-  /**
-   * The fields to update.
-   */
-  updateMask: Array<string>;
-  connection: ConnectionRequestBody;
 };
 
 export type GenerateConnectionRequest = {
@@ -783,112 +775,42 @@ export function oAuth2AuthorizationCodeFromJSON(
 }
 
 /** @internal */
-export const ConnectionRequestBody$inboundSchema: z.ZodType<
-  ConnectionRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  providerWorkspaceRef: z.string().optional(),
-  groupName: z.string().optional(),
-  groupRef: z.string().optional(),
-  consumerName: z.string().optional(),
-  consumerRef: z.string().optional(),
-  provider: z.string().optional(),
-  apiKey: z.string().optional(),
-  basicAuth: z.lazy(() => BasicAuth$inboundSchema).optional(),
-  oauth2ClientCredentials: z.lazy(() => Oauth2ClientCredentials$inboundSchema)
-    .optional(),
-  oauth2PasswordCredentials: z.lazy(() =>
-    Oauth2PasswordCredentials$inboundSchema
-  ).optional(),
-  oauth2AuthorizationCode: z.lazy(() => OAuth2AuthorizationCode$inboundSchema)
-    .optional(),
-});
-
-/** @internal */
-export type ConnectionRequestBody$Outbound = {
-  providerWorkspaceRef?: string | undefined;
-  groupName?: string | undefined;
-  groupRef?: string | undefined;
-  consumerName?: string | undefined;
-  consumerRef?: string | undefined;
-  provider?: string | undefined;
-  apiKey?: string | undefined;
-  basicAuth?: BasicAuth$Outbound | undefined;
-  oauth2ClientCredentials?: Oauth2ClientCredentials$Outbound | undefined;
-  oauth2PasswordCredentials?: Oauth2PasswordCredentials$Outbound | undefined;
-  oauth2AuthorizationCode?: OAuth2AuthorizationCode$Outbound | undefined;
-};
-
-/** @internal */
-export const ConnectionRequestBody$outboundSchema: z.ZodType<
-  ConnectionRequestBody$Outbound,
-  z.ZodTypeDef,
-  ConnectionRequestBody
-> = z.object({
-  providerWorkspaceRef: z.string().optional(),
-  groupName: z.string().optional(),
-  groupRef: z.string().optional(),
-  consumerName: z.string().optional(),
-  consumerRef: z.string().optional(),
-  provider: z.string().optional(),
-  apiKey: z.string().optional(),
-  basicAuth: z.lazy(() => BasicAuth$outboundSchema).optional(),
-  oauth2ClientCredentials: z.lazy(() => Oauth2ClientCredentials$outboundSchema)
-    .optional(),
-  oauth2PasswordCredentials: z.lazy(() =>
-    Oauth2PasswordCredentials$outboundSchema
-  ).optional(),
-  oauth2AuthorizationCode: z.lazy(() => OAuth2AuthorizationCode$outboundSchema)
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectionRequestBody$ {
-  /** @deprecated use `ConnectionRequestBody$inboundSchema` instead. */
-  export const inboundSchema = ConnectionRequestBody$inboundSchema;
-  /** @deprecated use `ConnectionRequestBody$outboundSchema` instead. */
-  export const outboundSchema = ConnectionRequestBody$outboundSchema;
-  /** @deprecated use `ConnectionRequestBody$Outbound` instead. */
-  export type Outbound = ConnectionRequestBody$Outbound;
-}
-
-export function connectionRequestBodyToJSON(
-  connectionRequestBody: ConnectionRequestBody,
-): string {
-  return JSON.stringify(
-    ConnectionRequestBody$outboundSchema.parse(connectionRequestBody),
-  );
-}
-
-export function connectionRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectionRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConnectionRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectionRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GenerateConnectionGenerateConnectionRequest$inboundSchema:
   z.ZodType<
     GenerateConnectionGenerateConnectionRequest,
     z.ZodTypeDef,
     unknown
   > = z.object({
-    updateMask: z.array(z.string()),
-    connection: z.lazy(() => ConnectionRequestBody$inboundSchema),
+    providerWorkspaceRef: z.string().optional(),
+    groupName: z.string().optional(),
+    groupRef: z.string(),
+    consumerName: z.string().optional(),
+    consumerRef: z.string(),
+    provider: z.string(),
+    apiKey: z.string().optional(),
+    basicAuth: z.lazy(() => BasicAuth$inboundSchema).optional(),
+    oauth2ClientCredentials: z.lazy(() => Oauth2ClientCredentials$inboundSchema)
+      .optional(),
+    oauth2PasswordCredentials: z.lazy(() =>
+      Oauth2PasswordCredentials$inboundSchema
+    ).optional(),
+    oauth2AuthorizationCode: z.lazy(() => OAuth2AuthorizationCode$inboundSchema)
+      .optional(),
   });
 
 /** @internal */
 export type GenerateConnectionGenerateConnectionRequest$Outbound = {
-  updateMask: Array<string>;
-  connection: ConnectionRequestBody$Outbound;
+  providerWorkspaceRef?: string | undefined;
+  groupName?: string | undefined;
+  groupRef: string;
+  consumerName?: string | undefined;
+  consumerRef: string;
+  provider: string;
+  apiKey?: string | undefined;
+  basicAuth?: BasicAuth$Outbound | undefined;
+  oauth2ClientCredentials?: Oauth2ClientCredentials$Outbound | undefined;
+  oauth2PasswordCredentials?: Oauth2PasswordCredentials$Outbound | undefined;
+  oauth2AuthorizationCode?: OAuth2AuthorizationCode$Outbound | undefined;
 };
 
 /** @internal */
@@ -898,8 +820,23 @@ export const GenerateConnectionGenerateConnectionRequest$outboundSchema:
     z.ZodTypeDef,
     GenerateConnectionGenerateConnectionRequest
   > = z.object({
-    updateMask: z.array(z.string()),
-    connection: z.lazy(() => ConnectionRequestBody$outboundSchema),
+    providerWorkspaceRef: z.string().optional(),
+    groupName: z.string().optional(),
+    groupRef: z.string(),
+    consumerName: z.string().optional(),
+    consumerRef: z.string(),
+    provider: z.string(),
+    apiKey: z.string().optional(),
+    basicAuth: z.lazy(() => BasicAuth$outboundSchema).optional(),
+    oauth2ClientCredentials: z.lazy(() =>
+      Oauth2ClientCredentials$outboundSchema
+    ).optional(),
+    oauth2PasswordCredentials: z.lazy(() =>
+      Oauth2PasswordCredentials$outboundSchema
+    ).optional(),
+    oauth2AuthorizationCode: z.lazy(() =>
+      OAuth2AuthorizationCode$outboundSchema
+    ).optional(),
   });
 
 /**
