@@ -12,6 +12,7 @@ import { Integrations } from "./integrations.js";
 import { Oauth } from "./oauth.js";
 import { ObjectsAndFields } from "./objectsandfields.js";
 import { Operations } from "./operations.js";
+import { OrgBuilders } from "./orgbuilders.js";
 import { Projects } from "./projects.js";
 import { ProviderApps } from "./providerapps.js";
 import { Providers } from "./providers.js";
@@ -87,5 +88,10 @@ export class SDKNodePlatform extends ClientSDK {
   private _uploadUrls?: UploadUrls;
   get uploadUrls(): UploadUrls {
     return (this._uploadUrls ??= new UploadUrls(this._options));
+  }
+
+  private _orgBuilders?: OrgBuilders;
+  get orgBuilders(): OrgBuilders {
+    return (this._orgBuilders ??= new OrgBuilders(this._options));
   }
 }

@@ -91,7 +91,7 @@ export type UpdateConnectionOAuth2AuthorizationCode = {
   scopes?: Array<string> | undefined;
 };
 
-export type UpdateConnectionConnectionRequestBody = {
+export type ConnectionRequestBody = {
   /**
    * The ID of the provider workspace that this connection belongs to.
    */
@@ -133,7 +133,7 @@ export type UpdateConnectionUpdateConnectionRequest = {
    * The fields to update.
    */
   updateMask: Array<string>;
-  connection: UpdateConnectionConnectionRequestBody;
+  connection: ConnectionRequestBody;
 };
 
 export type UpdateConnectionRequest = {
@@ -841,8 +841,8 @@ export function updateConnectionOAuth2AuthorizationCodeFromJSON(
 }
 
 /** @internal */
-export const UpdateConnectionConnectionRequestBody$inboundSchema: z.ZodType<
-  UpdateConnectionConnectionRequestBody,
+export const ConnectionRequestBody$inboundSchema: z.ZodType<
+  ConnectionRequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -866,7 +866,7 @@ export const UpdateConnectionConnectionRequestBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateConnectionConnectionRequestBody$Outbound = {
+export type ConnectionRequestBody$Outbound = {
   providerWorkspaceRef?: string | undefined;
   groupName?: string | undefined;
   groupRef?: string | undefined;
@@ -887,10 +887,10 @@ export type UpdateConnectionConnectionRequestBody$Outbound = {
 };
 
 /** @internal */
-export const UpdateConnectionConnectionRequestBody$outboundSchema: z.ZodType<
-  UpdateConnectionConnectionRequestBody$Outbound,
+export const ConnectionRequestBody$outboundSchema: z.ZodType<
+  ConnectionRequestBody$Outbound,
   z.ZodTypeDef,
-  UpdateConnectionConnectionRequestBody
+  ConnectionRequestBody
 > = z.object({
   providerWorkspaceRef: z.string().optional(),
   groupName: z.string().optional(),
@@ -915,35 +915,30 @@ export const UpdateConnectionConnectionRequestBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateConnectionConnectionRequestBody$ {
-  /** @deprecated use `UpdateConnectionConnectionRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateConnectionConnectionRequestBody$inboundSchema;
-  /** @deprecated use `UpdateConnectionConnectionRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateConnectionConnectionRequestBody$outboundSchema;
-  /** @deprecated use `UpdateConnectionConnectionRequestBody$Outbound` instead. */
-  export type Outbound = UpdateConnectionConnectionRequestBody$Outbound;
+export namespace ConnectionRequestBody$ {
+  /** @deprecated use `ConnectionRequestBody$inboundSchema` instead. */
+  export const inboundSchema = ConnectionRequestBody$inboundSchema;
+  /** @deprecated use `ConnectionRequestBody$outboundSchema` instead. */
+  export const outboundSchema = ConnectionRequestBody$outboundSchema;
+  /** @deprecated use `ConnectionRequestBody$Outbound` instead. */
+  export type Outbound = ConnectionRequestBody$Outbound;
 }
 
-export function updateConnectionConnectionRequestBodyToJSON(
-  updateConnectionConnectionRequestBody: UpdateConnectionConnectionRequestBody,
+export function connectionRequestBodyToJSON(
+  connectionRequestBody: ConnectionRequestBody,
 ): string {
   return JSON.stringify(
-    UpdateConnectionConnectionRequestBody$outboundSchema.parse(
-      updateConnectionConnectionRequestBody,
-    ),
+    ConnectionRequestBody$outboundSchema.parse(connectionRequestBody),
   );
 }
 
-export function updateConnectionConnectionRequestBodyFromJSON(
+export function connectionRequestBodyFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateConnectionConnectionRequestBody, SDKValidationError> {
+): SafeParseResult<ConnectionRequestBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      UpdateConnectionConnectionRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateConnectionConnectionRequestBody' from JSON`,
+    (x) => ConnectionRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ConnectionRequestBody' from JSON`,
   );
 }
 
@@ -954,13 +949,13 @@ export const UpdateConnectionUpdateConnectionRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   updateMask: z.array(z.string()),
-  connection: z.lazy(() => UpdateConnectionConnectionRequestBody$inboundSchema),
+  connection: z.lazy(() => ConnectionRequestBody$inboundSchema),
 });
 
 /** @internal */
 export type UpdateConnectionUpdateConnectionRequest$Outbound = {
   updateMask: Array<string>;
-  connection: UpdateConnectionConnectionRequestBody$Outbound;
+  connection: ConnectionRequestBody$Outbound;
 };
 
 /** @internal */
@@ -970,9 +965,7 @@ export const UpdateConnectionUpdateConnectionRequest$outboundSchema: z.ZodType<
   UpdateConnectionUpdateConnectionRequest
 > = z.object({
   updateMask: z.array(z.string()),
-  connection: z.lazy(() =>
-    UpdateConnectionConnectionRequestBody$outboundSchema
-  ),
+  connection: z.lazy(() => ConnectionRequestBody$outboundSchema),
 });
 
 /**

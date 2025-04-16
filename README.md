@@ -309,6 +309,10 @@ run();
 * [get](docs/sdks/operations/README.md#get) - Get an operation
 * [listLogs](docs/sdks/operations/README.md#listlogs) - List logs for an operation
 
+### [orgBuilders](docs/sdks/orgbuilders/README.md)
+
+* [list](docs/sdks/orgbuilders/README.md#list) - List builders for an organization
+
 ### [projects](docs/sdks/projects/README.md)
 
 * [list](docs/sdks/projects/README.md#list) - List all projects that the API key or user credential has access to.
@@ -385,6 +389,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`operationsGet`](docs/sdks/operations/README.md#get) - Get an operation
 - [`operationsList`](docs/sdks/operations/README.md#list) - List operations
 - [`operationsListLogs`](docs/sdks/operations/README.md#listlogs) - List logs for an operation
+- [`orgBuildersList`](docs/sdks/orgbuilders/README.md#list) - List builders for an organization
 - [`projectsCreate`](docs/sdks/projects/README.md#create) - Create a new project
 - [`projectsDelete`](docs/sdks/projects/README.md#delete) - Delete a project
 - [`projectsGet`](docs/sdks/projects/README.md#get) - Get a project

@@ -41,6 +41,7 @@ import { tool$objectsAndFieldsGetObjectMetadataForConnection } from "./tools/obj
 import { tool$operationsGet } from "./tools/operationsGet.js";
 import { tool$operationsList } from "./tools/operationsList.js";
 import { tool$operationsListLogs } from "./tools/operationsListLogs.js";
+import { tool$orgBuildersList } from "./tools/orgBuildersList.js";
 import { tool$projectsCreate } from "./tools/projectsCreate.js";
 import { tool$projectsDelete } from "./tools/projectsDelete.js";
 import { tool$projectsGet } from "./tools/projectsGet.js";
@@ -66,7 +67,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDKNodePlatform",
-    version: "0.2.1",
+    version: "0.2.3",
   });
 
   const client = new SDKNodePlatformCore({
@@ -138,6 +139,7 @@ export function createMCPServer(deps: {
   tool(tool$destinationsUpdate);
   tool(tool$destinationsDelete);
   tool(tool$uploadUrlsGenerate);
+  tool(tool$orgBuildersList);
 
   return server;
 }
