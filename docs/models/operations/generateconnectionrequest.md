@@ -8,6 +8,13 @@ import { GenerateConnectionRequest } from "@amp-labs/sdk-node-platform/models/op
 let value: GenerateConnectionRequest = {
   projectIdOrName: "my-project",
   requestBody: {
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
     groupRef: "group-123",
     consumerRef: "<value>",
     provider: "<value>",

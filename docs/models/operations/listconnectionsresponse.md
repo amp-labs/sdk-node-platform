@@ -55,6 +55,13 @@ const value: operations.Connection[] = [
       },
     },
     apiKey: "api-key-123",
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
   },
 ];
 ```

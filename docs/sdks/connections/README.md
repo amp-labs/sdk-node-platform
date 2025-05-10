@@ -281,6 +281,23 @@ async function run() {
         "<value>",
       ],
       connection: {
+        providerMetadata: {
+          "key": {
+            value: "1234567890",
+            source: "input",
+            displayName: "Account ID",
+          },
+          "key1": {
+            value: "1234567890",
+            source: "input",
+            displayName: "Account ID",
+          },
+          "key2": {
+            value: "1234567890",
+            source: "input",
+            displayName: "Account ID",
+          },
+        },
         groupRef: "group-123",
       },
     },
@@ -318,6 +335,23 @@ async function run() {
         "<value>",
       ],
       connection: {
+        providerMetadata: {
+          "key": {
+            value: "1234567890",
+            source: "input",
+            displayName: "Account ID",
+          },
+          "key1": {
+            value: "1234567890",
+            source: "input",
+            displayName: "Account ID",
+          },
+          "key2": {
+            value: "1234567890",
+            source: "input",
+            displayName: "Account ID",
+          },
+        },
         groupRef: "group-123",
       },
     },
