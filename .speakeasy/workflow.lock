@@ -1,21 +1,21 @@
-speakeasyVersion: 1.533.0
+speakeasyVersion: 1.543.4
 sources:
     sdk-node-platform-OAS:
         sourceNamespace: sdk-node-platform-oas
-        sourceRevisionDigest: sha256:a27f6904b59f9cc8e888344c9439eb31ea808060120a61f17bfd9d2803cdf6be
-        sourceBlobDigest: sha256:e61e21df34dfa3d6ba7bf85f69a0b7005606fbcf58df8a6c6dd0bcbe12d2e31e
+        sourceRevisionDigest: sha256:6ee7bc825e014f83a45e1585a8d76c07dc9dfcb3e22811557e2a668b9c47b9b6
+        sourceBlobDigest: sha256:dc472cab82e3bda98d92db07c5b5f8da20850863018267cdbf10efe226ef784b
         tags:
             - latest
-            - speakeasy-sdk-regen-1744763500
+            - speakeasy-sdk-regen-1745281886
             - 1.0.0
 targets:
     sdk-node-platform:
         source: sdk-node-platform-OAS
         sourceNamespace: sdk-node-platform-oas
-        sourceRevisionDigest: sha256:a27f6904b59f9cc8e888344c9439eb31ea808060120a61f17bfd9d2803cdf6be
-        sourceBlobDigest: sha256:e61e21df34dfa3d6ba7bf85f69a0b7005606fbcf58df8a6c6dd0bcbe12d2e31e
+        sourceRevisionDigest: sha256:6ee7bc825e014f83a45e1585a8d76c07dc9dfcb3e22811557e2a668b9c47b9b6
+        sourceBlobDigest: sha256:dc472cab82e3bda98d92db07c5b5f8da20850863018267cdbf10efe226ef784b
         codeSamplesNamespace: sdk-node-platform-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:5d4f0e3ae2b4dcc7fb4e250ae030f51087c97d5b946f4968408ba599c92c6b02
+        codeSamplesRevisionDigest: sha256:bd2350b16b833592e5b82603433e88e9077ee931d3c76b4da04fabd32d24e4b5
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

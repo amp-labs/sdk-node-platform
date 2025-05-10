@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3a38888c-d574-484d-a97d-aad10316099b
 management:
-  docChecksum: ec9c11e5749b1f8d05482208db04467c
+  docChecksum: 56c53a8494839bb889bdaf47de724288
   docVersion: 1.0.0
-  speakeasyVersion: 1.533.0
-  generationVersion: 2.578.0
-  releaseVersion: 0.2.3
-  configChecksum: c257f6f8c111c4b2c6193cbb950b136e
+  speakeasyVersion: 1.543.4
+  generationVersion: 2.598.22
+  releaseVersion: 0.2.4
+  configChecksum: bbeb02e9886d988ef2046accc8f632ba
   repoURL: https://github.com/amp-labs/sdk-node-platform.git
   installationURL: https://github.com/amp-labs/sdk-node-platform
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.6
+    core: 3.21.7
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.0
@@ -24,10 +24,10 @@ features:
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.4
+    globalServerURLs: 2.82.5
     groups: 2.81.2
     ignores: 2.81.1
-    mcpServer: 0.9.1
+    mcpServer: 0.9.2
     nameOverrides: 2.81.2
     nullables: 0.1.1
     responseFormat: 0.2.3
@@ -197,6 +197,7 @@ generatedFiles:
   - docs/models/operations/applyonupdate.md
   - docs/models/operations/associationchangeevent.md
   - docs/models/operations/attachmenttype.md
+  - docs/models/operations/authhealthcheck.md
   - docs/models/operations/authscheme.md
   - docs/models/operations/authtype.md
   - docs/models/operations/backfill.md
@@ -267,21 +268,42 @@ generatedFiles:
   - docs/models/operations/createinstallationaccesstoken.md
   - docs/models/operations/createinstallationapiproblem.md
   - docs/models/operations/createinstallationauthscheme.md
+  - docs/models/operations/createinstallationbackfillconfig.md
   - docs/models/operations/createinstallationbaseproxyconfig.md
   - docs/models/operations/createinstallationconfig.md
   - docs/models/operations/createinstallationconfigcontent.md
   - docs/models/operations/createinstallationconnection.md
   - docs/models/operations/createinstallationconsumer.md
+  - docs/models/operations/createinstallationdefaultperiodconfig.md
+  - docs/models/operations/createinstallationdefaultvalueforafield.md
+  - docs/models/operations/createinstallationfieldsetting.md
   - docs/models/operations/createinstallationgroup.md
   - docs/models/operations/createinstallationinstallation.md
   - docs/models/operations/createinstallationinstallationsgroup.md
   - docs/models/operations/createinstallationoauth2authorizationcodetoken.md
   - docs/models/operations/createinstallationproviderapp.md
+  - docs/models/operations/createinstallationprovidermetadatainfo.md
+  - docs/models/operations/createinstallationreadconfig.md
+  - docs/models/operations/createinstallationreadconfigobject.md
   - docs/models/operations/createinstallationrefreshtoken.md
   - docs/models/operations/createinstallationrequest.md
   - docs/models/operations/createinstallationrequestbody.md
   - docs/models/operations/createinstallationresponse.md
+  - docs/models/operations/createinstallationselectedfieldsautoconfig.md
+  - docs/models/operations/createinstallationsource.md
   - docs/models/operations/createinstallationstatus.md
+  - docs/models/operations/createinstallationvaluedefaultlegacy.md
+  - docs/models/operations/createinstallationvaluedefaultlegacyapplyonupdate.md
+  - docs/models/operations/createinstallationvaluedefaultlegacyinstallationsapplyonupdate.md
+  - docs/models/operations/createinstallationvaluedefaultlegacyinstallationsresponse201applyonupdate.md
+  - docs/models/operations/createinstallationvaluedefaultlegacyinstallationsresponseapplyonupdate.md
+  - docs/models/operations/createinstallationvaluedefaultlegacyvaluedefaultboolean.md
+  - docs/models/operations/createinstallationvaluedefaultlegacyvaluedefaultinteger.md
+  - docs/models/operations/createinstallationvaluedefaultlegacyvaluedefaultstring.md
+  - docs/models/operations/createinstallationwriteconfig.md
+  - docs/models/operations/createinstallationwriteconfigobject.md
+  - docs/models/operations/createinstallationwriteoncreate.md
+  - docs/models/operations/createinstallationwriteonupdate.md
   - docs/models/operations/createintegrationapiproblem.md
   - docs/models/operations/createintegrationenabled.md
   - docs/models/operations/createintegrationintegrationfield.md
@@ -331,14 +353,18 @@ generatedFiles:
   - docs/models/operations/generateconnectionapiproblem.md
   - docs/models/operations/generateconnectionauthscheme.md
   - docs/models/operations/generateconnectionconnection.md
+  - docs/models/operations/generateconnectionconnectionsprovidermetadatainfo.md
+  - docs/models/operations/generateconnectionconnectionssource.md
   - docs/models/operations/generateconnectionconsumer.md
   - docs/models/operations/generateconnectiongenerateconnectionrequest.md
   - docs/models/operations/generateconnectiongroup.md
   - docs/models/operations/generateconnectionoauth2authorizationcodetoken.md
   - docs/models/operations/generateconnectionproviderapp.md
+  - docs/models/operations/generateconnectionprovidermetadatainfo.md
   - docs/models/operations/generateconnectionrefreshtoken.md
   - docs/models/operations/generateconnectionrequest.md
   - docs/models/operations/generateconnectionresponse.md
+  - docs/models/operations/generateconnectionsource.md
   - docs/models/operations/generateconnectionstatus.md
   - docs/models/operations/generateuploadurlapiproblem.md
   - docs/models/operations/generateuploadurlresponse.md
@@ -351,9 +377,11 @@ generatedFiles:
   - docs/models/operations/getconnectiongroup.md
   - docs/models/operations/getconnectionoauth2authorizationcodetoken.md
   - docs/models/operations/getconnectionproviderapp.md
+  - docs/models/operations/getconnectionprovidermetadatainfo.md
   - docs/models/operations/getconnectionrefreshtoken.md
   - docs/models/operations/getconnectionrequest.md
   - docs/models/operations/getconnectionresponse.md
+  - docs/models/operations/getconnectionsource.md
   - docs/models/operations/getconnectionstatus.md
   - docs/models/operations/getdestinationapiproblem.md
   - docs/models/operations/getdestinationdestination.md
@@ -379,20 +407,40 @@ generatedFiles:
   - docs/models/operations/getinstallationaccesstoken.md
   - docs/models/operations/getinstallationapiproblem.md
   - docs/models/operations/getinstallationauthscheme.md
+  - docs/models/operations/getinstallationbackfillconfig.md
   - docs/models/operations/getinstallationbaseproxyconfig.md
   - docs/models/operations/getinstallationconfig.md
   - docs/models/operations/getinstallationconfigcontent.md
   - docs/models/operations/getinstallationconnection.md
   - docs/models/operations/getinstallationconsumer.md
+  - docs/models/operations/getinstallationdefaultperiodconfig.md
+  - docs/models/operations/getinstallationdefaultvalueforafield.md
+  - docs/models/operations/getinstallationfieldsetting.md
   - docs/models/operations/getinstallationgroup.md
   - docs/models/operations/getinstallationinstallation.md
   - docs/models/operations/getinstallationinstallationsgroup.md
   - docs/models/operations/getinstallationoauth2authorizationcodetoken.md
   - docs/models/operations/getinstallationproviderapp.md
+  - docs/models/operations/getinstallationprovidermetadatainfo.md
+  - docs/models/operations/getinstallationreadconfig.md
+  - docs/models/operations/getinstallationreadconfigobject.md
   - docs/models/operations/getinstallationrefreshtoken.md
   - docs/models/operations/getinstallationrequest.md
   - docs/models/operations/getinstallationresponse.md
+  - docs/models/operations/getinstallationselectedfieldsautoconfig.md
+  - docs/models/operations/getinstallationsource.md
   - docs/models/operations/getinstallationstatus.md
+  - docs/models/operations/getinstallationvaluedefaultlegacy.md
+  - docs/models/operations/getinstallationvaluedefaultlegacyapplyonupdate.md
+  - docs/models/operations/getinstallationvaluedefaultlegacyinstallationsapplyonupdate.md
+  - docs/models/operations/getinstallationvaluedefaultlegacyinstallationsresponseapplyonupdate.md
+  - docs/models/operations/getinstallationvaluedefaultlegacyvaluedefaultboolean.md
+  - docs/models/operations/getinstallationvaluedefaultlegacyvaluedefaultinteger.md
+  - docs/models/operations/getinstallationvaluedefaultlegacyvaluedefaultstring.md
+  - docs/models/operations/getinstallationwriteconfig.md
+  - docs/models/operations/getinstallationwriteconfigobject.md
+  - docs/models/operations/getinstallationwriteoncreate.md
+  - docs/models/operations/getinstallationwriteonupdate.md
   - docs/models/operations/getobjectmetadataforconnectionapiproblem.md
   - docs/models/operations/getobjectmetadataforconnectionfieldmetadata.md
   - docs/models/operations/getobjectmetadataforconnectionfieldvalue.md
@@ -421,6 +469,7 @@ generatedFiles:
   - docs/models/operations/getproviderapikeyqueryoptions.md
   - docs/models/operations/getproviderapiproblem.md
   - docs/models/operations/getproviderattachmenttype.md
+  - docs/models/operations/getproviderauthhealthcheck.md
   - docs/models/operations/getproviderauthtype.md
   - docs/models/operations/getproviderbasicauthoptions.md
   - docs/models/operations/getproviderbulkwritesupport.md
@@ -429,9 +478,13 @@ generatedFiles:
   - docs/models/operations/getprovidermedia.md
   - docs/models/operations/getprovidermediatypedarkmode.md
   - docs/models/operations/getprovidermediatyperegular.md
+  - docs/models/operations/getprovidermetadataitemasinput.md
+  - docs/models/operations/getprovidermetadataitemfetchedpostauthentication.md
   - docs/models/operations/getprovidermoduleinfo.md
   - docs/models/operations/getprovideroauth2options.md
+  - docs/models/operations/getproviderotherfields.md
   - docs/models/operations/getproviderproviderinfo.md
+  - docs/models/operations/getproviderprovidermetadata.md
   - docs/models/operations/getproviderprovidersbulkwritesupport.md
   - docs/models/operations/getproviderproviderssubscribesupport.md
   - docs/models/operations/getproviderproviderssupport.md
@@ -468,9 +521,11 @@ generatedFiles:
   - docs/models/operations/listconnectionsapiproblem.md
   - docs/models/operations/listconnectionsgroup.md
   - docs/models/operations/listconnectionsproviderapp.md
+  - docs/models/operations/listconnectionsprovidermetadatainfo.md
   - docs/models/operations/listconnectionsrefreshtoken.md
   - docs/models/operations/listconnectionsrequest.md
   - docs/models/operations/listconnectionsresponse.md
+  - docs/models/operations/listconnectionssource.md
   - docs/models/operations/listdestinationsapiproblem.md
   - docs/models/operations/listdestinationsdestination.md
   - docs/models/operations/listdestinationsmetadata.md
@@ -479,19 +534,39 @@ generatedFiles:
   - docs/models/operations/listinstallationsaccesstoken.md
   - docs/models/operations/listinstallationsapiproblem.md
   - docs/models/operations/listinstallationsauthscheme.md
+  - docs/models/operations/listinstallationsbackfillconfig.md
   - docs/models/operations/listinstallationsbaseproxyconfig.md
   - docs/models/operations/listinstallationsconfig.md
   - docs/models/operations/listinstallationsconfigcontent.md
   - docs/models/operations/listinstallationsconnection.md
   - docs/models/operations/listinstallationsconsumer.md
+  - docs/models/operations/listinstallationsdefaultperiodconfig.md
+  - docs/models/operations/listinstallationsdefaultvalueforafield.md
+  - docs/models/operations/listinstallationsfieldsetting.md
   - docs/models/operations/listinstallationsgroup.md
   - docs/models/operations/listinstallationsinstallation.md
   - docs/models/operations/listinstallationsoauth2authorizationcodetoken.md
   - docs/models/operations/listinstallationsproviderapp.md
+  - docs/models/operations/listinstallationsprovidermetadatainfo.md
+  - docs/models/operations/listinstallationsreadconfig.md
+  - docs/models/operations/listinstallationsreadconfigobject.md
   - docs/models/operations/listinstallationsrefreshtoken.md
   - docs/models/operations/listinstallationsrequest.md
   - docs/models/operations/listinstallationsresponse.md
+  - docs/models/operations/listinstallationsselectedfieldsautoconfig.md
+  - docs/models/operations/listinstallationssource.md
   - docs/models/operations/listinstallationsstatus.md
+  - docs/models/operations/listinstallationsvaluedefaultlegacy.md
+  - docs/models/operations/listinstallationsvaluedefaultlegacyapplyonupdate.md
+  - docs/models/operations/listinstallationsvaluedefaultlegacyinstallationsapplyonupdate.md
+  - docs/models/operations/listinstallationsvaluedefaultlegacyinstallationsresponseapplyonupdate.md
+  - docs/models/operations/listinstallationsvaluedefaultlegacyvaluedefaultboolean.md
+  - docs/models/operations/listinstallationsvaluedefaultlegacyvaluedefaultinteger.md
+  - docs/models/operations/listinstallationsvaluedefaultlegacyvaluedefaultstring.md
+  - docs/models/operations/listinstallationswriteconfig.md
+  - docs/models/operations/listinstallationswriteconfigobject.md
+  - docs/models/operations/listinstallationswriteoncreate.md
+  - docs/models/operations/listinstallationswriteonupdate.md
   - docs/models/operations/listintegrationsapiproblem.md
   - docs/models/operations/listintegrationsassociationchangeevent.md
   - docs/models/operations/listintegrationsbackfill.md
@@ -554,6 +629,8 @@ generatedFiles:
   - docs/models/operations/mediatyperegular.md
   - docs/models/operations/message.md
   - docs/models/operations/metadata.md
+  - docs/models/operations/metadataitemasinput.md
+  - docs/models/operations/metadataitemfetchedpostauthentication.md
   - docs/models/operations/mode.md
   - docs/models/operations/moduleinfo.md
   - docs/models/operations/oauth2authorizationcode.md
@@ -571,17 +648,23 @@ generatedFiles:
   - docs/models/operations/one.md
   - docs/models/operations/operation.md
   - docs/models/operations/optionalfieldsautooption.md
+  - docs/models/operations/otherfields.md
   - docs/models/operations/paginationinformation.md
   - docs/models/operations/project.md
   - docs/models/operations/providerapp.md
   - docs/models/operations/providerinfo.md
+  - docs/models/operations/providermetadata.md
+  - docs/models/operations/providermetadatainfo.md
   - docs/models/operations/proxyintegration.md
+  - docs/models/operations/readconfig.md
+  - docs/models/operations/readconfigobject.md
   - docs/models/operations/readintegration.md
   - docs/models/operations/refresh.md
   - docs/models/operations/refreshtoken.md
   - docs/models/operations/registrationtiming.md
   - docs/models/operations/revision.md
   - docs/models/operations/selectedfieldsautoconfig.md
+  - docs/models/operations/source.md
   - docs/models/operations/status.md
   - docs/models/operations/subscribeintegration.md
   - docs/models/operations/subscribeoptions.md
@@ -596,7 +679,9 @@ generatedFiles:
   - docs/models/operations/updateconnectionbasicauth.md
   - docs/models/operations/updateconnectionconnection.md
   - docs/models/operations/updateconnectionconnectionsaccesstoken.md
+  - docs/models/operations/updateconnectionconnectionsprovidermetadatainfo.md
   - docs/models/operations/updateconnectionconnectionsrefreshtoken.md
+  - docs/models/operations/updateconnectionconnectionssource.md
   - docs/models/operations/updateconnectionconsumer.md
   - docs/models/operations/updateconnectiongroup.md
   - docs/models/operations/updateconnectionoauth2authorizationcode.md
@@ -604,9 +689,11 @@ generatedFiles:
   - docs/models/operations/updateconnectionoauth2clientcredentials.md
   - docs/models/operations/updateconnectionoauth2passwordcredentials.md
   - docs/models/operations/updateconnectionproviderapp.md
+  - docs/models/operations/updateconnectionprovidermetadatainfo.md
   - docs/models/operations/updateconnectionrefreshtoken.md
   - docs/models/operations/updateconnectionrequest.md
   - docs/models/operations/updateconnectionresponse.md
+  - docs/models/operations/updateconnectionsource.md
   - docs/models/operations/updateconnectionstatus.md
   - docs/models/operations/updateconnectionupdateconnectionrequest.md
   - docs/models/operations/updatedestinationapiproblem.md
@@ -620,25 +707,55 @@ generatedFiles:
   - docs/models/operations/updateinstallationaccesstoken.md
   - docs/models/operations/updateinstallationapiproblem.md
   - docs/models/operations/updateinstallationauthscheme.md
+  - docs/models/operations/updateinstallationbackfillconfig.md
   - docs/models/operations/updateinstallationbaseproxyconfig.md
   - docs/models/operations/updateinstallationconfig.md
   - docs/models/operations/updateinstallationconfigcontent.md
   - docs/models/operations/updateinstallationconnection.md
   - docs/models/operations/updateinstallationconsumer.md
+  - docs/models/operations/updateinstallationdefaultperiodconfig.md
+  - docs/models/operations/updateinstallationdefaultvalueforafield.md
+  - docs/models/operations/updateinstallationfieldsetting.md
   - docs/models/operations/updateinstallationgroup.md
   - docs/models/operations/updateinstallationinstallation.md
+  - docs/models/operations/updateinstallationinstallationsbackfillconfig.md
   - docs/models/operations/updateinstallationinstallationsbaseproxyconfig.md
   - docs/models/operations/updateinstallationinstallationsconfig.md
   - docs/models/operations/updateinstallationinstallationsconfigcontent.md
+  - docs/models/operations/updateinstallationinstallationsdefaultperiodconfig.md
+  - docs/models/operations/updateinstallationinstallationsdefaultvalueforafield.md
+  - docs/models/operations/updateinstallationinstallationsfieldsetting.md
   - docs/models/operations/updateinstallationinstallationsgroup.md
+  - docs/models/operations/updateinstallationinstallationsselectedfieldsautoconfig.md
+  - docs/models/operations/updateinstallationinstallationsvaluedefaultlegacy.md
+  - docs/models/operations/updateinstallationinstallationswriteoncreate.md
+  - docs/models/operations/updateinstallationinstallationswriteonupdate.md
   - docs/models/operations/updateinstallationoauth2authorizationcodetoken.md
   - docs/models/operations/updateinstallationproviderapp.md
+  - docs/models/operations/updateinstallationprovidermetadatainfo.md
+  - docs/models/operations/updateinstallationreadconfig.md
+  - docs/models/operations/updateinstallationreadconfigobject.md
   - docs/models/operations/updateinstallationrefreshtoken.md
   - docs/models/operations/updateinstallationrequest.md
   - docs/models/operations/updateinstallationrequestbody.md
   - docs/models/operations/updateinstallationresponse.md
+  - docs/models/operations/updateinstallationselectedfieldsautoconfig.md
+  - docs/models/operations/updateinstallationsource.md
   - docs/models/operations/updateinstallationstatus.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacy.md
   - docs/models/operations/updateinstallationvaluedefaultlegacyapplyonupdate.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacyinstallationsapplyonupdate.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacyinstallationsrequestapplyonupdate.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacyinstallationsresponse200applicationjsonapplyonupdate.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacyinstallationsresponse200applyonupdate.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacyinstallationsresponseapplyonupdate.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacyvaluedefaultboolean.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacyvaluedefaultinteger.md
+  - docs/models/operations/updateinstallationvaluedefaultlegacyvaluedefaultstring.md
+  - docs/models/operations/updateinstallationwriteconfig.md
+  - docs/models/operations/updateinstallationwriteconfigobject.md
+  - docs/models/operations/updateinstallationwriteoncreate.md
+  - docs/models/operations/updateinstallationwriteonupdate.md
   - docs/models/operations/updateprojectapiproblem.md
   - docs/models/operations/updateprojectbrandingremoval.md
   - docs/models/operations/updateprojectentitlements.md
@@ -655,11 +772,16 @@ generatedFiles:
   - docs/models/operations/valuedefaultinteger.md
   - docs/models/operations/valuedefaultlegacy.md
   - docs/models/operations/valuedefaultlegacyapplyonupdate.md
+  - docs/models/operations/valuedefaultlegacyvaluedefaultboolean.md
+  - docs/models/operations/valuedefaultlegacyvaluedefaultinteger.md
+  - docs/models/operations/valuedefaultlegacyvaluedefaultstring.md
   - docs/models/operations/valuedefaults.md
   - docs/models/operations/valuedefaultstring.md
   - docs/models/operations/valuetype.md
   - docs/models/operations/watchfieldsauto.md
   - docs/models/operations/write.md
+  - docs/models/operations/writeconfig.md
+  - docs/models/operations/writeconfigobject.md
   - docs/models/operations/writeintegration.md
   - docs/models/operations/writeoncreate.md
   - docs/models/operations/writeonupdate.md
@@ -916,12 +1038,12 @@ examples:
   oauthConnect:
     speakeasy-default-oauth-connect:
       requestBody:
-        application/json: {"providerWorkspaceRef": "salesforce-instance-domain", "projectId": "my-project", "groupRef": "group-123", "groupName": "Organization Name", "consumerRef": "user_123456", "consumerName": "John Doe", "providerAppId": "32356abe-d2fd-49c7-9030-abdcbc6456d4", "provider": "salesforce"}
+        application/json: {"providerWorkspaceRef": "salesforce-instance-domain", "providerMetadata": {"key": {"value": "1234567890", "source": "input", "displayName": "Account ID"}}, "projectId": "my-project", "groupRef": "group-123", "groupName": "Organization Name", "consumerRef": "user_123456", "consumerName": "John Doe", "providerAppId": "32356abe-d2fd-49c7-9030-abdcbc6456d4", "provider": "salesforce"}
       responses:
         "200":
           text/plain: "<value>"
         "400":
-          application/problem+json: {"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Service Unavailable", "status": 503, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000", "subsystem": "api", "time": "2024-04-22T18:55:28.456076Z", "requestId": "89eb1ffb-2a54-4105-aaae-7bf990f1aa69#87715", "causes": ["database connection failed"], "remedy": "Shorten your input to be under 100 characters", "supportEmail": "support@withampersand.com", "supportPhone": "+1-555-555-5555", "supportUrl": "https://withampersand.com/support", "retryable": false, "retryAfter": "2024-04-22T18:55:28.456076Z", "context": {"name": "Rick Sanchez"}, "issues": [{"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Description of the type of problem that occurred", "status": 400, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"}]}
+          application/problem+json: {"type": "about:blank", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Service Unavailable", "status": 503, "detail": "The input message is incorrect", "instance": "123456-1234-1235-4567489798", "subsystem": "api", "time": "2024-04-22T18:55:28.456076Z", "requestId": "89eb1ffb-2a54-4105-aaae-7bf990f1aa69#87715", "causes": ["database connection failed"], "remedy": "Shorten your input to be under 100 characters", "supportEmail": "support@withampersand.com", "supportPhone": "+1-555-555-5555", "supportUrl": "https://withampersand.com/support", "retryable": false, "retryAfter": "2024-04-22T18:55:28.456076Z", "context": {"name": "Rick Sanchez"}, "issues": [{"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Description of the type of problem that occurred", "status": 400, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"}]}
         default:
           application/problem+json: {"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Service Unavailable", "status": 503, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000", "subsystem": "api", "time": "2024-04-22T18:55:28.456076Z", "requestId": "89eb1ffb-2a54-4105-aaae-7bf990f1aa69#87715", "causes": ["database connection failed"], "remedy": "Shorten your input to be under 100 characters", "supportEmail": "support@withampersand.com", "supportPhone": "+1-555-555-5555", "supportUrl": "https://withampersand.com/support", "retryable": false, "retryAfter": "2024-04-22T18:55:28.456076Z", "context": {"name": "Rick Sanchez"}}
   oauthUpdate:
@@ -1289,7 +1411,7 @@ examples:
     speakeasy-default-list-providers:
       responses:
         "200":
-          application/json: {"key": {"name": "<value>", "authType": "basic", "baseURL": "https://definite-deer.com", "oauth2Opts": {"grantType": "clientCredentials", "authURL": "https://login.salesforce.com/services/oauth2/authorize", "tokenURL": "https://login.salesforce.com/services/oauth2/token", "explicitScopesRequired": true, "explicitWorkspaceRequired": true, "audience": ["https://api.mparticle.com"], "tokenMetadataFields": {"workspaceRefField": "account-id", "consumerRefField": "user-id", "scopesField": "scopes"}, "docsURL": "https://docs.example.com/client-credentials", "authURLParams": {"access_type": "offline", "duration": "permanent"}}, "apiKeyOpts": {"attachmentType": "header", "query": {"name": "api_key"}, "header": {"name": "X-Api-Key", "valuePrefix": "Bearer "}, "docsURL": "https://docs.example.com/api-key"}, "basicOpts": {"apiKeyAsBasic": true, "apiKeyAsBasicOpts": {"fieldUsed": "username", "keyFormat": "api:%s"}, "docsURL": "https://docs.example.com/api-key"}, "support": {"bulkWrite": {"insert": true, "update": false, "upsert": true, "delete": true}, "proxy": false, "read": false, "subscribe": false, "write": true}, "providerOpts": {}, "displayName": "Zendesk Chat", "postAuthInfoNeeded": true, "media": {"regular": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}, "darkMode": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}}}, "key1": {"name": "<value>", "authType": "apiKey", "baseURL": "https://blind-trench.name/", "oauth2Opts": {"grantType": "password", "authURL": "https://login.salesforce.com/services/oauth2/authorize", "tokenURL": "https://login.salesforce.com/services/oauth2/token", "explicitScopesRequired": true, "explicitWorkspaceRequired": true, "audience": ["https://api.mparticle.com"], "tokenMetadataFields": {"workspaceRefField": "account-id", "consumerRefField": "user-id", "scopesField": "scopes"}, "docsURL": "https://docs.example.com/client-credentials", "authURLParams": {"access_type": "offline", "duration": "permanent"}}, "apiKeyOpts": {"attachmentType": "query", "query": {"name": "api_key"}, "header": {"name": "X-Api-Key", "valuePrefix": "Bearer "}, "docsURL": "https://docs.example.com/api-key"}, "basicOpts": {"apiKeyAsBasic": true, "apiKeyAsBasicOpts": {"fieldUsed": "username", "keyFormat": "api:%s"}, "docsURL": "https://docs.example.com/api-key"}, "support": {"bulkWrite": {"insert": true, "update": true, "upsert": false, "delete": true}, "proxy": false, "read": true, "subscribe": false, "write": true}, "providerOpts": {}, "displayName": "Zendesk Chat", "postAuthInfoNeeded": true, "media": {"regular": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}, "darkMode": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}}}, "key2": {"name": "<value>", "authType": "none", "baseURL": "https://lazy-honesty.info/", "oauth2Opts": {"grantType": "authorizationCodePKCE", "authURL": "https://login.salesforce.com/services/oauth2/authorize", "tokenURL": "https://login.salesforce.com/services/oauth2/token", "explicitScopesRequired": true, "explicitWorkspaceRequired": true, "audience": ["https://api.mparticle.com"], "tokenMetadataFields": {"workspaceRefField": "account-id", "consumerRefField": "user-id", "scopesField": "scopes"}, "docsURL": "https://docs.example.com/client-credentials", "authURLParams": {"access_type": "offline", "duration": "permanent"}}, "apiKeyOpts": {"attachmentType": "query", "query": {"name": "api_key"}, "header": {"name": "X-Api-Key", "valuePrefix": "Bearer "}, "docsURL": "https://docs.example.com/api-key"}, "basicOpts": {"apiKeyAsBasic": true, "apiKeyAsBasicOpts": {"fieldUsed": "username", "keyFormat": "api:%s"}, "docsURL": "https://docs.example.com/api-key"}, "support": {"bulkWrite": {"insert": false, "update": false, "upsert": true, "delete": false}, "proxy": true, "read": true, "subscribe": true, "write": true}, "providerOpts": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "displayName": "Zendesk Chat", "postAuthInfoNeeded": true, "media": {"regular": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}, "darkMode": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}}}}
+          application/json: {"key": {"name": "<value>", "authType": "basic", "baseURL": "https://definite-deer.com", "oauth2Opts": {"grantType": "clientCredentials", "authURL": "https://login.salesforce.com/services/oauth2/authorize", "tokenURL": "https://login.salesforce.com/services/oauth2/token", "explicitScopesRequired": true, "explicitWorkspaceRequired": true, "audience": ["https://api.mparticle.com"], "tokenMetadataFields": {"workspaceRefField": "account-id", "consumerRefField": "user-id", "scopesField": "scopes", "otherFields": [{"name": "<value>", "displayName": "Ahmad.Bogan", "path": "owner.siteId", "capture": "https:\\/\\/(?<result>[^.]+)\\.docusign\\.net"}, {"name": "<value>", "displayName": "Lorenz.Becker48", "path": "owner.siteId", "capture": "https:\\/\\/(?<result>[^.]+)\\.docusign\\.net"}]}, "docsURL": "https://docs.example.com/client-credentials", "authURLParams": {"access_type": "offline", "duration": "permanent"}}, "apiKeyOpts": {"attachmentType": "header", "query": {"name": "api_key"}, "header": {"name": "X-Api-Key", "valuePrefix": "Bearer "}, "docsURL": "https://docs.example.com/api-key"}, "basicOpts": {"apiKeyAsBasic": true, "apiKeyAsBasicOpts": {"fieldUsed": "username", "keyFormat": "api:%s"}, "docsURL": "https://docs.example.com/api-key"}, "support": {"bulkWrite": {"insert": false, "update": false, "upsert": true, "delete": true}, "proxy": true, "read": false, "subscribe": true, "write": false}, "providerOpts": {"key": "<value>"}, "authHealthCheck": {"url": "https://api.example.com/health-check", "method": "GET", "successStatusCodes": [200, 204]}, "displayName": "Zendesk Chat", "postAuthInfoNeeded": true, "media": {"regular": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}, "darkMode": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}}, "metadata": {"input": [{"name": "<value>", "docsURL": "https://example.com/how-to-find-subdomain"}, {"name": "<value>", "docsURL": "https://example.com/how-to-find-subdomain"}, {"name": "<value>", "docsURL": "https://example.com/how-to-find-subdomain"}]}}, "key1": {"name": "<value>", "authType": "oauth2", "baseURL": "https://unpleasant-chairperson.info/", "oauth2Opts": {"grantType": "authorizationCodePKCE", "authURL": "https://login.salesforce.com/services/oauth2/authorize", "tokenURL": "https://login.salesforce.com/services/oauth2/token", "explicitScopesRequired": true, "explicitWorkspaceRequired": true, "audience": ["https://api.mparticle.com"], "tokenMetadataFields": {"workspaceRefField": "account-id", "consumerRefField": "user-id", "scopesField": "scopes", "otherFields": [{"name": "<value>", "displayName": "Jayde41", "path": "owner.siteId", "capture": "https:\\/\\/(?<result>[^.]+)\\.docusign\\.net"}, {"name": "<value>", "displayName": "Elody.Bruen91", "path": "owner.siteId", "capture": "https:\\/\\/(?<result>[^.]+)\\.docusign\\.net"}]}, "docsURL": "https://docs.example.com/client-credentials", "authURLParams": {"access_type": "offline", "duration": "permanent"}}, "apiKeyOpts": {"attachmentType": "header", "query": {"name": "api_key"}, "header": {"name": "X-Api-Key", "valuePrefix": "Bearer "}, "docsURL": "https://docs.example.com/api-key"}, "basicOpts": {"apiKeyAsBasic": true, "apiKeyAsBasicOpts": {"fieldUsed": "username", "keyFormat": "api:%s"}, "docsURL": "https://docs.example.com/api-key"}, "support": {"bulkWrite": {"insert": false, "update": false, "upsert": true, "delete": false}, "proxy": false, "read": false, "subscribe": false, "write": false}, "providerOpts": {}, "authHealthCheck": {"url": "https://api.example.com/health-check", "method": "GET", "successStatusCodes": [200, 204]}, "displayName": "Zendesk Chat", "postAuthInfoNeeded": true, "media": {"regular": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}, "darkMode": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}}, "metadata": {"input": [{"name": "<value>", "docsURL": "https://example.com/how-to-find-subdomain"}]}}, "key2": {"name": "<value>", "authType": "oauth2", "baseURL": "https://sour-characterization.name", "oauth2Opts": {"grantType": "authorizationCodePKCE", "authURL": "https://login.salesforce.com/services/oauth2/authorize", "tokenURL": "https://login.salesforce.com/services/oauth2/token", "explicitScopesRequired": true, "explicitWorkspaceRequired": true, "audience": ["https://api.mparticle.com"], "tokenMetadataFields": {"workspaceRefField": "account-id", "consumerRefField": "user-id", "scopesField": "scopes", "otherFields": [{"name": "<value>", "displayName": "Karlee99", "path": "owner.siteId", "capture": "https:\\/\\/(?<result>[^.]+)\\.docusign\\.net"}, {"name": "<value>", "displayName": "Destiney_Boyer44", "path": "owner.siteId", "capture": "https:\\/\\/(?<result>[^.]+)\\.docusign\\.net"}, {"name": "<value>", "displayName": "Ramona_Sanford-Lakin90", "path": "owner.siteId", "capture": "https:\\/\\/(?<result>[^.]+)\\.docusign\\.net"}]}, "docsURL": "https://docs.example.com/client-credentials", "authURLParams": {"access_type": "offline", "duration": "permanent"}}, "apiKeyOpts": {"attachmentType": "query", "query": {"name": "api_key"}, "header": {"name": "X-Api-Key", "valuePrefix": "Bearer "}, "docsURL": "https://docs.example.com/api-key"}, "basicOpts": {"apiKeyAsBasic": true, "apiKeyAsBasicOpts": {"fieldUsed": "username", "keyFormat": "api:%s"}, "docsURL": "https://docs.example.com/api-key"}, "support": {"bulkWrite": {"insert": false, "update": false, "upsert": false, "delete": true}, "proxy": true, "read": false, "subscribe": false, "write": false}, "providerOpts": {"key": "<value>"}, "authHealthCheck": {"url": "https://api.example.com/health-check", "method": "GET", "successStatusCodes": [200, 204]}, "displayName": "Zendesk Chat", "postAuthInfoNeeded": true, "media": {"regular": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}, "darkMode": {"iconURL": "https://example.com/icon.png", "logoURL": "https://example.com/logo.png"}}, "metadata": {"input": [{"name": "<value>", "docsURL": "https://example.com/how-to-find-subdomain"}]}}}
         default:
           application/problem+json: {"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Service Unavailable", "status": 503, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000", "subsystem": "api", "time": "2024-04-22T18:55:28.456076Z", "requestId": "89eb1ffb-2a54-4105-aaae-7bf990f1aa69#87715", "causes": ["database connection failed"], "remedy": "Shorten your input to be under 100 characters", "supportEmail": "support@withampersand.com", "supportPhone": "+1-555-555-5555", "supportUrl": "https://withampersand.com/support", "retryable": false, "retryAfter": "2024-04-22T18:55:28.456076Z", "context": {"name": "Rick Sanchez"}}
   getProvider:
@@ -1353,10 +1475,10 @@ examples:
           projectIdOrName: "<value>"
           connectionId: "<id>"
       requestBody:
-        application/json: {"updateMask": ["<value>", "<value>", "<value>"], "connection": {"groupRef": "group-123"}}
+        application/json: {"updateMask": ["<value>", "<value>", "<value>"], "connection": {"providerMetadata": {"key": {"value": "1234567890", "source": "input", "displayName": "Account ID"}, "key1": {"value": "1234567890", "source": "input", "displayName": "Account ID"}, "key2": {"value": "1234567890", "source": "input", "displayName": "Account ID"}}, "groupRef": "group-123"}}
       responses:
         "200":
-          application/json: {"id": "connection-123", "projectId": "project-456", "provider": "salesforce", "providerApp": {"id": "provider-app-123", "projectId": "project-456", "externalRef": "external-id-123", "provider": "salesforce", "clientId": "client-id-123", "scopes": ["[\"oauth\",\"offline\",\"crm.read\"]"], "createTime": "2025-07-28T19:04:48.565Z"}, "group": {"groupRef": "group-123", "groupName": "Super Customer", "projectId": "project-456", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z"}, "consumer": {"consumerRef": "consumer-123", "consumerName": "Super Customer", "projectId": "project-456", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z"}, "providerWorkspaceRef": "provider-workspace-123", "providerConsumerRef": "provider-consumer-123", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z", "authScheme": "oauth2/authorizationCode", "status": "working", "oauth2AuthorizationCode": {"accessToken": {"token": "<value>", "issuedAt": "2024-04-22T18:55:28.456076Z", "expiresAt": "2024-10-22T18:55:28.456076Z"}, "refreshToken": {"token": "<value>", "issuedAt": "2024-04-22T18:55:28.456076Z", "expiresAt": "2024-10-22T18:55:28.456076Z"}}, "apiKey": "api-key-123"}
+          application/json: {"id": "connection-123", "projectId": "project-456", "provider": "salesforce", "providerApp": {"id": "provider-app-123", "projectId": "project-456", "externalRef": "external-id-123", "provider": "salesforce", "clientId": "client-id-123", "scopes": ["[\"oauth\",\"offline\",\"crm.read\"]"], "createTime": "2025-07-28T19:04:48.565Z"}, "group": {"groupRef": "group-123", "groupName": "Super Customer", "projectId": "project-456", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z"}, "consumer": {"consumerRef": "consumer-123", "consumerName": "Super Customer", "projectId": "project-456", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z"}, "providerWorkspaceRef": "provider-workspace-123", "providerConsumerRef": "provider-consumer-123", "createTime": "2023-07-13T21:34:44.816Z", "updateTime": "2023-07-13T21:34:44.816Z", "authScheme": "oauth2/authorizationCode", "status": "working", "oauth2AuthorizationCode": {"accessToken": {"token": "<value>", "issuedAt": "2024-04-22T18:55:28.456076Z", "expiresAt": "2024-10-22T18:55:28.456076Z"}, "refreshToken": {"token": "<value>", "issuedAt": "2024-04-22T18:55:28.456076Z", "expiresAt": "2024-10-22T18:55:28.456076Z"}}, "apiKey": "api-key-123", "providerMetadata": {"key": {"value": "1234567890", "source": "input", "displayName": "Account ID"}, "key1": {"value": "1234567890", "source": "input", "displayName": "Account ID"}}}
         "400":
           application/problem+json: {"type": "about:blank", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Service Unavailable", "status": 503, "detail": "The input message is incorrect", "instance": "123456-1234-1235-4567489798", "subsystem": "api", "time": "2024-04-22T18:55:28.456076Z", "requestId": "89eb1ffb-2a54-4105-aaae-7bf990f1aa69#87715", "causes": ["database connection failed"], "remedy": "Shorten your input to be under 100 characters", "supportEmail": "support@withampersand.com", "supportPhone": "+1-555-555-5555", "supportUrl": "https://withampersand.com/support", "retryable": false, "retryAfter": "2024-04-22T18:55:28.456076Z", "context": {"name": "Rick Sanchez"}, "issues": [{"type": "urn:problem-type:exampleOrganization:exampleProblem", "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", "title": "Description of the type of problem that occurred", "status": 400, "detail": "Description of specific occurrence of the problem", "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"}]}
         default:

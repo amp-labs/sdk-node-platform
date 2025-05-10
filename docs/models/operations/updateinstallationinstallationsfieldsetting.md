@@ -1,0 +1,17 @@
+# UpdateInstallationInstallationsFieldSetting
+
+## Example Usage
+
+```typescript
+import { UpdateInstallationInstallationsFieldSetting } from "@amp-labs/sdk-node-platform/models/operations";
+
+let value: UpdateInstallationInstallationsFieldSetting = {};
+```
+
+## Fields
+
+| Field                                                                                                                                              | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `default`                                                                                                                                          | [operations.UpdateInstallationInstallationsDefaultValueForAField](../../models/operations/updateinstallationinstallationsdefaultvalueforafield.md) | :heavy_minus_sign:                                                                                                                                 | Only use one of stringValue, integerValue, booleanValue.                                                                                           |
+| `writeOnCreate`                                                                                                                                    | [operations.UpdateInstallationInstallationsWriteOnCreate](../../models/operations/updateinstallationinstallationswriteoncreate.md)                 | :heavy_minus_sign:                                                                                                                                 | Whether the default value should be applied when creating a record.                                                                                |
+| `writeOnUpdate`                                                                                                                                    | [operations.UpdateInstallationInstallationsWriteOnUpdate](../../models/operations/updateinstallationinstallationswriteonupdate.md)                 | :heavy_minus_sign:                                                                                                                                 | Whether the default value should be applied when updating a record.                                                                                |

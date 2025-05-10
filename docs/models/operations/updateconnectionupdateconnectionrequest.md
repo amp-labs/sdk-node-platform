@@ -10,6 +10,13 @@ let value: UpdateConnectionUpdateConnectionRequest = {
     "<value>",
   ],
   connection: {
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
     groupRef: "group-123",
   },
 };
