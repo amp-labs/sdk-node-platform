@@ -107,6 +107,13 @@ async function run() {
   const result = await sdkNodePlatform.connections.generate({
     projectIdOrName: "my-project",
     requestBody: {
+      providerMetadata: {
+        "key": {
+          value: "1234567890",
+          source: "input",
+          displayName: "Account ID",
+        },
+      },
       groupRef: "group-123",
       consumerRef: "<value>",
       provider: "<value>",
@@ -138,6 +145,13 @@ async function run() {
   const res = await connectionsGenerate(sdkNodePlatform, {
     projectIdOrName: "my-project",
     requestBody: {
+      providerMetadata: {
+        "key": {
+          value: "1234567890",
+          source: "input",
+          displayName: "Account ID",
+        },
+      },
       groupRef: "group-123",
       consumerRef: "<value>",
       provider: "<value>",
@@ -276,11 +290,18 @@ async function run() {
     connectionId: "<id>",
     requestBody: {
       updateMask: [
-        "<value>",
-        "<value>",
-        "<value>",
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
       ],
       connection: {
+        providerMetadata: {
+          "key": {
+            value: "1234567890",
+            source: "input",
+            displayName: "Account ID",
+          },
+        },
         groupRef: "group-123",
       },
     },
@@ -313,11 +334,18 @@ async function run() {
     connectionId: "<id>",
     requestBody: {
       updateMask: [
-        "<value>",
-        "<value>",
-        "<value>",
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
       ],
       connection: {
+        providerMetadata: {
+          "key": {
+            value: "1234567890",
+            source: "input",
+            displayName: "Account ID",
+          },
+        },
         groupRef: "group-123",
       },
     },

@@ -26,20 +26,20 @@ const value: operations.Connection[] = [
       groupRef: "group-123",
       groupName: "Super Customer",
       projectId: "project-456",
-      createTime: new Date("2023-07-13T21:34:44.816Z"),
-      updateTime: new Date("2023-07-13T21:34:44.816Z"),
+      createTime: new Date("2023-07-13T21:34:44.816354Z"),
+      updateTime: new Date("2023-07-13T21:34:44.816354Z"),
     },
     consumer: {
       consumerRef: "consumer-123",
       consumerName: "Super Customer",
       projectId: "project-456",
-      createTime: new Date("2023-07-13T21:34:44.816Z"),
-      updateTime: new Date("2023-07-13T21:34:44.816Z"),
+      createTime: new Date("2023-07-13T21:34:44.816354Z"),
+      updateTime: new Date("2023-07-13T21:34:44.816354Z"),
     },
     providerWorkspaceRef: "provider-workspace-123",
     providerConsumerRef: "provider-consumer-123",
-    createTime: new Date("2023-07-13T21:34:44.816Z"),
-    updateTime: new Date("2023-07-13T21:34:44.816Z"),
+    createTime: new Date("2023-07-13T21:34:44.816354Z"),
+    updateTime: new Date("2023-07-13T21:34:44.816354Z"),
     authScheme: "oauth2/authorizationCode",
     status: "working",
     oauth2AuthorizationCode: {
@@ -55,6 +55,13 @@ const value: operations.Connection[] = [
       },
     },
     apiKey: "api-key-123",
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
   },
 ];
 ```
