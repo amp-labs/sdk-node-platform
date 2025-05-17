@@ -11,6 +11,7 @@ const value: { [k: string]: operations.ProviderInfo } = {
     name: "<value>",
     authType: "oauth2",
     baseURL: "https://every-sauerkraut.com",
+    defaultModule: "<value>",
     oauth2Opts: {
       grantType: "authorizationCodePKCE",
       authURL: "https://login.salesforce.com/services/oauth2/authorize",
@@ -24,6 +25,14 @@ const value: { [k: string]: operations.ProviderInfo } = {
         workspaceRefField: "account-id",
         consumerRefField: "user-id",
         scopesField: "scopes",
+        otherFields: [
+          {
+            name: "<value>",
+            displayName: "Luella13",
+            path: "owner.siteId",
+            capture: "https:\/\/(?<result>[^.]+)\.docusign\.net",
+          },
+        ],
       },
       docsURL: "https://docs.example.com/client-credentials",
       authURLParams: {
@@ -65,6 +74,14 @@ const value: { [k: string]: operations.ProviderInfo } = {
     providerOpts: {
       "key": "<value>",
     },
+    authHealthCheck: {
+      url: "https://api.example.com/health-check",
+      method: "GET",
+      successStatusCodes: [
+        200,
+        204,
+      ],
+    },
     displayName: "Zendesk Chat",
     postAuthInfoNeeded: true,
     media: {
@@ -76,6 +93,14 @@ const value: { [k: string]: operations.ProviderInfo } = {
         iconURL: "https://example.com/icon.png",
         logoURL: "https://example.com/logo.png",
       },
+    },
+    metadata: {
+      input: [
+        {
+          name: "<value>",
+          docsURL: "https://example.com/how-to-find-subdomain",
+        },
+      ],
     },
   },
 };

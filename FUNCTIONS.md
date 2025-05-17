@@ -32,6 +32,23 @@ const sdkNodePlatform = new SDKNodePlatformCore({
 async function run() {
   const res = await oauthConnect(sdkNodePlatform, {
     providerWorkspaceRef: "salesforce-instance-domain",
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key1": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key2": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
     projectId: "my-project",
     groupRef: "group-123",
     groupName: "Organization Name",

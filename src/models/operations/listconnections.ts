@@ -252,6 +252,34 @@ export type OAuth2AuthorizationCodeToken = {
   scopes?: Array<string> | undefined;
 };
 
+/**
+ * The source of the metadata field
+ */
+export const ListConnectionsSource = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type ListConnectionsSource = ClosedEnum<typeof ListConnectionsSource>;
+
+export type ListConnectionsProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: ListConnectionsSource;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
+
 export type Connection = {
   /**
    * The connection ID.
@@ -297,6 +325,9 @@ export type Connection = {
    * The API key used while making the connection.
    */
   apiKey?: string | undefined;
+  providerMetadata?:
+    | { [k: string]: ListConnectionsProviderMetadataInfo }
+    | undefined;
 };
 
 export type ListConnectionsResponse =
@@ -907,6 +938,92 @@ export function oAuth2AuthorizationCodeTokenFromJSON(
 }
 
 /** @internal */
+export const ListConnectionsSource$inboundSchema: z.ZodNativeEnum<
+  typeof ListConnectionsSource
+> = z.nativeEnum(ListConnectionsSource);
+
+/** @internal */
+export const ListConnectionsSource$outboundSchema: z.ZodNativeEnum<
+  typeof ListConnectionsSource
+> = ListConnectionsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListConnectionsSource$ {
+  /** @deprecated use `ListConnectionsSource$inboundSchema` instead. */
+  export const inboundSchema = ListConnectionsSource$inboundSchema;
+  /** @deprecated use `ListConnectionsSource$outboundSchema` instead. */
+  export const outboundSchema = ListConnectionsSource$outboundSchema;
+}
+
+/** @internal */
+export const ListConnectionsProviderMetadataInfo$inboundSchema: z.ZodType<
+  ListConnectionsProviderMetadataInfo,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  source: ListConnectionsSource$inboundSchema,
+  displayName: z.string().optional(),
+});
+
+/** @internal */
+export type ListConnectionsProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const ListConnectionsProviderMetadataInfo$outboundSchema: z.ZodType<
+  ListConnectionsProviderMetadataInfo$Outbound,
+  z.ZodTypeDef,
+  ListConnectionsProviderMetadataInfo
+> = z.object({
+  value: z.string(),
+  source: ListConnectionsSource$outboundSchema,
+  displayName: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListConnectionsProviderMetadataInfo$ {
+  /** @deprecated use `ListConnectionsProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema =
+    ListConnectionsProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `ListConnectionsProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema =
+    ListConnectionsProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `ListConnectionsProviderMetadataInfo$Outbound` instead. */
+  export type Outbound = ListConnectionsProviderMetadataInfo$Outbound;
+}
+
+export function listConnectionsProviderMetadataInfoToJSON(
+  listConnectionsProviderMetadataInfo: ListConnectionsProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    ListConnectionsProviderMetadataInfo$outboundSchema.parse(
+      listConnectionsProviderMetadataInfo,
+    ),
+  );
+}
+
+export function listConnectionsProviderMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<ListConnectionsProviderMetadataInfo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListConnectionsProviderMetadataInfo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListConnectionsProviderMetadataInfo' from JSON`,
+  );
+}
+
+/** @internal */
 export const Connection$inboundSchema: z.ZodType<
   Connection,
   z.ZodTypeDef,
@@ -930,6 +1047,9 @@ export const Connection$inboundSchema: z.ZodType<
     OAuth2AuthorizationCodeToken$inboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => ListConnectionsProviderMetadataInfo$inboundSchema),
+  ).optional(),
 });
 
 /** @internal */
@@ -948,6 +1068,9 @@ export type Connection$Outbound = {
   status: string;
   oauth2AuthorizationCode?: OAuth2AuthorizationCodeToken$Outbound | undefined;
   apiKey?: string | undefined;
+  providerMetadata?: {
+    [k: string]: ListConnectionsProviderMetadataInfo$Outbound;
+  } | undefined;
 };
 
 /** @internal */
@@ -973,6 +1096,9 @@ export const Connection$outboundSchema: z.ZodType<
     OAuth2AuthorizationCodeToken$outboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => ListConnectionsProviderMetadataInfo$outboundSchema),
+  ).optional(),
 });
 
 /**

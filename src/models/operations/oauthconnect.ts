@@ -4,14 +4,44 @@
 
 import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The source of the metadata field
+ */
+export const Source = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type Source = ClosedEnum<typeof Source>;
+
+export type ProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: Source;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
 
 export type OauthConnectRequestBody = {
   /**
    * The identifier for the provider workspace (e.g. the Salesforce subdomain).
    */
   providerWorkspaceRef?: string | undefined;
+  providerMetadata?: { [k: string]: ProviderMetadataInfo } | undefined;
   /**
    * The Ampersand project ID.
    */
@@ -127,12 +157,93 @@ export type OauthConnectAPIProblem = {
 export type OauthConnectResponse = OauthConnectAPIProblem | string;
 
 /** @internal */
+export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
+  .nativeEnum(Source);
+
+/** @internal */
+export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
+  Source$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Source$ {
+  /** @deprecated use `Source$inboundSchema` instead. */
+  export const inboundSchema = Source$inboundSchema;
+  /** @deprecated use `Source$outboundSchema` instead. */
+  export const outboundSchema = Source$outboundSchema;
+}
+
+/** @internal */
+export const ProviderMetadataInfo$inboundSchema: z.ZodType<
+  ProviderMetadataInfo,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  source: Source$inboundSchema,
+  displayName: z.string().optional(),
+});
+
+/** @internal */
+export type ProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const ProviderMetadataInfo$outboundSchema: z.ZodType<
+  ProviderMetadataInfo$Outbound,
+  z.ZodTypeDef,
+  ProviderMetadataInfo
+> = z.object({
+  value: z.string(),
+  source: Source$outboundSchema,
+  displayName: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ProviderMetadataInfo$ {
+  /** @deprecated use `ProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema = ProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `ProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema = ProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `ProviderMetadataInfo$Outbound` instead. */
+  export type Outbound = ProviderMetadataInfo$Outbound;
+}
+
+export function providerMetadataInfoToJSON(
+  providerMetadataInfo: ProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    ProviderMetadataInfo$outboundSchema.parse(providerMetadataInfo),
+  );
+}
+
+export function providerMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<ProviderMetadataInfo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ProviderMetadataInfo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ProviderMetadataInfo' from JSON`,
+  );
+}
+
+/** @internal */
 export const OauthConnectRequestBody$inboundSchema: z.ZodType<
   OauthConnectRequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   providerWorkspaceRef: z.string().optional(),
+  providerMetadata: z.record(z.lazy(() => ProviderMetadataInfo$inboundSchema))
+    .optional(),
   projectId: z.string(),
   groupRef: z.string(),
   groupName: z.string().optional(),
@@ -146,6 +257,7 @@ export const OauthConnectRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type OauthConnectRequestBody$Outbound = {
   providerWorkspaceRef?: string | undefined;
+  providerMetadata?: { [k: string]: ProviderMetadataInfo$Outbound } | undefined;
   projectId: string;
   groupRef: string;
   groupName?: string | undefined;
@@ -163,6 +275,8 @@ export const OauthConnectRequestBody$outboundSchema: z.ZodType<
   OauthConnectRequestBody
 > = z.object({
   providerWorkspaceRef: z.string().optional(),
+  providerMetadata: z.record(z.lazy(() => ProviderMetadataInfo$outboundSchema))
+    .optional(),
   projectId: z.string(),
   groupRef: z.string(),
   groupName: z.string().optional(),

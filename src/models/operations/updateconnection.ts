@@ -9,6 +9,34 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The source of the metadata field
+ */
+export const UpdateConnectionSource = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type UpdateConnectionSource = ClosedEnum<typeof UpdateConnectionSource>;
+
+export type UpdateConnectionProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: UpdateConnectionSource;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
+
 export type UpdateConnectionBasicAuth = {
   /**
    * The username to use for the connection.
@@ -96,6 +124,9 @@ export type ConnectionRequestBody = {
    * The ID of the provider workspace that this connection belongs to.
    */
   providerWorkspaceRef?: string | undefined;
+  providerMetadata?:
+    | { [k: string]: UpdateConnectionProviderMetadataInfo }
+    | undefined;
   /**
    * The name of the user group that has access to this installation.
    */
@@ -376,6 +407,36 @@ export type UpdateConnectionOAuth2AuthorizationCodeToken = {
 };
 
 /**
+ * The source of the metadata field
+ */
+export const UpdateConnectionConnectionsSource = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type UpdateConnectionConnectionsSource = ClosedEnum<
+  typeof UpdateConnectionConnectionsSource
+>;
+
+export type UpdateConnectionConnectionsProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: UpdateConnectionConnectionsSource;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
+
+/**
  * Connection updated successfully.
  */
 export type UpdateConnectionConnection = {
@@ -425,11 +486,100 @@ export type UpdateConnectionConnection = {
    * The API key used while making the connection.
    */
   apiKey?: string | undefined;
+  providerMetadata?: {
+    [k: string]: UpdateConnectionConnectionsProviderMetadataInfo;
+  } | undefined;
 };
 
 export type UpdateConnectionResponse =
   | UpdateConnectionConnection
   | UpdateConnectionAPIProblem;
+
+/** @internal */
+export const UpdateConnectionSource$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateConnectionSource
+> = z.nativeEnum(UpdateConnectionSource);
+
+/** @internal */
+export const UpdateConnectionSource$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateConnectionSource
+> = UpdateConnectionSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateConnectionSource$ {
+  /** @deprecated use `UpdateConnectionSource$inboundSchema` instead. */
+  export const inboundSchema = UpdateConnectionSource$inboundSchema;
+  /** @deprecated use `UpdateConnectionSource$outboundSchema` instead. */
+  export const outboundSchema = UpdateConnectionSource$outboundSchema;
+}
+
+/** @internal */
+export const UpdateConnectionProviderMetadataInfo$inboundSchema: z.ZodType<
+  UpdateConnectionProviderMetadataInfo,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  source: UpdateConnectionSource$inboundSchema,
+  displayName: z.string().optional(),
+});
+
+/** @internal */
+export type UpdateConnectionProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const UpdateConnectionProviderMetadataInfo$outboundSchema: z.ZodType<
+  UpdateConnectionProviderMetadataInfo$Outbound,
+  z.ZodTypeDef,
+  UpdateConnectionProviderMetadataInfo
+> = z.object({
+  value: z.string(),
+  source: UpdateConnectionSource$outboundSchema,
+  displayName: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateConnectionProviderMetadataInfo$ {
+  /** @deprecated use `UpdateConnectionProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateConnectionProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `UpdateConnectionProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateConnectionProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `UpdateConnectionProviderMetadataInfo$Outbound` instead. */
+  export type Outbound = UpdateConnectionProviderMetadataInfo$Outbound;
+}
+
+export function updateConnectionProviderMetadataInfoToJSON(
+  updateConnectionProviderMetadataInfo: UpdateConnectionProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    UpdateConnectionProviderMetadataInfo$outboundSchema.parse(
+      updateConnectionProviderMetadataInfo,
+    ),
+  );
+}
+
+export function updateConnectionProviderMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateConnectionProviderMetadataInfo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateConnectionProviderMetadataInfo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateConnectionProviderMetadataInfo' from JSON`,
+  );
+}
 
 /** @internal */
 export const UpdateConnectionBasicAuth$inboundSchema: z.ZodType<
@@ -847,6 +997,9 @@ export const ConnectionRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   providerWorkspaceRef: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => UpdateConnectionProviderMetadataInfo$inboundSchema),
+  ).optional(),
   groupName: z.string().optional(),
   groupRef: z.string().optional(),
   consumerName: z.string().optional(),
@@ -868,6 +1021,9 @@ export const ConnectionRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type ConnectionRequestBody$Outbound = {
   providerWorkspaceRef?: string | undefined;
+  providerMetadata?: {
+    [k: string]: UpdateConnectionProviderMetadataInfo$Outbound;
+  } | undefined;
   groupName?: string | undefined;
   groupRef?: string | undefined;
   consumerName?: string | undefined;
@@ -893,6 +1049,9 @@ export const ConnectionRequestBody$outboundSchema: z.ZodType<
   ConnectionRequestBody
 > = z.object({
   providerWorkspaceRef: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => UpdateConnectionProviderMetadataInfo$outboundSchema),
+  ).optional(),
   groupName: z.string().optional(),
   groupRef: z.string().optional(),
   consumerName: z.string().optional(),
@@ -1663,6 +1822,102 @@ export function updateConnectionOAuth2AuthorizationCodeTokenFromJSON(
 }
 
 /** @internal */
+export const UpdateConnectionConnectionsSource$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateConnectionConnectionsSource
+> = z.nativeEnum(UpdateConnectionConnectionsSource);
+
+/** @internal */
+export const UpdateConnectionConnectionsSource$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateConnectionConnectionsSource
+> = UpdateConnectionConnectionsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateConnectionConnectionsSource$ {
+  /** @deprecated use `UpdateConnectionConnectionsSource$inboundSchema` instead. */
+  export const inboundSchema = UpdateConnectionConnectionsSource$inboundSchema;
+  /** @deprecated use `UpdateConnectionConnectionsSource$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateConnectionConnectionsSource$outboundSchema;
+}
+
+/** @internal */
+export const UpdateConnectionConnectionsProviderMetadataInfo$inboundSchema:
+  z.ZodType<
+    UpdateConnectionConnectionsProviderMetadataInfo,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.string(),
+    source: UpdateConnectionConnectionsSource$inboundSchema,
+    displayName: z.string().optional(),
+  });
+
+/** @internal */
+export type UpdateConnectionConnectionsProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const UpdateConnectionConnectionsProviderMetadataInfo$outboundSchema:
+  z.ZodType<
+    UpdateConnectionConnectionsProviderMetadataInfo$Outbound,
+    z.ZodTypeDef,
+    UpdateConnectionConnectionsProviderMetadataInfo
+  > = z.object({
+    value: z.string(),
+    source: UpdateConnectionConnectionsSource$outboundSchema,
+    displayName: z.string().optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateConnectionConnectionsProviderMetadataInfo$ {
+  /** @deprecated use `UpdateConnectionConnectionsProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateConnectionConnectionsProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `UpdateConnectionConnectionsProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateConnectionConnectionsProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `UpdateConnectionConnectionsProviderMetadataInfo$Outbound` instead. */
+  export type Outbound =
+    UpdateConnectionConnectionsProviderMetadataInfo$Outbound;
+}
+
+export function updateConnectionConnectionsProviderMetadataInfoToJSON(
+  updateConnectionConnectionsProviderMetadataInfo:
+    UpdateConnectionConnectionsProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    UpdateConnectionConnectionsProviderMetadataInfo$outboundSchema.parse(
+      updateConnectionConnectionsProviderMetadataInfo,
+    ),
+  );
+}
+
+export function updateConnectionConnectionsProviderMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateConnectionConnectionsProviderMetadataInfo,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateConnectionConnectionsProviderMetadataInfo$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateConnectionConnectionsProviderMetadataInfo' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateConnectionConnection$inboundSchema: z.ZodType<
   UpdateConnectionConnection,
   z.ZodTypeDef,
@@ -1686,6 +1941,9 @@ export const UpdateConnectionConnection$inboundSchema: z.ZodType<
     UpdateConnectionOAuth2AuthorizationCodeToken$inboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => UpdateConnectionConnectionsProviderMetadataInfo$inboundSchema),
+  ).optional(),
 });
 
 /** @internal */
@@ -1706,6 +1964,9 @@ export type UpdateConnectionConnection$Outbound = {
     | UpdateConnectionOAuth2AuthorizationCodeToken$Outbound
     | undefined;
   apiKey?: string | undefined;
+  providerMetadata?: {
+    [k: string]: UpdateConnectionConnectionsProviderMetadataInfo$Outbound;
+  } | undefined;
 };
 
 /** @internal */
@@ -1731,6 +1992,11 @@ export const UpdateConnectionConnection$outboundSchema: z.ZodType<
     UpdateConnectionOAuth2AuthorizationCodeToken$outboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() =>
+      UpdateConnectionConnectionsProviderMetadataInfo$outboundSchema
+    ),
+  ).optional(),
 });
 
 /**
