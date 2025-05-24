@@ -25,11 +25,13 @@ import { tool$destinationsGet } from "./tools/destinationsGet.js";
 import { tool$destinationsList } from "./tools/destinationsList.js";
 import { tool$destinationsUpdate } from "./tools/destinationsUpdate.js";
 import { tool$groupsCreate } from "./tools/groupsCreate.js";
+import { tool$installationPauseReads } from "./tools/installationPauseReads.js";
 import { tool$installationsCreate } from "./tools/installationsCreate.js";
 import { tool$installationsDelete } from "./tools/installationsDelete.js";
 import { tool$installationsGet } from "./tools/installationsGet.js";
 import { tool$installationsList } from "./tools/installationsList.js";
 import { tool$installationsUpdate } from "./tools/installationsUpdate.js";
+import { tool$installationUnpauseReads } from "./tools/installationUnpauseReads.js";
 import { tool$integrationsBatchUpsert } from "./tools/integrationsBatchUpsert.js";
 import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
 import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
@@ -43,7 +45,6 @@ import { tool$operationsList } from "./tools/operationsList.js";
 import { tool$operationsListLogs } from "./tools/operationsListLogs.js";
 import { tool$orgBuildersList } from "./tools/orgBuildersList.js";
 import { tool$projectsCreate } from "./tools/projectsCreate.js";
-import { tool$projectsDelete } from "./tools/projectsDelete.js";
 import { tool$projectsGet } from "./tools/projectsGet.js";
 import { tool$projectsList } from "./tools/projectsList.js";
 import { tool$projectsUpdate } from "./tools/projectsUpdate.js";
@@ -67,7 +68,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDKNodePlatform",
-    version: "0.2.3",
+    version: "0.2.4",
   });
 
   const client = new SDKNodePlatformCore({
@@ -102,7 +103,6 @@ export function createMCPServer(deps: {
   tool(tool$projectsList);
   tool(tool$projectsCreate);
   tool(tool$projectsGet);
-  tool(tool$projectsDelete);
   tool(tool$projectsUpdate);
   tool(tool$providerAppsList);
   tool(tool$providerAppsCreate);
@@ -119,6 +119,8 @@ export function createMCPServer(deps: {
   tool(tool$installationsGet);
   tool(tool$installationsDelete);
   tool(tool$installationsUpdate);
+  tool(tool$installationPauseReads);
+  tool(tool$installationUnpauseReads);
   tool(tool$objectsAndFieldsGetMetadata);
   tool(tool$objectsAndFieldsGetObjectMetadataForConnection);
   tool(tool$operationsList);

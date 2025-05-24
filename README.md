@@ -190,6 +190,23 @@ const sdkNodePlatform = new SDKNodePlatform({
 async function run() {
   const result = await sdkNodePlatform.oauth.connect({
     providerWorkspaceRef: "salesforce-instance-domain",
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key1": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key2": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
     projectId: "my-project",
     groupRef: "group-123",
     groupName: "Organization Name",
@@ -230,6 +247,23 @@ const sdkNodePlatform = new SDKNodePlatform({
 async function run() {
   const result = await sdkNodePlatform.oauth.connect({
     providerWorkspaceRef: "salesforce-instance-domain",
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key1": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key2": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
     projectId: "my-project",
     groupRef: "group-123",
     groupName: "Organization Name",
@@ -278,6 +312,11 @@ run();
 
 * [create](docs/sdks/groups/README.md#create) - Create a new group
 
+### [installation](docs/sdks/installation/README.md)
+
+* [pauseReads](docs/sdks/installation/README.md#pausereads) - Pause reads for an installation
+* [unpauseReads](docs/sdks/installation/README.md#unpausereads) - Unpause reads for an installation
+
 ### [installations](docs/sdks/installations/README.md)
 
 * [list](docs/sdks/installations/README.md#list) - List installations
@@ -318,7 +357,6 @@ run();
 * [list](docs/sdks/projects/README.md#list) - List all projects that the API key or user credential has access to.
 * [create](docs/sdks/projects/README.md#create) - Create a new project
 * [get](docs/sdks/projects/README.md#get) - Get a project
-* [delete](docs/sdks/projects/README.md#delete) - Delete a project
 * [update](docs/sdks/projects/README.md#update) - Update a project
 
 ### [providerApps](docs/sdks/providerapps/README.md)
@@ -373,11 +411,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`destinationsList`](docs/sdks/destinations/README.md#list) - List destinations
 - [`destinationsUpdate`](docs/sdks/destinations/README.md#update) - Update a destination
 - [`groupsCreate`](docs/sdks/groups/README.md#create) - Create a new group
+- [`installationPauseReads`](docs/sdks/installation/README.md#pausereads) - Pause reads for an installation
 - [`installationsCreate`](docs/sdks/installations/README.md#create) - Create a new installation
 - [`installationsDelete`](docs/sdks/installations/README.md#delete) - Delete an installation
 - [`installationsGet`](docs/sdks/installations/README.md#get) - Get an installation
 - [`installationsList`](docs/sdks/installations/README.md#list) - List installations
 - [`installationsUpdate`](docs/sdks/installations/README.md#update) - Update an installation
+- [`installationUnpauseReads`](docs/sdks/installation/README.md#unpausereads) - Unpause reads for an installation
 - [`integrationsBatchUpsert`](docs/sdks/integrations/README.md#batchupsert) - Batch upsert a group of integrations
 - [`integrationsCreate`](docs/sdks/integrations/README.md#create) - Create a new integration.
 - [`integrationsDelete`](docs/sdks/integrations/README.md#delete) - Delete an integration
@@ -391,7 +431,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`operationsListLogs`](docs/sdks/operations/README.md#listlogs) - List logs for an operation
 - [`orgBuildersList`](docs/sdks/orgbuilders/README.md#list) - List builders for an organization
 - [`projectsCreate`](docs/sdks/projects/README.md#create) - Create a new project
-- [`projectsDelete`](docs/sdks/projects/README.md#delete) - Delete a project
 - [`projectsGet`](docs/sdks/projects/README.md#get) - Get a project
 - [`projectsList`](docs/sdks/projects/README.md#list) - List all projects that the API key or user credential has access to.
 - [`projectsUpdate`](docs/sdks/projects/README.md#update) - Update a project
@@ -424,6 +463,23 @@ const sdkNodePlatform = new SDKNodePlatform({
 async function run() {
   const result = await sdkNodePlatform.oauth.connect({
     providerWorkspaceRef: "salesforce-instance-domain",
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key1": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key2": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
     projectId: "my-project",
     groupRef: "group-123",
     groupName: "Organization Name",
@@ -473,6 +529,23 @@ const sdkNodePlatform = new SDKNodePlatform({
 async function run() {
   const result = await sdkNodePlatform.oauth.connect({
     providerWorkspaceRef: "salesforce-instance-domain",
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key1": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key2": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
     projectId: "my-project",
     groupRef: "group-123",
     groupName: "Organization Name",
@@ -519,6 +592,23 @@ async function run() {
   try {
     result = await sdkNodePlatform.oauth.connect({
       providerWorkspaceRef: "salesforce-instance-domain",
+      providerMetadata: {
+        "key": {
+          value: "1234567890",
+          source: "input",
+          displayName: "Account ID",
+        },
+        "key1": {
+          value: "1234567890",
+          source: "input",
+          displayName: "Account ID",
+        },
+        "key2": {
+          value: "1234567890",
+          source: "input",
+          displayName: "Account ID",
+        },
+      },
       projectId: "my-project",
       groupRef: "group-123",
       groupName: "Organization Name",
@@ -587,6 +677,23 @@ const sdkNodePlatform = new SDKNodePlatform({
 async function run() {
   const result = await sdkNodePlatform.oauth.connect({
     providerWorkspaceRef: "salesforce-instance-domain",
+    providerMetadata: {
+      "key": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key1": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+      "key2": {
+        value: "1234567890",
+        source: "input",
+        displayName: "Account ID",
+      },
+    },
     projectId: "my-project",
     groupRef: "group-123",
     groupName: "Organization Name",
