@@ -10,6 +10,7 @@ const value: operations.GetProviderProviderInfo = {
   name: "<value>",
   authType: "none",
   baseURL: "https://difficult-fisherman.info/",
+  defaultModule: "<value>",
   oauth2Opts: {
     grantType: "password",
     authURL: "https://login.salesforce.com/services/oauth2/authorize",
@@ -23,6 +24,14 @@ const value: operations.GetProviderProviderInfo = {
       workspaceRefField: "account-id",
       consumerRefField: "user-id",
       scopesField: "scopes",
+      otherFields: [
+        {
+          name: "<value>",
+          displayName: "Kyler.Schamberger91",
+          path: "owner.siteId",
+          capture: "https:\/\/(?<result>[^.]+)\.docusign\.net",
+        },
+      ],
     },
     docsURL: "https://docs.example.com/client-credentials",
     authURLParams: {
@@ -64,6 +73,14 @@ const value: operations.GetProviderProviderInfo = {
   providerOpts: {
     "key": "<value>",
   },
+  authHealthCheck: {
+    url: "https://api.example.com/health-check",
+    method: "GET",
+    successStatusCodes: [
+      200,
+      204,
+    ],
+  },
   displayName: "Zendesk Chat",
   postAuthInfoNeeded: true,
   media: {
@@ -75,6 +92,14 @@ const value: operations.GetProviderProviderInfo = {
       iconURL: "https://example.com/icon.png",
       logoURL: "https://example.com/logo.png",
     },
+  },
+  metadata: {
+    input: [
+      {
+        name: "<value>",
+        docsURL: "https://example.com/how-to-find-subdomain",
+      },
+    ],
   },
 };
 ```

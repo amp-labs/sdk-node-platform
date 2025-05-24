@@ -119,6 +119,25 @@ export const GetProviderGrantType = {
 } as const;
 export type GetProviderGrantType = ClosedEnum<typeof GetProviderGrantType>;
 
+export type GetProviderOtherFields = {
+  /**
+   * The internal name of the field
+   */
+  name: string;
+  /**
+   * The human-readable name of the field
+   */
+  displayName: string;
+  /**
+   * The path to the field in the token response (accepts dot notation for nested fields)
+   */
+  path: string;
+  /**
+   * A regex expression to capture the value that we need from the path. There must be only one capture group named 'result' in the expression. If not provided, will cause an error.
+   */
+  capture?: string | undefined;
+};
+
 /**
  * Fields to be used to extract token metadata from the token response.
  */
@@ -126,6 +145,10 @@ export type GetProviderTokenMetadataFields = {
   workspaceRefField?: string | undefined;
   consumerRefField?: string | undefined;
   scopesField?: string | undefined;
+  /**
+   * Additional fields to extract and transform from the token response
+   */
+  otherFields?: Array<GetProviderOtherFields> | undefined;
 };
 
 /**
@@ -295,6 +318,24 @@ export type GetProviderSupport = {
 };
 
 /**
+ * A URL to check the health of a provider's credentials. It's used to see if the credentials are valid and if the provider is reachable.
+ */
+export type GetProviderAuthHealthCheck = {
+  /**
+   * a no-op URL to check the health of the credentials. The URL MUST not mutate any state. If the provider doesn't have such an endpoint, then don't provide credentialsHealthCheck.
+   */
+  url: string;
+  /**
+   * The HTTP method to use for the health check. If not set, defaults to GET.
+   */
+  method?: string | undefined;
+  /**
+   * The HTTP status codes that indicate a successful health check. If not set, defaults to 200 and 204.
+   */
+  successStatusCodes?: Array<number> | undefined;
+};
+
+/**
  * Media for light/regular mode.
  */
 export type GetProviderMediaTypeRegular = {
@@ -427,6 +468,64 @@ export type GetProviderModuleInfo = {
 };
 
 /**
+ * Dependency for a single module.
+ */
+export type GetProviderModuleDependency = {};
+
+export type GetProviderMetadataItemAsInput = {
+  /**
+   * The internal identifier for the metadata field
+   */
+  name: string;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+  /**
+   * URL with more information about how to locate this value
+   */
+  docsURL?: string | undefined;
+  /**
+   * Module-specific dependencies for this metadata item.
+   */
+  moduleDependencies?: { [k: string]: GetProviderModuleDependency } | undefined;
+};
+
+/**
+ * Dependency for a single module.
+ */
+export type GetProviderProvidersModuleDependency = {};
+
+export type GetProviderMetadataItemFetchedPostAuthentication = {
+  /**
+   * The internal identifier for the metadata field
+   */
+  name: string;
+  /**
+   * Module-specific dependencies for this metadata item.
+   */
+  moduleDependencies?:
+    | { [k: string]: GetProviderProvidersModuleDependency }
+    | undefined;
+};
+
+/**
+ * Provider metadata that needs to be given by the user or fetched by the connector post authentication for the connector to work.
+ */
+export type GetProviderProviderMetadata = {
+  /**
+   * Metadata provided as manual input
+   */
+  input?: Array<GetProviderMetadataItemAsInput> | undefined;
+  /**
+   * Metadata fetched by the connector post authentication
+   */
+  postAuthentication?:
+    | Array<GetProviderMetadataItemFetchedPostAuthentication>
+    | undefined;
+};
+
+/**
  * ProviderInfo
  */
 export type GetProviderProviderInfo = {
@@ -439,6 +538,7 @@ export type GetProviderProviderInfo = {
    * The base URL for making API requests.
    */
   baseURL: string;
+  defaultModule?: any | undefined;
   /**
    * Configuration for OAuth2.0. Must be provided if authType is oauth2.
    */
@@ -460,6 +560,10 @@ export type GetProviderProviderInfo = {
    */
   providerOpts: { [k: string]: string };
   /**
+   * A URL to check the health of a provider's credentials. It's used to see if the credentials are valid and if the provider is reachable.
+   */
+  authHealthCheck?: GetProviderAuthHealthCheck | undefined;
+  /**
    * The display name of the provider, if omitted, defaults to provider name.
    */
   displayName?: string | undefined;
@@ -474,6 +578,10 @@ export type GetProviderProviderInfo = {
    * The registry of provider modules.
    */
   modules?: { [k: string]: GetProviderModuleInfo } | undefined;
+  /**
+   * Provider metadata that needs to be given by the user or fetched by the connector post authentication for the connector to work.
+   */
+  metadata?: GetProviderProviderMetadata | undefined;
 };
 
 export type GetProviderResponse =
@@ -681,6 +789,69 @@ export namespace GetProviderGrantType$ {
 }
 
 /** @internal */
+export const GetProviderOtherFields$inboundSchema: z.ZodType<
+  GetProviderOtherFields,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  displayName: z.string(),
+  path: z.string(),
+  capture: z.string().optional(),
+});
+
+/** @internal */
+export type GetProviderOtherFields$Outbound = {
+  name: string;
+  displayName: string;
+  path: string;
+  capture?: string | undefined;
+};
+
+/** @internal */
+export const GetProviderOtherFields$outboundSchema: z.ZodType<
+  GetProviderOtherFields$Outbound,
+  z.ZodTypeDef,
+  GetProviderOtherFields
+> = z.object({
+  name: z.string(),
+  displayName: z.string(),
+  path: z.string(),
+  capture: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProviderOtherFields$ {
+  /** @deprecated use `GetProviderOtherFields$inboundSchema` instead. */
+  export const inboundSchema = GetProviderOtherFields$inboundSchema;
+  /** @deprecated use `GetProviderOtherFields$outboundSchema` instead. */
+  export const outboundSchema = GetProviderOtherFields$outboundSchema;
+  /** @deprecated use `GetProviderOtherFields$Outbound` instead. */
+  export type Outbound = GetProviderOtherFields$Outbound;
+}
+
+export function getProviderOtherFieldsToJSON(
+  getProviderOtherFields: GetProviderOtherFields,
+): string {
+  return JSON.stringify(
+    GetProviderOtherFields$outboundSchema.parse(getProviderOtherFields),
+  );
+}
+
+export function getProviderOtherFieldsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProviderOtherFields, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProviderOtherFields$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProviderOtherFields' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetProviderTokenMetadataFields$inboundSchema: z.ZodType<
   GetProviderTokenMetadataFields,
   z.ZodTypeDef,
@@ -689,6 +860,8 @@ export const GetProviderTokenMetadataFields$inboundSchema: z.ZodType<
   workspaceRefField: z.string().optional(),
   consumerRefField: z.string().optional(),
   scopesField: z.string().optional(),
+  otherFields: z.array(z.lazy(() => GetProviderOtherFields$inboundSchema))
+    .optional(),
 });
 
 /** @internal */
@@ -696,6 +869,7 @@ export type GetProviderTokenMetadataFields$Outbound = {
   workspaceRefField?: string | undefined;
   consumerRefField?: string | undefined;
   scopesField?: string | undefined;
+  otherFields?: Array<GetProviderOtherFields$Outbound> | undefined;
 };
 
 /** @internal */
@@ -707,6 +881,8 @@ export const GetProviderTokenMetadataFields$outboundSchema: z.ZodType<
   workspaceRefField: z.string().optional(),
   consumerRefField: z.string().optional(),
   scopesField: z.string().optional(),
+  otherFields: z.array(z.lazy(() => GetProviderOtherFields$outboundSchema))
+    .optional(),
 });
 
 /**
@@ -1371,6 +1547,66 @@ export function getProviderSupportFromJSON(
 }
 
 /** @internal */
+export const GetProviderAuthHealthCheck$inboundSchema: z.ZodType<
+  GetProviderAuthHealthCheck,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  url: z.string(),
+  method: z.string().optional(),
+  successStatusCodes: z.array(z.number().int()).optional(),
+});
+
+/** @internal */
+export type GetProviderAuthHealthCheck$Outbound = {
+  url: string;
+  method?: string | undefined;
+  successStatusCodes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const GetProviderAuthHealthCheck$outboundSchema: z.ZodType<
+  GetProviderAuthHealthCheck$Outbound,
+  z.ZodTypeDef,
+  GetProviderAuthHealthCheck
+> = z.object({
+  url: z.string(),
+  method: z.string().optional(),
+  successStatusCodes: z.array(z.number().int()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProviderAuthHealthCheck$ {
+  /** @deprecated use `GetProviderAuthHealthCheck$inboundSchema` instead. */
+  export const inboundSchema = GetProviderAuthHealthCheck$inboundSchema;
+  /** @deprecated use `GetProviderAuthHealthCheck$outboundSchema` instead. */
+  export const outboundSchema = GetProviderAuthHealthCheck$outboundSchema;
+  /** @deprecated use `GetProviderAuthHealthCheck$Outbound` instead. */
+  export type Outbound = GetProviderAuthHealthCheck$Outbound;
+}
+
+export function getProviderAuthHealthCheckToJSON(
+  getProviderAuthHealthCheck: GetProviderAuthHealthCheck,
+): string {
+  return JSON.stringify(
+    GetProviderAuthHealthCheck$outboundSchema.parse(getProviderAuthHealthCheck),
+  );
+}
+
+export function getProviderAuthHealthCheckFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProviderAuthHealthCheck, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProviderAuthHealthCheck$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProviderAuthHealthCheck' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetProviderMediaTypeRegular$inboundSchema: z.ZodType<
   GetProviderMediaTypeRegular,
   z.ZodTypeDef,
@@ -1943,6 +2179,328 @@ export function getProviderModuleInfoFromJSON(
 }
 
 /** @internal */
+export const GetProviderModuleDependency$inboundSchema: z.ZodType<
+  GetProviderModuleDependency,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+/** @internal */
+export type GetProviderModuleDependency$Outbound = {};
+
+/** @internal */
+export const GetProviderModuleDependency$outboundSchema: z.ZodType<
+  GetProviderModuleDependency$Outbound,
+  z.ZodTypeDef,
+  GetProviderModuleDependency
+> = z.object({});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProviderModuleDependency$ {
+  /** @deprecated use `GetProviderModuleDependency$inboundSchema` instead. */
+  export const inboundSchema = GetProviderModuleDependency$inboundSchema;
+  /** @deprecated use `GetProviderModuleDependency$outboundSchema` instead. */
+  export const outboundSchema = GetProviderModuleDependency$outboundSchema;
+  /** @deprecated use `GetProviderModuleDependency$Outbound` instead. */
+  export type Outbound = GetProviderModuleDependency$Outbound;
+}
+
+export function getProviderModuleDependencyToJSON(
+  getProviderModuleDependency: GetProviderModuleDependency,
+): string {
+  return JSON.stringify(
+    GetProviderModuleDependency$outboundSchema.parse(
+      getProviderModuleDependency,
+    ),
+  );
+}
+
+export function getProviderModuleDependencyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProviderModuleDependency, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProviderModuleDependency$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProviderModuleDependency' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetProviderMetadataItemAsInput$inboundSchema: z.ZodType<
+  GetProviderMetadataItemAsInput,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  displayName: z.string().optional(),
+  docsURL: z.string().optional(),
+  moduleDependencies: z.record(
+    z.lazy(() => GetProviderModuleDependency$inboundSchema),
+  ).optional(),
+});
+
+/** @internal */
+export type GetProviderMetadataItemAsInput$Outbound = {
+  name: string;
+  displayName?: string | undefined;
+  docsURL?: string | undefined;
+  moduleDependencies?:
+    | { [k: string]: GetProviderModuleDependency$Outbound }
+    | undefined;
+};
+
+/** @internal */
+export const GetProviderMetadataItemAsInput$outboundSchema: z.ZodType<
+  GetProviderMetadataItemAsInput$Outbound,
+  z.ZodTypeDef,
+  GetProviderMetadataItemAsInput
+> = z.object({
+  name: z.string(),
+  displayName: z.string().optional(),
+  docsURL: z.string().optional(),
+  moduleDependencies: z.record(
+    z.lazy(() => GetProviderModuleDependency$outboundSchema),
+  ).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProviderMetadataItemAsInput$ {
+  /** @deprecated use `GetProviderMetadataItemAsInput$inboundSchema` instead. */
+  export const inboundSchema = GetProviderMetadataItemAsInput$inboundSchema;
+  /** @deprecated use `GetProviderMetadataItemAsInput$outboundSchema` instead. */
+  export const outboundSchema = GetProviderMetadataItemAsInput$outboundSchema;
+  /** @deprecated use `GetProviderMetadataItemAsInput$Outbound` instead. */
+  export type Outbound = GetProviderMetadataItemAsInput$Outbound;
+}
+
+export function getProviderMetadataItemAsInputToJSON(
+  getProviderMetadataItemAsInput: GetProviderMetadataItemAsInput,
+): string {
+  return JSON.stringify(
+    GetProviderMetadataItemAsInput$outboundSchema.parse(
+      getProviderMetadataItemAsInput,
+    ),
+  );
+}
+
+export function getProviderMetadataItemAsInputFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProviderMetadataItemAsInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProviderMetadataItemAsInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProviderMetadataItemAsInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetProviderProvidersModuleDependency$inboundSchema: z.ZodType<
+  GetProviderProvidersModuleDependency,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+/** @internal */
+export type GetProviderProvidersModuleDependency$Outbound = {};
+
+/** @internal */
+export const GetProviderProvidersModuleDependency$outboundSchema: z.ZodType<
+  GetProviderProvidersModuleDependency$Outbound,
+  z.ZodTypeDef,
+  GetProviderProvidersModuleDependency
+> = z.object({});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProviderProvidersModuleDependency$ {
+  /** @deprecated use `GetProviderProvidersModuleDependency$inboundSchema` instead. */
+  export const inboundSchema =
+    GetProviderProvidersModuleDependency$inboundSchema;
+  /** @deprecated use `GetProviderProvidersModuleDependency$outboundSchema` instead. */
+  export const outboundSchema =
+    GetProviderProvidersModuleDependency$outboundSchema;
+  /** @deprecated use `GetProviderProvidersModuleDependency$Outbound` instead. */
+  export type Outbound = GetProviderProvidersModuleDependency$Outbound;
+}
+
+export function getProviderProvidersModuleDependencyToJSON(
+  getProviderProvidersModuleDependency: GetProviderProvidersModuleDependency,
+): string {
+  return JSON.stringify(
+    GetProviderProvidersModuleDependency$outboundSchema.parse(
+      getProviderProvidersModuleDependency,
+    ),
+  );
+}
+
+export function getProviderProvidersModuleDependencyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProviderProvidersModuleDependency, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetProviderProvidersModuleDependency$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProviderProvidersModuleDependency' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetProviderMetadataItemFetchedPostAuthentication$inboundSchema:
+  z.ZodType<
+    GetProviderMetadataItemFetchedPostAuthentication,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    name: z.string(),
+    moduleDependencies: z.record(
+      z.lazy(() => GetProviderProvidersModuleDependency$inboundSchema),
+    ).optional(),
+  });
+
+/** @internal */
+export type GetProviderMetadataItemFetchedPostAuthentication$Outbound = {
+  name: string;
+  moduleDependencies?: {
+    [k: string]: GetProviderProvidersModuleDependency$Outbound;
+  } | undefined;
+};
+
+/** @internal */
+export const GetProviderMetadataItemFetchedPostAuthentication$outboundSchema:
+  z.ZodType<
+    GetProviderMetadataItemFetchedPostAuthentication$Outbound,
+    z.ZodTypeDef,
+    GetProviderMetadataItemFetchedPostAuthentication
+  > = z.object({
+    name: z.string(),
+    moduleDependencies: z.record(
+      z.lazy(() => GetProviderProvidersModuleDependency$outboundSchema),
+    ).optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProviderMetadataItemFetchedPostAuthentication$ {
+  /** @deprecated use `GetProviderMetadataItemFetchedPostAuthentication$inboundSchema` instead. */
+  export const inboundSchema =
+    GetProviderMetadataItemFetchedPostAuthentication$inboundSchema;
+  /** @deprecated use `GetProviderMetadataItemFetchedPostAuthentication$outboundSchema` instead. */
+  export const outboundSchema =
+    GetProviderMetadataItemFetchedPostAuthentication$outboundSchema;
+  /** @deprecated use `GetProviderMetadataItemFetchedPostAuthentication$Outbound` instead. */
+  export type Outbound =
+    GetProviderMetadataItemFetchedPostAuthentication$Outbound;
+}
+
+export function getProviderMetadataItemFetchedPostAuthenticationToJSON(
+  getProviderMetadataItemFetchedPostAuthentication:
+    GetProviderMetadataItemFetchedPostAuthentication,
+): string {
+  return JSON.stringify(
+    GetProviderMetadataItemFetchedPostAuthentication$outboundSchema.parse(
+      getProviderMetadataItemFetchedPostAuthentication,
+    ),
+  );
+}
+
+export function getProviderMetadataItemFetchedPostAuthenticationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetProviderMetadataItemFetchedPostAuthentication,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetProviderMetadataItemFetchedPostAuthentication$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetProviderMetadataItemFetchedPostAuthentication' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetProviderProviderMetadata$inboundSchema: z.ZodType<
+  GetProviderProviderMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  input: z.array(z.lazy(() => GetProviderMetadataItemAsInput$inboundSchema))
+    .optional(),
+  postAuthentication: z.array(
+    z.lazy(() =>
+      GetProviderMetadataItemFetchedPostAuthentication$inboundSchema
+    ),
+  ).optional(),
+});
+
+/** @internal */
+export type GetProviderProviderMetadata$Outbound = {
+  input?: Array<GetProviderMetadataItemAsInput$Outbound> | undefined;
+  postAuthentication?:
+    | Array<GetProviderMetadataItemFetchedPostAuthentication$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetProviderProviderMetadata$outboundSchema: z.ZodType<
+  GetProviderProviderMetadata$Outbound,
+  z.ZodTypeDef,
+  GetProviderProviderMetadata
+> = z.object({
+  input: z.array(z.lazy(() => GetProviderMetadataItemAsInput$outboundSchema))
+    .optional(),
+  postAuthentication: z.array(
+    z.lazy(() =>
+      GetProviderMetadataItemFetchedPostAuthentication$outboundSchema
+    ),
+  ).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProviderProviderMetadata$ {
+  /** @deprecated use `GetProviderProviderMetadata$inboundSchema` instead. */
+  export const inboundSchema = GetProviderProviderMetadata$inboundSchema;
+  /** @deprecated use `GetProviderProviderMetadata$outboundSchema` instead. */
+  export const outboundSchema = GetProviderProviderMetadata$outboundSchema;
+  /** @deprecated use `GetProviderProviderMetadata$Outbound` instead. */
+  export type Outbound = GetProviderProviderMetadata$Outbound;
+}
+
+export function getProviderProviderMetadataToJSON(
+  getProviderProviderMetadata: GetProviderProviderMetadata,
+): string {
+  return JSON.stringify(
+    GetProviderProviderMetadata$outboundSchema.parse(
+      getProviderProviderMetadata,
+    ),
+  );
+}
+
+export function getProviderProviderMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProviderProviderMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProviderProviderMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProviderProviderMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetProviderProviderInfo$inboundSchema: z.ZodType<
   GetProviderProviderInfo,
   z.ZodTypeDef,
@@ -1951,11 +2509,14 @@ export const GetProviderProviderInfo$inboundSchema: z.ZodType<
   name: z.string(),
   authType: GetProviderAuthType$inboundSchema,
   baseURL: z.string(),
+  defaultModule: z.any().optional(),
   oauth2Opts: z.lazy(() => GetProviderOAuth2Options$inboundSchema).optional(),
   apiKeyOpts: z.lazy(() => GetProviderAPIKeyOptions$inboundSchema).optional(),
   basicOpts: z.lazy(() => GetProviderBasicAuthOptions$inboundSchema).optional(),
   support: z.lazy(() => GetProviderSupport$inboundSchema),
   providerOpts: z.record(z.string()),
+  authHealthCheck: z.lazy(() => GetProviderAuthHealthCheck$inboundSchema)
+    .optional(),
   displayName: z.string().optional(),
   postAuthInfoNeeded: z.boolean().optional(),
   media: z.lazy(() => GetProviderMedia$inboundSchema).optional(),
@@ -1964,6 +2525,7 @@ export const GetProviderProviderInfo$inboundSchema: z.ZodType<
     .optional(),
   modules: z.record(z.lazy(() => GetProviderModuleInfo$inboundSchema))
     .optional(),
+  metadata: z.lazy(() => GetProviderProviderMetadata$inboundSchema).optional(),
 });
 
 /** @internal */
@@ -1971,17 +2533,20 @@ export type GetProviderProviderInfo$Outbound = {
   name: string;
   authType: string;
   baseURL: string;
+  defaultModule?: any | undefined;
   oauth2Opts?: GetProviderOAuth2Options$Outbound | undefined;
   apiKeyOpts?: GetProviderAPIKeyOptions$Outbound | undefined;
   basicOpts?: GetProviderBasicAuthOptions$Outbound | undefined;
   support: GetProviderSupport$Outbound;
   providerOpts: { [k: string]: string };
+  authHealthCheck?: GetProviderAuthHealthCheck$Outbound | undefined;
   displayName?: string | undefined;
   postAuthInfoNeeded?: boolean | undefined;
   media?: GetProviderMedia$Outbound | undefined;
   labels?: { [k: string]: string } | undefined;
   subscribeOpts?: GetProviderSubscribeOptions$Outbound | undefined;
   modules?: { [k: string]: GetProviderModuleInfo$Outbound } | undefined;
+  metadata?: GetProviderProviderMetadata$Outbound | undefined;
 };
 
 /** @internal */
@@ -1993,12 +2558,15 @@ export const GetProviderProviderInfo$outboundSchema: z.ZodType<
   name: z.string(),
   authType: GetProviderAuthType$outboundSchema,
   baseURL: z.string(),
+  defaultModule: z.any().optional(),
   oauth2Opts: z.lazy(() => GetProviderOAuth2Options$outboundSchema).optional(),
   apiKeyOpts: z.lazy(() => GetProviderAPIKeyOptions$outboundSchema).optional(),
   basicOpts: z.lazy(() => GetProviderBasicAuthOptions$outboundSchema)
     .optional(),
   support: z.lazy(() => GetProviderSupport$outboundSchema),
   providerOpts: z.record(z.string()),
+  authHealthCheck: z.lazy(() => GetProviderAuthHealthCheck$outboundSchema)
+    .optional(),
   displayName: z.string().optional(),
   postAuthInfoNeeded: z.boolean().optional(),
   media: z.lazy(() => GetProviderMedia$outboundSchema).optional(),
@@ -2007,6 +2575,7 @@ export const GetProviderProviderInfo$outboundSchema: z.ZodType<
     .optional(),
   modules: z.record(z.lazy(() => GetProviderModuleInfo$outboundSchema))
     .optional(),
+  metadata: z.lazy(() => GetProviderProviderMetadata$outboundSchema).optional(),
 });
 
 /**

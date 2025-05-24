@@ -7,6 +7,7 @@ import { Connections } from "./connections.js";
 import { Consumers } from "./consumers.js";
 import { Destinations } from "./destinations.js";
 import { Groups } from "./groups.js";
+import { Installation } from "./installation.js";
 import { Installations } from "./installations.js";
 import { Integrations } from "./integrations.js";
 import { Oauth } from "./oauth.js";
@@ -48,6 +49,11 @@ export class SDKNodePlatform extends ClientSDK {
   private _installations?: Installations;
   get installations(): Installations {
     return (this._installations ??= new Installations(this._options));
+  }
+
+  private _installation?: Installation;
+  get installation(): Installation {
+    return (this._installation ??= new Installation(this._options));
   }
 
   private _objectsAndFields?: ObjectsAndFields;
