@@ -1,6 +1,6 @@
 # ListIntegrationsEnabled
 
-If always, the integration will subscribe to update events.
+If always, the integration will subscribe to update events by default.
 
 ## Example Usage
 

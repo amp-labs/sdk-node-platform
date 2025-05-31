@@ -273,13 +273,13 @@ export type BatchUpsertIntegrationsProxyIntegration = {
 };
 
 /**
- * If always, the integration will subscribe to create events.
+ * If always, the integration will subscribe to create events by default.
  */
 export const BatchUpsertIntegrationsEnabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to create events.
+ * If always, the integration will subscribe to create events by default.
  */
 export type BatchUpsertIntegrationsEnabled = ClosedEnum<
   typeof BatchUpsertIntegrationsEnabled
@@ -287,19 +287,19 @@ export type BatchUpsertIntegrationsEnabled = ClosedEnum<
 
 export type BatchUpsertIntegrationsCreateEvent = {
   /**
-   * If always, the integration will subscribe to create events.
+   * If always, the integration will subscribe to create events by default.
    */
   enabled?: BatchUpsertIntegrationsEnabled | undefined;
 };
 
 /**
- * If always, the integration will subscribe to update events.
+ * If always, the integration will subscribe to update events by default.
  */
 export const BatchUpsertIntegrationsIntegrationsEnabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to update events.
+ * If always, the integration will subscribe to update events by default.
  */
 export type BatchUpsertIntegrationsIntegrationsEnabled = ClosedEnum<
   typeof BatchUpsertIntegrationsIntegrationsEnabled
@@ -320,7 +320,7 @@ export type BatchUpsertIntegrationsWatchFieldsAuto = ClosedEnum<
 
 export type BatchUpsertIntegrationsUpdateEvent = {
   /**
-   * If always, the integration will subscribe to update events.
+   * If always, the integration will subscribe to update events by default.
    */
   enabled?: BatchUpsertIntegrationsIntegrationsEnabled | undefined;
   /**
@@ -331,13 +331,13 @@ export type BatchUpsertIntegrationsUpdateEvent = {
 };
 
 /**
- * If always, the integration will subscribe to delete events.
+ * If always, the integration will subscribe to delete events by default.
  */
 export const BatchUpsertIntegrationsIntegrationsResponseEnabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to delete events.
+ * If always, the integration will subscribe to delete events by default.
  */
 export type BatchUpsertIntegrationsIntegrationsResponseEnabled = ClosedEnum<
   typeof BatchUpsertIntegrationsIntegrationsResponseEnabled
@@ -345,7 +345,7 @@ export type BatchUpsertIntegrationsIntegrationsResponseEnabled = ClosedEnum<
 
 export type BatchUpsertIntegrationsDeleteEvent = {
   /**
-   * If always, the integration will subscribe to delete events.
+   * If always, the integration will subscribe to delete events by default.
    */
   enabled?: BatchUpsertIntegrationsIntegrationsResponseEnabled | undefined;
 };

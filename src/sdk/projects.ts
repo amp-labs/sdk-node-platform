@@ -3,7 +3,6 @@
  */
 
 import { CreateAcceptEnum, projectsCreate } from "../funcs/projectsCreate.js";
-import { projectsDelete } from "../funcs/projectsDelete.js";
 import { GetAcceptEnum, projectsGet } from "../funcs/projectsGet.js";
 import { ListAcceptEnum, projectsList } from "../funcs/projectsList.js";
 import { projectsUpdate, UpdateAcceptEnum } from "../funcs/projectsUpdate.js";
@@ -54,20 +53,6 @@ export class Projects extends ClientSDK {
     options?: RequestOptions & { acceptHeaderOverride?: GetAcceptEnum },
   ): Promise<operations.GetProjectResponse> {
     return unwrapAsync(projectsGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a project
-   */
-  async delete(
-    request: operations.DeleteProjectRequest,
-    options?: RequestOptions,
-  ): Promise<operations.DeleteProjectAPIProblem | undefined> {
-    return unwrapAsync(projectsDelete(
       this,
       request,
       options,

@@ -43,7 +43,6 @@ import { tool$operationsList } from "./tools/operationsList.js";
 import { tool$operationsListLogs } from "./tools/operationsListLogs.js";
 import { tool$orgBuildersList } from "./tools/orgBuildersList.js";
 import { tool$projectsCreate } from "./tools/projectsCreate.js";
-import { tool$projectsDelete } from "./tools/projectsDelete.js";
 import { tool$projectsGet } from "./tools/projectsGet.js";
 import { tool$projectsList } from "./tools/projectsList.js";
 import { tool$projectsUpdate } from "./tools/projectsUpdate.js";
@@ -67,7 +66,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDKNodePlatform",
-    version: "0.2.3",
+    version: "0.3.0",
   });
 
   const client = new SDKNodePlatformCore({
@@ -102,7 +101,6 @@ export function createMCPServer(deps: {
   tool(tool$projectsList);
   tool(tool$projectsCreate);
   tool(tool$projectsGet);
-  tool(tool$projectsDelete);
   tool(tool$projectsUpdate);
   tool(tool$providerAppsList);
   tool(tool$providerAppsCreate);

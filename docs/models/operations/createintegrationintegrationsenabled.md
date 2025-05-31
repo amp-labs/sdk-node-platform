@@ -1,6 +1,6 @@
 # CreateIntegrationIntegrationsEnabled
 
-If always, the integration will subscribe to delete events.
+If always, the integration will subscribe to delete events by default.
 
 ## Example Usage
 

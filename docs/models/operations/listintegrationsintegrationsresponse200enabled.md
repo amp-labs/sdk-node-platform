@@ -1,6 +1,6 @@
 # ListIntegrationsIntegrationsResponse200Enabled
 
-If always, the integration will subscribe to create events.
+If always, the integration will subscribe to create events by default.
 
 ## Example Usage
 

@@ -13,7 +13,6 @@ export * from "./createproject.js";
 export * from "./createproviderapp.js";
 export * from "./createrevision.js";
 export * from "./deleteintegration.js";
-export * from "./deleteproject.js";
 export * from "./deleteproviderapp.js";
 export * from "./generateconnection.js";
 export * from "./generateuploadurl.js";

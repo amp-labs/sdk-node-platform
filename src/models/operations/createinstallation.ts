@@ -9,8 +9,393 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * If selectedFieldsAuto is set to all, all fields will be read.
+ */
+export const SelectedFieldsAutoConfig = {
+  All: "all",
+} as const;
+/**
+ * If selectedFieldsAuto is set to all, all fields will be read.
+ */
+export type SelectedFieldsAutoConfig = ClosedEnum<
+  typeof SelectedFieldsAutoConfig
+>;
+
+export type DefaultPeriodConfig = {
+  /**
+   * Number of days in past to backfill from. 0 is no backfill. e.g) if 10, then backfill last 10 days of data. Required if fullHistory is not set.
+   */
+  days?: number | undefined;
+  /**
+   * If true, backfill all history. Required if days is not set.
+   */
+  fullHistory?: boolean | undefined;
+};
+
+export type BackfillConfig = {
+  defaultPeriod: DefaultPeriodConfig;
+};
+
+export type ReadConfigObject = {
+  /**
+   * The name of the object to read from.
+   */
+  objectName: string;
+  /**
+   * The schedule for reading the object, in cron syntax.
+   */
+  schedule: string;
+  /**
+   * The name of the destination that the result should be sent to.
+   */
+  destination: string;
+  /**
+   * This is a map of field names to booleans indicating whether they should be read. If a field is already included in `selectedFieldMappings`, it does not need to be included here.
+   */
+  selectedFields: { [k: string]: boolean };
+  /**
+   * This is a map of field names to their value mappings.
+   */
+  selectedValueMappings?: { [k: string]: { [k: string]: string } } | undefined;
+  /**
+   * This is a map of mapToNames to field names. (A mapTo name is the name the builder wants to map a field to when it lands in their destination.)
+   */
+  selectedFieldMappings: { [k: string]: string };
+  /**
+   * If selectedFieldsAuto is set to all, all fields will be read.
+   */
+  selectedFieldsAuto?: SelectedFieldsAutoConfig | undefined;
+  backfill?: BackfillConfig | undefined;
+};
+
+export type ReadConfig = {
+  objects: { [k: string]: ReadConfigObject };
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const CreateInstallationValueDefaultLegacyApplyOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type CreateInstallationValueDefaultLegacyApplyOnUpdate = ClosedEnum<
+  typeof CreateInstallationValueDefaultLegacyApplyOnUpdate
+>;
+
+export type ValueDefaultBoolean = {
+  /**
+   * The value to be used as a default.
+   */
+  value: boolean;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?: CreateInstallationValueDefaultLegacyApplyOnUpdate | undefined;
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const ValueDefaultLegacyApplyOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type ValueDefaultLegacyApplyOnUpdate = ClosedEnum<
+  typeof ValueDefaultLegacyApplyOnUpdate
+>;
+
+export type ValueDefaultInteger = {
+  /**
+   * The value to be used as a default.
+   */
+  value: number;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?: ValueDefaultLegacyApplyOnUpdate | undefined;
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const ApplyOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type ApplyOnUpdate = ClosedEnum<typeof ApplyOnUpdate>;
+
+export type ValueDefaultString = {
+  /**
+   * The value to be used as a default.
+   */
+  value: string;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?: ApplyOnUpdate | undefined;
+};
+
+/**
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export type ValueDefaultLegacy =
+  | ValueDefaultString
+  | ValueDefaultInteger
+  | ValueDefaultBoolean;
+
+/**
+ * Only use one of stringValue, integerValue, booleanValue.
+ */
+export type DefaultValueForAField = {
+  /**
+   * The default string value to apply to a field
+   */
+  stringValue?: string | undefined;
+  /**
+   * The default integer value to apply to a field
+   */
+  integerValue?: number | undefined;
+  /**
+   * The default boolean value to apply to a field
+   */
+  booleanValue?: boolean | undefined;
+};
+
+/**
+ * Whether the default value should be applied when creating a record.
+ */
+export const WriteOnCreate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when creating a record.
+ */
+export type WriteOnCreate = ClosedEnum<typeof WriteOnCreate>;
+
+/**
+ * Whether the default value should be applied when updating a record.
+ */
+export const WriteOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ */
+export type WriteOnUpdate = ClosedEnum<typeof WriteOnUpdate>;
+
+export type FieldSetting = {
+  /**
+   * Only use one of stringValue, integerValue, booleanValue.
+   */
+  default?: DefaultValueForAField | undefined;
+  /**
+   * Whether the default value should be applied when creating a record.
+   */
+  writeOnCreate?: WriteOnCreate | undefined;
+  /**
+   * Whether the default value should be applied when updating a record.
+   */
+  writeOnUpdate?: WriteOnUpdate | undefined;
+};
+
+export type WriteConfigObject = {
+  /**
+   * The name of the object to write to.
+   */
+  objectName: string;
+  /**
+   * This is a map of field names to default values. These values will be used when writing to the object.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  selectedValueDefaults?: {
+    [k: string]: ValueDefaultString | ValueDefaultInteger | ValueDefaultBoolean;
+  } | undefined;
+  /**
+   * This is a map of field names to their settings.
+   */
+  selectedFieldSettings?: { [k: string]: FieldSetting } | undefined;
+};
+
+export type WriteConfig = {
+  objects?: { [k: string]: WriteConfigObject } | undefined;
+};
+
 export type BaseProxyConfig = {
   enabled?: boolean | undefined;
+};
+
+/**
+ * Conditions to enable create events.
+ */
+export const CreateInstallationEnabled = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Conditions to enable create events.
+ */
+export type CreateInstallationEnabled = ClosedEnum<
+  typeof CreateInstallationEnabled
+>;
+
+export type CreateInstallationCreateEvent = {
+  /**
+   * Conditions to enable create events.
+   */
+  enabled: CreateInstallationEnabled;
+};
+
+/**
+ * Conditions to enable update events.
+ */
+export const CreateInstallationInstallationsEnabled = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Conditions to enable update events.
+ */
+export type CreateInstallationInstallationsEnabled = ClosedEnum<
+  typeof CreateInstallationInstallationsEnabled
+>;
+
+/**
+ * Whether to watch fields all fields automatically.
+ */
+export const CreateInstallationWatchFieldsAuto = {
+  All: "all",
+} as const;
+/**
+ * Whether to watch fields all fields automatically.
+ */
+export type CreateInstallationWatchFieldsAuto = ClosedEnum<
+  typeof CreateInstallationWatchFieldsAuto
+>;
+
+export type CreateInstallationUpdateEvent = {
+  /**
+   * Conditions to enable update events.
+   */
+  enabled: CreateInstallationInstallationsEnabled;
+  /**
+   * Whether to watch fields all fields automatically.
+   */
+  watchFieldsAuto?: CreateInstallationWatchFieldsAuto | undefined;
+  /**
+   * The fields that should be watched.
+   */
+  requiredWatchFields?: Array<string> | undefined;
+};
+
+/**
+ * Conditions to enable delete events.
+ */
+export const CreateInstallationInstallationsRequestEnabled = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Conditions to enable delete events.
+ */
+export type CreateInstallationInstallationsRequestEnabled = ClosedEnum<
+  typeof CreateInstallationInstallationsRequestEnabled
+>;
+
+export type CreateInstallationDeleteEvent = {
+  /**
+   * Conditions to enable delete events.
+   */
+  enabled: CreateInstallationInstallationsRequestEnabled;
+};
+
+export type SubscribeConfigObject = {
+  /**
+   * Whether to inherit fields and mappings from the read config.
+   */
+  inheritFieldsAndMappings: boolean;
+  /**
+   * The name of the object to subscribe to.
+   */
+  objectName: string;
+  /**
+   * The name of the destination that the result should be sent to.
+   */
+  destination: string;
+  createEvent?: CreateInstallationCreateEvent | undefined;
+  updateEvent?: CreateInstallationUpdateEvent | undefined;
+  deleteEvent?: CreateInstallationDeleteEvent | undefined;
+};
+
+export type SubscribeConfig = {
+  objects: { [k: string]: SubscribeConfigObject };
 };
 
 export type ConfigContent = {
@@ -18,9 +403,10 @@ export type ConfigContent = {
    * The SaaS API that we are integrating with.
    */
   provider: string;
-  read?: any | undefined;
-  write?: any | undefined;
+  read?: ReadConfig | undefined;
+  write?: WriteConfig | undefined;
   proxy?: BaseProxyConfig | undefined;
+  subscribe?: SubscribeConfig | undefined;
 };
 
 /**
@@ -317,6 +703,36 @@ export type CreateInstallationOAuth2AuthorizationCodeToken = {
   scopes?: Array<string> | undefined;
 };
 
+/**
+ * The source of the metadata field
+ */
+export const CreateInstallationSource = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type CreateInstallationSource = ClosedEnum<
+  typeof CreateInstallationSource
+>;
+
+export type CreateInstallationProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: CreateInstallationSource;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
+
 export type CreateInstallationConnection = {
   /**
    * The connection ID.
@@ -364,10 +780,422 @@ export type CreateInstallationConnection = {
    * The API key used while making the connection.
    */
   apiKey?: string | undefined;
+  providerMetadata?:
+    | { [k: string]: CreateInstallationProviderMetadataInfo }
+    | undefined;
+};
+
+/**
+ * If selectedFieldsAuto is set to all, all fields will be read.
+ */
+export const CreateInstallationSelectedFieldsAutoConfig = {
+  All: "all",
+} as const;
+/**
+ * If selectedFieldsAuto is set to all, all fields will be read.
+ */
+export type CreateInstallationSelectedFieldsAutoConfig = ClosedEnum<
+  typeof CreateInstallationSelectedFieldsAutoConfig
+>;
+
+export type CreateInstallationDefaultPeriodConfig = {
+  /**
+   * Number of days in past to backfill from. 0 is no backfill. e.g) if 10, then backfill last 10 days of data. Required if fullHistory is not set.
+   */
+  days?: number | undefined;
+  /**
+   * If true, backfill all history. Required if days is not set.
+   */
+  fullHistory?: boolean | undefined;
+};
+
+export type CreateInstallationBackfillConfig = {
+  defaultPeriod: CreateInstallationDefaultPeriodConfig;
+};
+
+export type CreateInstallationReadConfigObject = {
+  /**
+   * The name of the object to read from.
+   */
+  objectName: string;
+  /**
+   * The schedule for reading the object, in cron syntax.
+   */
+  schedule: string;
+  /**
+   * The name of the destination that the result should be sent to.
+   */
+  destination: string;
+  /**
+   * This is a map of field names to booleans indicating whether they should be read. If a field is already included in `selectedFieldMappings`, it does not need to be included here.
+   */
+  selectedFields: { [k: string]: boolean };
+  /**
+   * This is a map of field names to their value mappings.
+   */
+  selectedValueMappings?: { [k: string]: { [k: string]: string } } | undefined;
+  /**
+   * This is a map of mapToNames to field names. (A mapTo name is the name the builder wants to map a field to when it lands in their destination.)
+   */
+  selectedFieldMappings: { [k: string]: string };
+  /**
+   * If selectedFieldsAuto is set to all, all fields will be read.
+   */
+  selectedFieldsAuto?: CreateInstallationSelectedFieldsAutoConfig | undefined;
+  backfill?: CreateInstallationBackfillConfig | undefined;
+};
+
+export type CreateInstallationReadConfig = {
+  objects: { [k: string]: CreateInstallationReadConfigObject };
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate =
+  {
+    Always: "always",
+    Never: "never",
+  } as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate =
+  ClosedEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate
+  >;
+
+export type CreateInstallationValueDefaultLegacyValueDefaultBoolean = {
+  /**
+   * The value to be used as a default.
+   */
+  value: boolean;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?:
+    | CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate
+    | undefined;
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate =
+  {
+    Always: "always",
+    Never: "never",
+  } as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate =
+  ClosedEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate
+  >;
+
+export type CreateInstallationValueDefaultLegacyValueDefaultInteger = {
+  /**
+   * The value to be used as a default.
+   */
+  value: number;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?:
+    | CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate
+    | undefined;
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate =
+  ClosedEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate
+  >;
+
+export type CreateInstallationValueDefaultLegacyValueDefaultString = {
+  /**
+   * The value to be used as a default.
+   */
+  value: string;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?:
+    | CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate
+    | undefined;
+};
+
+/**
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export type CreateInstallationValueDefaultLegacy =
+  | CreateInstallationValueDefaultLegacyValueDefaultString
+  | CreateInstallationValueDefaultLegacyValueDefaultInteger
+  | CreateInstallationValueDefaultLegacyValueDefaultBoolean;
+
+/**
+ * Only use one of stringValue, integerValue, booleanValue.
+ */
+export type CreateInstallationDefaultValueForAField = {
+  /**
+   * The default string value to apply to a field
+   */
+  stringValue?: string | undefined;
+  /**
+   * The default integer value to apply to a field
+   */
+  integerValue?: number | undefined;
+  /**
+   * The default boolean value to apply to a field
+   */
+  booleanValue?: boolean | undefined;
+};
+
+/**
+ * Whether the default value should be applied when creating a record.
+ */
+export const CreateInstallationWriteOnCreate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when creating a record.
+ */
+export type CreateInstallationWriteOnCreate = ClosedEnum<
+  typeof CreateInstallationWriteOnCreate
+>;
+
+/**
+ * Whether the default value should be applied when updating a record.
+ */
+export const CreateInstallationWriteOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ */
+export type CreateInstallationWriteOnUpdate = ClosedEnum<
+  typeof CreateInstallationWriteOnUpdate
+>;
+
+export type CreateInstallationFieldSetting = {
+  /**
+   * Only use one of stringValue, integerValue, booleanValue.
+   */
+  default?: CreateInstallationDefaultValueForAField | undefined;
+  /**
+   * Whether the default value should be applied when creating a record.
+   */
+  writeOnCreate?: CreateInstallationWriteOnCreate | undefined;
+  /**
+   * Whether the default value should be applied when updating a record.
+   */
+  writeOnUpdate?: CreateInstallationWriteOnUpdate | undefined;
+};
+
+export type CreateInstallationWriteConfigObject = {
+  /**
+   * The name of the object to write to.
+   */
+  objectName: string;
+  /**
+   * This is a map of field names to default values. These values will be used when writing to the object.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  selectedValueDefaults?: {
+    [k: string]:
+      | CreateInstallationValueDefaultLegacyValueDefaultString
+      | CreateInstallationValueDefaultLegacyValueDefaultInteger
+      | CreateInstallationValueDefaultLegacyValueDefaultBoolean;
+  } | undefined;
+  /**
+   * This is a map of field names to their settings.
+   */
+  selectedFieldSettings?:
+    | { [k: string]: CreateInstallationFieldSetting }
+    | undefined;
+};
+
+export type CreateInstallationWriteConfig = {
+  objects?: { [k: string]: CreateInstallationWriteConfigObject } | undefined;
 };
 
 export type CreateInstallationBaseProxyConfig = {
   enabled?: boolean | undefined;
+};
+
+/**
+ * Conditions to enable create events.
+ */
+export const CreateInstallationInstallationsResponseEnabled = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Conditions to enable create events.
+ */
+export type CreateInstallationInstallationsResponseEnabled = ClosedEnum<
+  typeof CreateInstallationInstallationsResponseEnabled
+>;
+
+export type CreateInstallationInstallationsCreateEvent = {
+  /**
+   * Conditions to enable create events.
+   */
+  enabled: CreateInstallationInstallationsResponseEnabled;
+};
+
+/**
+ * Conditions to enable update events.
+ */
+export const CreateInstallationInstallationsResponse201Enabled = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Conditions to enable update events.
+ */
+export type CreateInstallationInstallationsResponse201Enabled = ClosedEnum<
+  typeof CreateInstallationInstallationsResponse201Enabled
+>;
+
+/**
+ * Whether to watch fields all fields automatically.
+ */
+export const CreateInstallationInstallationsWatchFieldsAuto = {
+  All: "all",
+} as const;
+/**
+ * Whether to watch fields all fields automatically.
+ */
+export type CreateInstallationInstallationsWatchFieldsAuto = ClosedEnum<
+  typeof CreateInstallationInstallationsWatchFieldsAuto
+>;
+
+export type CreateInstallationInstallationsUpdateEvent = {
+  /**
+   * Conditions to enable update events.
+   */
+  enabled: CreateInstallationInstallationsResponse201Enabled;
+  /**
+   * Whether to watch fields all fields automatically.
+   */
+  watchFieldsAuto?: CreateInstallationInstallationsWatchFieldsAuto | undefined;
+  /**
+   * The fields that should be watched.
+   */
+  requiredWatchFields?: Array<string> | undefined;
+};
+
+/**
+ * Conditions to enable delete events.
+ */
+export const CreateInstallationInstallationsResponse201ApplicationJSONEnabled =
+  {
+    Always: "always",
+    Never: "never",
+  } as const;
+/**
+ * Conditions to enable delete events.
+ */
+export type CreateInstallationInstallationsResponse201ApplicationJSONEnabled =
+  ClosedEnum<
+    typeof CreateInstallationInstallationsResponse201ApplicationJSONEnabled
+  >;
+
+export type CreateInstallationInstallationsDeleteEvent = {
+  /**
+   * Conditions to enable delete events.
+   */
+  enabled: CreateInstallationInstallationsResponse201ApplicationJSONEnabled;
+};
+
+export type CreateInstallationSubscribeConfigObject = {
+  /**
+   * Whether to inherit fields and mappings from the read config.
+   */
+  inheritFieldsAndMappings: boolean;
+  /**
+   * The name of the object to subscribe to.
+   */
+  objectName: string;
+  /**
+   * The name of the destination that the result should be sent to.
+   */
+  destination: string;
+  createEvent?: CreateInstallationInstallationsCreateEvent | undefined;
+  updateEvent?: CreateInstallationInstallationsUpdateEvent | undefined;
+  deleteEvent?: CreateInstallationInstallationsDeleteEvent | undefined;
+};
+
+export type CreateInstallationSubscribeConfig = {
+  objects: { [k: string]: CreateInstallationSubscribeConfigObject };
 };
 
 export type CreateInstallationConfigContent = {
@@ -375,9 +1203,10 @@ export type CreateInstallationConfigContent = {
    * The SaaS API that we are integrating with.
    */
   provider: string;
-  read?: any | undefined;
-  write?: any | undefined;
+  read?: CreateInstallationReadConfig | undefined;
+  write?: CreateInstallationWriteConfig | undefined;
   proxy?: CreateInstallationBaseProxyConfig | undefined;
+  subscribe?: CreateInstallationSubscribeConfig | undefined;
 };
 
 export type CreateInstallationConfig = {
@@ -442,6 +1271,843 @@ export type CreateInstallationResponse =
   | CreateInstallationAPIProblem;
 
 /** @internal */
+export const SelectedFieldsAutoConfig$inboundSchema: z.ZodNativeEnum<
+  typeof SelectedFieldsAutoConfig
+> = z.nativeEnum(SelectedFieldsAutoConfig);
+
+/** @internal */
+export const SelectedFieldsAutoConfig$outboundSchema: z.ZodNativeEnum<
+  typeof SelectedFieldsAutoConfig
+> = SelectedFieldsAutoConfig$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SelectedFieldsAutoConfig$ {
+  /** @deprecated use `SelectedFieldsAutoConfig$inboundSchema` instead. */
+  export const inboundSchema = SelectedFieldsAutoConfig$inboundSchema;
+  /** @deprecated use `SelectedFieldsAutoConfig$outboundSchema` instead. */
+  export const outboundSchema = SelectedFieldsAutoConfig$outboundSchema;
+}
+
+/** @internal */
+export const DefaultPeriodConfig$inboundSchema: z.ZodType<
+  DefaultPeriodConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  days: z.number().int().optional(),
+  fullHistory: z.boolean().optional(),
+});
+
+/** @internal */
+export type DefaultPeriodConfig$Outbound = {
+  days?: number | undefined;
+  fullHistory?: boolean | undefined;
+};
+
+/** @internal */
+export const DefaultPeriodConfig$outboundSchema: z.ZodType<
+  DefaultPeriodConfig$Outbound,
+  z.ZodTypeDef,
+  DefaultPeriodConfig
+> = z.object({
+  days: z.number().int().optional(),
+  fullHistory: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DefaultPeriodConfig$ {
+  /** @deprecated use `DefaultPeriodConfig$inboundSchema` instead. */
+  export const inboundSchema = DefaultPeriodConfig$inboundSchema;
+  /** @deprecated use `DefaultPeriodConfig$outboundSchema` instead. */
+  export const outboundSchema = DefaultPeriodConfig$outboundSchema;
+  /** @deprecated use `DefaultPeriodConfig$Outbound` instead. */
+  export type Outbound = DefaultPeriodConfig$Outbound;
+}
+
+export function defaultPeriodConfigToJSON(
+  defaultPeriodConfig: DefaultPeriodConfig,
+): string {
+  return JSON.stringify(
+    DefaultPeriodConfig$outboundSchema.parse(defaultPeriodConfig),
+  );
+}
+
+export function defaultPeriodConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<DefaultPeriodConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DefaultPeriodConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DefaultPeriodConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const BackfillConfig$inboundSchema: z.ZodType<
+  BackfillConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  defaultPeriod: z.lazy(() => DefaultPeriodConfig$inboundSchema),
+});
+
+/** @internal */
+export type BackfillConfig$Outbound = {
+  defaultPeriod: DefaultPeriodConfig$Outbound;
+};
+
+/** @internal */
+export const BackfillConfig$outboundSchema: z.ZodType<
+  BackfillConfig$Outbound,
+  z.ZodTypeDef,
+  BackfillConfig
+> = z.object({
+  defaultPeriod: z.lazy(() => DefaultPeriodConfig$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BackfillConfig$ {
+  /** @deprecated use `BackfillConfig$inboundSchema` instead. */
+  export const inboundSchema = BackfillConfig$inboundSchema;
+  /** @deprecated use `BackfillConfig$outboundSchema` instead. */
+  export const outboundSchema = BackfillConfig$outboundSchema;
+  /** @deprecated use `BackfillConfig$Outbound` instead. */
+  export type Outbound = BackfillConfig$Outbound;
+}
+
+export function backfillConfigToJSON(backfillConfig: BackfillConfig): string {
+  return JSON.stringify(BackfillConfig$outboundSchema.parse(backfillConfig));
+}
+
+export function backfillConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<BackfillConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BackfillConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BackfillConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const ReadConfigObject$inboundSchema: z.ZodType<
+  ReadConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objectName: z.string(),
+  schedule: z.string(),
+  destination: z.string(),
+  selectedFields: z.record(z.boolean()),
+  selectedValueMappings: z.record(z.record(z.string())).optional(),
+  selectedFieldMappings: z.record(z.string()),
+  selectedFieldsAuto: SelectedFieldsAutoConfig$inboundSchema.optional(),
+  backfill: z.lazy(() => BackfillConfig$inboundSchema).optional(),
+});
+
+/** @internal */
+export type ReadConfigObject$Outbound = {
+  objectName: string;
+  schedule: string;
+  destination: string;
+  selectedFields: { [k: string]: boolean };
+  selectedValueMappings?: { [k: string]: { [k: string]: string } } | undefined;
+  selectedFieldMappings: { [k: string]: string };
+  selectedFieldsAuto?: string | undefined;
+  backfill?: BackfillConfig$Outbound | undefined;
+};
+
+/** @internal */
+export const ReadConfigObject$outboundSchema: z.ZodType<
+  ReadConfigObject$Outbound,
+  z.ZodTypeDef,
+  ReadConfigObject
+> = z.object({
+  objectName: z.string(),
+  schedule: z.string(),
+  destination: z.string(),
+  selectedFields: z.record(z.boolean()),
+  selectedValueMappings: z.record(z.record(z.string())).optional(),
+  selectedFieldMappings: z.record(z.string()),
+  selectedFieldsAuto: SelectedFieldsAutoConfig$outboundSchema.optional(),
+  backfill: z.lazy(() => BackfillConfig$outboundSchema).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ReadConfigObject$ {
+  /** @deprecated use `ReadConfigObject$inboundSchema` instead. */
+  export const inboundSchema = ReadConfigObject$inboundSchema;
+  /** @deprecated use `ReadConfigObject$outboundSchema` instead. */
+  export const outboundSchema = ReadConfigObject$outboundSchema;
+  /** @deprecated use `ReadConfigObject$Outbound` instead. */
+  export type Outbound = ReadConfigObject$Outbound;
+}
+
+export function readConfigObjectToJSON(
+  readConfigObject: ReadConfigObject,
+): string {
+  return JSON.stringify(
+    ReadConfigObject$outboundSchema.parse(readConfigObject),
+  );
+}
+
+export function readConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<ReadConfigObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ReadConfigObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ReadConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const ReadConfig$inboundSchema: z.ZodType<
+  ReadConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(z.lazy(() => ReadConfigObject$inboundSchema)),
+});
+
+/** @internal */
+export type ReadConfig$Outbound = {
+  objects: { [k: string]: ReadConfigObject$Outbound };
+};
+
+/** @internal */
+export const ReadConfig$outboundSchema: z.ZodType<
+  ReadConfig$Outbound,
+  z.ZodTypeDef,
+  ReadConfig
+> = z.object({
+  objects: z.record(z.lazy(() => ReadConfigObject$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ReadConfig$ {
+  /** @deprecated use `ReadConfig$inboundSchema` instead. */
+  export const inboundSchema = ReadConfig$inboundSchema;
+  /** @deprecated use `ReadConfig$outboundSchema` instead. */
+  export const outboundSchema = ReadConfig$outboundSchema;
+  /** @deprecated use `ReadConfig$Outbound` instead. */
+  export type Outbound = ReadConfig$Outbound;
+}
+
+export function readConfigToJSON(readConfig: ReadConfig): string {
+  return JSON.stringify(ReadConfig$outboundSchema.parse(readConfig));
+}
+
+export function readConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<ReadConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ReadConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ReadConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyApplyOnUpdate$inboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationValueDefaultLegacyApplyOnUpdate> = z
+    .nativeEnum(CreateInstallationValueDefaultLegacyApplyOnUpdate);
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyApplyOnUpdate$outboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationValueDefaultLegacyApplyOnUpdate> =
+    CreateInstallationValueDefaultLegacyApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationValueDefaultLegacyApplyOnUpdate$ {
+  /** @deprecated use `CreateInstallationValueDefaultLegacyApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationValueDefaultLegacyApplyOnUpdate$inboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationValueDefaultLegacyApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const ValueDefaultBoolean$inboundSchema: z.ZodType<
+  ValueDefaultBoolean,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.boolean(),
+  applyOnUpdate: CreateInstallationValueDefaultLegacyApplyOnUpdate$inboundSchema
+    .optional(),
+});
+
+/** @internal */
+export type ValueDefaultBoolean$Outbound = {
+  value: boolean;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const ValueDefaultBoolean$outboundSchema: z.ZodType<
+  ValueDefaultBoolean$Outbound,
+  z.ZodTypeDef,
+  ValueDefaultBoolean
+> = z.object({
+  value: z.boolean(),
+  applyOnUpdate:
+    CreateInstallationValueDefaultLegacyApplyOnUpdate$outboundSchema.optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ValueDefaultBoolean$ {
+  /** @deprecated use `ValueDefaultBoolean$inboundSchema` instead. */
+  export const inboundSchema = ValueDefaultBoolean$inboundSchema;
+  /** @deprecated use `ValueDefaultBoolean$outboundSchema` instead. */
+  export const outboundSchema = ValueDefaultBoolean$outboundSchema;
+  /** @deprecated use `ValueDefaultBoolean$Outbound` instead. */
+  export type Outbound = ValueDefaultBoolean$Outbound;
+}
+
+export function valueDefaultBooleanToJSON(
+  valueDefaultBoolean: ValueDefaultBoolean,
+): string {
+  return JSON.stringify(
+    ValueDefaultBoolean$outboundSchema.parse(valueDefaultBoolean),
+  );
+}
+
+export function valueDefaultBooleanFromJSON(
+  jsonString: string,
+): SafeParseResult<ValueDefaultBoolean, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ValueDefaultBoolean$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ValueDefaultBoolean' from JSON`,
+  );
+}
+
+/** @internal */
+export const ValueDefaultLegacyApplyOnUpdate$inboundSchema: z.ZodNativeEnum<
+  typeof ValueDefaultLegacyApplyOnUpdate
+> = z.nativeEnum(ValueDefaultLegacyApplyOnUpdate);
+
+/** @internal */
+export const ValueDefaultLegacyApplyOnUpdate$outboundSchema: z.ZodNativeEnum<
+  typeof ValueDefaultLegacyApplyOnUpdate
+> = ValueDefaultLegacyApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ValueDefaultLegacyApplyOnUpdate$ {
+  /** @deprecated use `ValueDefaultLegacyApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema = ValueDefaultLegacyApplyOnUpdate$inboundSchema;
+  /** @deprecated use `ValueDefaultLegacyApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema = ValueDefaultLegacyApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const ValueDefaultInteger$inboundSchema: z.ZodType<
+  ValueDefaultInteger,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.number().int(),
+  applyOnUpdate: ValueDefaultLegacyApplyOnUpdate$inboundSchema.optional(),
+});
+
+/** @internal */
+export type ValueDefaultInteger$Outbound = {
+  value: number;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const ValueDefaultInteger$outboundSchema: z.ZodType<
+  ValueDefaultInteger$Outbound,
+  z.ZodTypeDef,
+  ValueDefaultInteger
+> = z.object({
+  value: z.number().int(),
+  applyOnUpdate: ValueDefaultLegacyApplyOnUpdate$outboundSchema.optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ValueDefaultInteger$ {
+  /** @deprecated use `ValueDefaultInteger$inboundSchema` instead. */
+  export const inboundSchema = ValueDefaultInteger$inboundSchema;
+  /** @deprecated use `ValueDefaultInteger$outboundSchema` instead. */
+  export const outboundSchema = ValueDefaultInteger$outboundSchema;
+  /** @deprecated use `ValueDefaultInteger$Outbound` instead. */
+  export type Outbound = ValueDefaultInteger$Outbound;
+}
+
+export function valueDefaultIntegerToJSON(
+  valueDefaultInteger: ValueDefaultInteger,
+): string {
+  return JSON.stringify(
+    ValueDefaultInteger$outboundSchema.parse(valueDefaultInteger),
+  );
+}
+
+export function valueDefaultIntegerFromJSON(
+  jsonString: string,
+): SafeParseResult<ValueDefaultInteger, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ValueDefaultInteger$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ValueDefaultInteger' from JSON`,
+  );
+}
+
+/** @internal */
+export const ApplyOnUpdate$inboundSchema: z.ZodNativeEnum<
+  typeof ApplyOnUpdate
+> = z.nativeEnum(ApplyOnUpdate);
+
+/** @internal */
+export const ApplyOnUpdate$outboundSchema: z.ZodNativeEnum<
+  typeof ApplyOnUpdate
+> = ApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ApplyOnUpdate$ {
+  /** @deprecated use `ApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema = ApplyOnUpdate$inboundSchema;
+  /** @deprecated use `ApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema = ApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const ValueDefaultString$inboundSchema: z.ZodType<
+  ValueDefaultString,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  applyOnUpdate: ApplyOnUpdate$inboundSchema.optional(),
+});
+
+/** @internal */
+export type ValueDefaultString$Outbound = {
+  value: string;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const ValueDefaultString$outboundSchema: z.ZodType<
+  ValueDefaultString$Outbound,
+  z.ZodTypeDef,
+  ValueDefaultString
+> = z.object({
+  value: z.string(),
+  applyOnUpdate: ApplyOnUpdate$outboundSchema.optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ValueDefaultString$ {
+  /** @deprecated use `ValueDefaultString$inboundSchema` instead. */
+  export const inboundSchema = ValueDefaultString$inboundSchema;
+  /** @deprecated use `ValueDefaultString$outboundSchema` instead. */
+  export const outboundSchema = ValueDefaultString$outboundSchema;
+  /** @deprecated use `ValueDefaultString$Outbound` instead. */
+  export type Outbound = ValueDefaultString$Outbound;
+}
+
+export function valueDefaultStringToJSON(
+  valueDefaultString: ValueDefaultString,
+): string {
+  return JSON.stringify(
+    ValueDefaultString$outboundSchema.parse(valueDefaultString),
+  );
+}
+
+export function valueDefaultStringFromJSON(
+  jsonString: string,
+): SafeParseResult<ValueDefaultString, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ValueDefaultString$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ValueDefaultString' from JSON`,
+  );
+}
+
+/** @internal */
+export const ValueDefaultLegacy$inboundSchema: z.ZodType<
+  ValueDefaultLegacy,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ValueDefaultString$inboundSchema),
+  z.lazy(() => ValueDefaultInteger$inboundSchema),
+  z.lazy(() => ValueDefaultBoolean$inboundSchema),
+]);
+
+/** @internal */
+export type ValueDefaultLegacy$Outbound =
+  | ValueDefaultString$Outbound
+  | ValueDefaultInteger$Outbound
+  | ValueDefaultBoolean$Outbound;
+
+/** @internal */
+export const ValueDefaultLegacy$outboundSchema: z.ZodType<
+  ValueDefaultLegacy$Outbound,
+  z.ZodTypeDef,
+  ValueDefaultLegacy
+> = z.union([
+  z.lazy(() => ValueDefaultString$outboundSchema),
+  z.lazy(() => ValueDefaultInteger$outboundSchema),
+  z.lazy(() => ValueDefaultBoolean$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ValueDefaultLegacy$ {
+  /** @deprecated use `ValueDefaultLegacy$inboundSchema` instead. */
+  export const inboundSchema = ValueDefaultLegacy$inboundSchema;
+  /** @deprecated use `ValueDefaultLegacy$outboundSchema` instead. */
+  export const outboundSchema = ValueDefaultLegacy$outboundSchema;
+  /** @deprecated use `ValueDefaultLegacy$Outbound` instead. */
+  export type Outbound = ValueDefaultLegacy$Outbound;
+}
+
+export function valueDefaultLegacyToJSON(
+  valueDefaultLegacy: ValueDefaultLegacy,
+): string {
+  return JSON.stringify(
+    ValueDefaultLegacy$outboundSchema.parse(valueDefaultLegacy),
+  );
+}
+
+export function valueDefaultLegacyFromJSON(
+  jsonString: string,
+): SafeParseResult<ValueDefaultLegacy, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ValueDefaultLegacy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ValueDefaultLegacy' from JSON`,
+  );
+}
+
+/** @internal */
+export const DefaultValueForAField$inboundSchema: z.ZodType<
+  DefaultValueForAField,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  stringValue: z.string().optional(),
+  integerValue: z.number().int().optional(),
+  booleanValue: z.boolean().optional(),
+});
+
+/** @internal */
+export type DefaultValueForAField$Outbound = {
+  stringValue?: string | undefined;
+  integerValue?: number | undefined;
+  booleanValue?: boolean | undefined;
+};
+
+/** @internal */
+export const DefaultValueForAField$outboundSchema: z.ZodType<
+  DefaultValueForAField$Outbound,
+  z.ZodTypeDef,
+  DefaultValueForAField
+> = z.object({
+  stringValue: z.string().optional(),
+  integerValue: z.number().int().optional(),
+  booleanValue: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DefaultValueForAField$ {
+  /** @deprecated use `DefaultValueForAField$inboundSchema` instead. */
+  export const inboundSchema = DefaultValueForAField$inboundSchema;
+  /** @deprecated use `DefaultValueForAField$outboundSchema` instead. */
+  export const outboundSchema = DefaultValueForAField$outboundSchema;
+  /** @deprecated use `DefaultValueForAField$Outbound` instead. */
+  export type Outbound = DefaultValueForAField$Outbound;
+}
+
+export function defaultValueForAFieldToJSON(
+  defaultValueForAField: DefaultValueForAField,
+): string {
+  return JSON.stringify(
+    DefaultValueForAField$outboundSchema.parse(defaultValueForAField),
+  );
+}
+
+export function defaultValueForAFieldFromJSON(
+  jsonString: string,
+): SafeParseResult<DefaultValueForAField, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DefaultValueForAField$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DefaultValueForAField' from JSON`,
+  );
+}
+
+/** @internal */
+export const WriteOnCreate$inboundSchema: z.ZodNativeEnum<
+  typeof WriteOnCreate
+> = z.nativeEnum(WriteOnCreate);
+
+/** @internal */
+export const WriteOnCreate$outboundSchema: z.ZodNativeEnum<
+  typeof WriteOnCreate
+> = WriteOnCreate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WriteOnCreate$ {
+  /** @deprecated use `WriteOnCreate$inboundSchema` instead. */
+  export const inboundSchema = WriteOnCreate$inboundSchema;
+  /** @deprecated use `WriteOnCreate$outboundSchema` instead. */
+  export const outboundSchema = WriteOnCreate$outboundSchema;
+}
+
+/** @internal */
+export const WriteOnUpdate$inboundSchema: z.ZodNativeEnum<
+  typeof WriteOnUpdate
+> = z.nativeEnum(WriteOnUpdate);
+
+/** @internal */
+export const WriteOnUpdate$outboundSchema: z.ZodNativeEnum<
+  typeof WriteOnUpdate
+> = WriteOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WriteOnUpdate$ {
+  /** @deprecated use `WriteOnUpdate$inboundSchema` instead. */
+  export const inboundSchema = WriteOnUpdate$inboundSchema;
+  /** @deprecated use `WriteOnUpdate$outboundSchema` instead. */
+  export const outboundSchema = WriteOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const FieldSetting$inboundSchema: z.ZodType<
+  FieldSetting,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  default: z.lazy(() => DefaultValueForAField$inboundSchema).optional(),
+  writeOnCreate: WriteOnCreate$inboundSchema.default("always"),
+  writeOnUpdate: WriteOnUpdate$inboundSchema.default("always"),
+});
+
+/** @internal */
+export type FieldSetting$Outbound = {
+  default?: DefaultValueForAField$Outbound | undefined;
+  writeOnCreate: string;
+  writeOnUpdate: string;
+};
+
+/** @internal */
+export const FieldSetting$outboundSchema: z.ZodType<
+  FieldSetting$Outbound,
+  z.ZodTypeDef,
+  FieldSetting
+> = z.object({
+  default: z.lazy(() => DefaultValueForAField$outboundSchema).optional(),
+  writeOnCreate: WriteOnCreate$outboundSchema.default("always"),
+  writeOnUpdate: WriteOnUpdate$outboundSchema.default("always"),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FieldSetting$ {
+  /** @deprecated use `FieldSetting$inboundSchema` instead. */
+  export const inboundSchema = FieldSetting$inboundSchema;
+  /** @deprecated use `FieldSetting$outboundSchema` instead. */
+  export const outboundSchema = FieldSetting$outboundSchema;
+  /** @deprecated use `FieldSetting$Outbound` instead. */
+  export type Outbound = FieldSetting$Outbound;
+}
+
+export function fieldSettingToJSON(fieldSetting: FieldSetting): string {
+  return JSON.stringify(FieldSetting$outboundSchema.parse(fieldSetting));
+}
+
+export function fieldSettingFromJSON(
+  jsonString: string,
+): SafeParseResult<FieldSetting, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FieldSetting$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FieldSetting' from JSON`,
+  );
+}
+
+/** @internal */
+export const WriteConfigObject$inboundSchema: z.ZodType<
+  WriteConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objectName: z.string(),
+  selectedValueDefaults: z.record(
+    z.union([
+      z.lazy(() => ValueDefaultString$inboundSchema),
+      z.lazy(() => ValueDefaultInteger$inboundSchema),
+      z.lazy(() => ValueDefaultBoolean$inboundSchema),
+    ]),
+  ).optional(),
+  selectedFieldSettings: z.record(z.lazy(() => FieldSetting$inboundSchema))
+    .optional(),
+});
+
+/** @internal */
+export type WriteConfigObject$Outbound = {
+  objectName: string;
+  selectedValueDefaults?: {
+    [k: string]:
+      | ValueDefaultString$Outbound
+      | ValueDefaultInteger$Outbound
+      | ValueDefaultBoolean$Outbound;
+  } | undefined;
+  selectedFieldSettings?: { [k: string]: FieldSetting$Outbound } | undefined;
+};
+
+/** @internal */
+export const WriteConfigObject$outboundSchema: z.ZodType<
+  WriteConfigObject$Outbound,
+  z.ZodTypeDef,
+  WriteConfigObject
+> = z.object({
+  objectName: z.string(),
+  selectedValueDefaults: z.record(
+    z.union([
+      z.lazy(() => ValueDefaultString$outboundSchema),
+      z.lazy(() => ValueDefaultInteger$outboundSchema),
+      z.lazy(() => ValueDefaultBoolean$outboundSchema),
+    ]),
+  ).optional(),
+  selectedFieldSettings: z.record(z.lazy(() => FieldSetting$outboundSchema))
+    .optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WriteConfigObject$ {
+  /** @deprecated use `WriteConfigObject$inboundSchema` instead. */
+  export const inboundSchema = WriteConfigObject$inboundSchema;
+  /** @deprecated use `WriteConfigObject$outboundSchema` instead. */
+  export const outboundSchema = WriteConfigObject$outboundSchema;
+  /** @deprecated use `WriteConfigObject$Outbound` instead. */
+  export type Outbound = WriteConfigObject$Outbound;
+}
+
+export function writeConfigObjectToJSON(
+  writeConfigObject: WriteConfigObject,
+): string {
+  return JSON.stringify(
+    WriteConfigObject$outboundSchema.parse(writeConfigObject),
+  );
+}
+
+export function writeConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<WriteConfigObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WriteConfigObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WriteConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const WriteConfig$inboundSchema: z.ZodType<
+  WriteConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(z.lazy(() => WriteConfigObject$inboundSchema)).optional(),
+});
+
+/** @internal */
+export type WriteConfig$Outbound = {
+  objects?: { [k: string]: WriteConfigObject$Outbound } | undefined;
+};
+
+/** @internal */
+export const WriteConfig$outboundSchema: z.ZodType<
+  WriteConfig$Outbound,
+  z.ZodTypeDef,
+  WriteConfig
+> = z.object({
+  objects: z.record(z.lazy(() => WriteConfigObject$outboundSchema)).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WriteConfig$ {
+  /** @deprecated use `WriteConfig$inboundSchema` instead. */
+  export const inboundSchema = WriteConfig$inboundSchema;
+  /** @deprecated use `WriteConfig$outboundSchema` instead. */
+  export const outboundSchema = WriteConfig$outboundSchema;
+  /** @deprecated use `WriteConfig$Outbound` instead. */
+  export type Outbound = WriteConfig$Outbound;
+}
+
+export function writeConfigToJSON(writeConfig: WriteConfig): string {
+  return JSON.stringify(WriteConfig$outboundSchema.parse(writeConfig));
+}
+
+export function writeConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<WriteConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WriteConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WriteConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const BaseProxyConfig$inboundSchema: z.ZodType<
   BaseProxyConfig,
   z.ZodTypeDef,
@@ -494,23 +2160,416 @@ export function baseProxyConfigFromJSON(
 }
 
 /** @internal */
+export const CreateInstallationEnabled$inboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationEnabled
+> = z.nativeEnum(CreateInstallationEnabled);
+
+/** @internal */
+export const CreateInstallationEnabled$outboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationEnabled
+> = CreateInstallationEnabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationEnabled$ {
+  /** @deprecated use `CreateInstallationEnabled$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationEnabled$inboundSchema;
+  /** @deprecated use `CreateInstallationEnabled$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationEnabled$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationCreateEvent$inboundSchema: z.ZodType<
+  CreateInstallationCreateEvent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: CreateInstallationEnabled$inboundSchema,
+});
+
+/** @internal */
+export type CreateInstallationCreateEvent$Outbound = {
+  enabled: string;
+};
+
+/** @internal */
+export const CreateInstallationCreateEvent$outboundSchema: z.ZodType<
+  CreateInstallationCreateEvent$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationCreateEvent
+> = z.object({
+  enabled: CreateInstallationEnabled$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationCreateEvent$ {
+  /** @deprecated use `CreateInstallationCreateEvent$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationCreateEvent$inboundSchema;
+  /** @deprecated use `CreateInstallationCreateEvent$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationCreateEvent$outboundSchema;
+  /** @deprecated use `CreateInstallationCreateEvent$Outbound` instead. */
+  export type Outbound = CreateInstallationCreateEvent$Outbound;
+}
+
+export function createInstallationCreateEventToJSON(
+  createInstallationCreateEvent: CreateInstallationCreateEvent,
+): string {
+  return JSON.stringify(
+    CreateInstallationCreateEvent$outboundSchema.parse(
+      createInstallationCreateEvent,
+    ),
+  );
+}
+
+export function createInstallationCreateEventFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationCreateEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateInstallationCreateEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationCreateEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationInstallationsEnabled$inboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsEnabled> = z.nativeEnum(
+    CreateInstallationInstallationsEnabled,
+  );
+
+/** @internal */
+export const CreateInstallationInstallationsEnabled$outboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsEnabled> =
+    CreateInstallationInstallationsEnabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsEnabled$ {
+  /** @deprecated use `CreateInstallationInstallationsEnabled$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsEnabled$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsEnabled$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsEnabled$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationWatchFieldsAuto$inboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationWatchFieldsAuto
+> = z.nativeEnum(CreateInstallationWatchFieldsAuto);
+
+/** @internal */
+export const CreateInstallationWatchFieldsAuto$outboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationWatchFieldsAuto
+> = CreateInstallationWatchFieldsAuto$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationWatchFieldsAuto$ {
+  /** @deprecated use `CreateInstallationWatchFieldsAuto$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationWatchFieldsAuto$inboundSchema;
+  /** @deprecated use `CreateInstallationWatchFieldsAuto$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationWatchFieldsAuto$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationUpdateEvent$inboundSchema: z.ZodType<
+  CreateInstallationUpdateEvent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: CreateInstallationInstallationsEnabled$inboundSchema,
+  watchFieldsAuto: CreateInstallationWatchFieldsAuto$inboundSchema.optional(),
+  requiredWatchFields: z.array(z.string()).optional(),
+});
+
+/** @internal */
+export type CreateInstallationUpdateEvent$Outbound = {
+  enabled: string;
+  watchFieldsAuto?: string | undefined;
+  requiredWatchFields?: Array<string> | undefined;
+};
+
+/** @internal */
+export const CreateInstallationUpdateEvent$outboundSchema: z.ZodType<
+  CreateInstallationUpdateEvent$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationUpdateEvent
+> = z.object({
+  enabled: CreateInstallationInstallationsEnabled$outboundSchema,
+  watchFieldsAuto: CreateInstallationWatchFieldsAuto$outboundSchema.optional(),
+  requiredWatchFields: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationUpdateEvent$ {
+  /** @deprecated use `CreateInstallationUpdateEvent$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationUpdateEvent$inboundSchema;
+  /** @deprecated use `CreateInstallationUpdateEvent$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationUpdateEvent$outboundSchema;
+  /** @deprecated use `CreateInstallationUpdateEvent$Outbound` instead. */
+  export type Outbound = CreateInstallationUpdateEvent$Outbound;
+}
+
+export function createInstallationUpdateEventToJSON(
+  createInstallationUpdateEvent: CreateInstallationUpdateEvent,
+): string {
+  return JSON.stringify(
+    CreateInstallationUpdateEvent$outboundSchema.parse(
+      createInstallationUpdateEvent,
+    ),
+  );
+}
+
+export function createInstallationUpdateEventFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationUpdateEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateInstallationUpdateEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationUpdateEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationInstallationsRequestEnabled$inboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsRequestEnabled> = z
+    .nativeEnum(CreateInstallationInstallationsRequestEnabled);
+
+/** @internal */
+export const CreateInstallationInstallationsRequestEnabled$outboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsRequestEnabled> =
+    CreateInstallationInstallationsRequestEnabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsRequestEnabled$ {
+  /** @deprecated use `CreateInstallationInstallationsRequestEnabled$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsRequestEnabled$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsRequestEnabled$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsRequestEnabled$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationDeleteEvent$inboundSchema: z.ZodType<
+  CreateInstallationDeleteEvent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: CreateInstallationInstallationsRequestEnabled$inboundSchema,
+});
+
+/** @internal */
+export type CreateInstallationDeleteEvent$Outbound = {
+  enabled: string;
+};
+
+/** @internal */
+export const CreateInstallationDeleteEvent$outboundSchema: z.ZodType<
+  CreateInstallationDeleteEvent$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationDeleteEvent
+> = z.object({
+  enabled: CreateInstallationInstallationsRequestEnabled$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationDeleteEvent$ {
+  /** @deprecated use `CreateInstallationDeleteEvent$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationDeleteEvent$inboundSchema;
+  /** @deprecated use `CreateInstallationDeleteEvent$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationDeleteEvent$outboundSchema;
+  /** @deprecated use `CreateInstallationDeleteEvent$Outbound` instead. */
+  export type Outbound = CreateInstallationDeleteEvent$Outbound;
+}
+
+export function createInstallationDeleteEventToJSON(
+  createInstallationDeleteEvent: CreateInstallationDeleteEvent,
+): string {
+  return JSON.stringify(
+    CreateInstallationDeleteEvent$outboundSchema.parse(
+      createInstallationDeleteEvent,
+    ),
+  );
+}
+
+export function createInstallationDeleteEventFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationDeleteEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateInstallationDeleteEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationDeleteEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const SubscribeConfigObject$inboundSchema: z.ZodType<
+  SubscribeConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  inheritFieldsAndMappings: z.boolean(),
+  objectName: z.string(),
+  destination: z.string(),
+  createEvent: z.lazy(() => CreateInstallationCreateEvent$inboundSchema)
+    .optional(),
+  updateEvent: z.lazy(() => CreateInstallationUpdateEvent$inboundSchema)
+    .optional(),
+  deleteEvent: z.lazy(() => CreateInstallationDeleteEvent$inboundSchema)
+    .optional(),
+});
+
+/** @internal */
+export type SubscribeConfigObject$Outbound = {
+  inheritFieldsAndMappings: boolean;
+  objectName: string;
+  destination: string;
+  createEvent?: CreateInstallationCreateEvent$Outbound | undefined;
+  updateEvent?: CreateInstallationUpdateEvent$Outbound | undefined;
+  deleteEvent?: CreateInstallationDeleteEvent$Outbound | undefined;
+};
+
+/** @internal */
+export const SubscribeConfigObject$outboundSchema: z.ZodType<
+  SubscribeConfigObject$Outbound,
+  z.ZodTypeDef,
+  SubscribeConfigObject
+> = z.object({
+  inheritFieldsAndMappings: z.boolean(),
+  objectName: z.string(),
+  destination: z.string(),
+  createEvent: z.lazy(() => CreateInstallationCreateEvent$outboundSchema)
+    .optional(),
+  updateEvent: z.lazy(() => CreateInstallationUpdateEvent$outboundSchema)
+    .optional(),
+  deleteEvent: z.lazy(() => CreateInstallationDeleteEvent$outboundSchema)
+    .optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SubscribeConfigObject$ {
+  /** @deprecated use `SubscribeConfigObject$inboundSchema` instead. */
+  export const inboundSchema = SubscribeConfigObject$inboundSchema;
+  /** @deprecated use `SubscribeConfigObject$outboundSchema` instead. */
+  export const outboundSchema = SubscribeConfigObject$outboundSchema;
+  /** @deprecated use `SubscribeConfigObject$Outbound` instead. */
+  export type Outbound = SubscribeConfigObject$Outbound;
+}
+
+export function subscribeConfigObjectToJSON(
+  subscribeConfigObject: SubscribeConfigObject,
+): string {
+  return JSON.stringify(
+    SubscribeConfigObject$outboundSchema.parse(subscribeConfigObject),
+  );
+}
+
+export function subscribeConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<SubscribeConfigObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SubscribeConfigObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SubscribeConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const SubscribeConfig$inboundSchema: z.ZodType<
+  SubscribeConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(z.lazy(() => SubscribeConfigObject$inboundSchema)),
+});
+
+/** @internal */
+export type SubscribeConfig$Outbound = {
+  objects: { [k: string]: SubscribeConfigObject$Outbound };
+};
+
+/** @internal */
+export const SubscribeConfig$outboundSchema: z.ZodType<
+  SubscribeConfig$Outbound,
+  z.ZodTypeDef,
+  SubscribeConfig
+> = z.object({
+  objects: z.record(z.lazy(() => SubscribeConfigObject$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SubscribeConfig$ {
+  /** @deprecated use `SubscribeConfig$inboundSchema` instead. */
+  export const inboundSchema = SubscribeConfig$inboundSchema;
+  /** @deprecated use `SubscribeConfig$outboundSchema` instead. */
+  export const outboundSchema = SubscribeConfig$outboundSchema;
+  /** @deprecated use `SubscribeConfig$Outbound` instead. */
+  export type Outbound = SubscribeConfig$Outbound;
+}
+
+export function subscribeConfigToJSON(
+  subscribeConfig: SubscribeConfig,
+): string {
+  return JSON.stringify(SubscribeConfig$outboundSchema.parse(subscribeConfig));
+}
+
+export function subscribeConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<SubscribeConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SubscribeConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SubscribeConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const ConfigContent$inboundSchema: z.ZodType<
   ConfigContent,
   z.ZodTypeDef,
   unknown
 > = z.object({
   provider: z.string(),
-  read: z.any().optional(),
-  write: z.any().optional(),
+  read: z.lazy(() => ReadConfig$inboundSchema).optional(),
+  write: z.lazy(() => WriteConfig$inboundSchema).optional(),
   proxy: z.lazy(() => BaseProxyConfig$inboundSchema).optional(),
+  subscribe: z.lazy(() => SubscribeConfig$inboundSchema).optional(),
 });
 
 /** @internal */
 export type ConfigContent$Outbound = {
   provider: string;
-  read?: any | undefined;
-  write?: any | undefined;
+  read?: ReadConfig$Outbound | undefined;
+  write?: WriteConfig$Outbound | undefined;
   proxy?: BaseProxyConfig$Outbound | undefined;
+  subscribe?: SubscribeConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -520,9 +2579,10 @@ export const ConfigContent$outboundSchema: z.ZodType<
   ConfigContent
 > = z.object({
   provider: z.string(),
-  read: z.any().optional(),
-  write: z.any().optional(),
+  read: z.lazy(() => ReadConfig$outboundSchema).optional(),
+  write: z.lazy(() => WriteConfig$outboundSchema).optional(),
   proxy: z.lazy(() => BaseProxyConfig$outboundSchema).optional(),
+  subscribe: z.lazy(() => SubscribeConfig$outboundSchema).optional(),
 });
 
 /**
@@ -1374,6 +3434,93 @@ export function createInstallationOAuth2AuthorizationCodeTokenFromJSON(
 }
 
 /** @internal */
+export const CreateInstallationSource$inboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationSource
+> = z.nativeEnum(CreateInstallationSource);
+
+/** @internal */
+export const CreateInstallationSource$outboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationSource
+> = CreateInstallationSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationSource$ {
+  /** @deprecated use `CreateInstallationSource$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationSource$inboundSchema;
+  /** @deprecated use `CreateInstallationSource$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationSource$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationProviderMetadataInfo$inboundSchema: z.ZodType<
+  CreateInstallationProviderMetadataInfo,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  source: CreateInstallationSource$inboundSchema,
+  displayName: z.string().optional(),
+});
+
+/** @internal */
+export type CreateInstallationProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const CreateInstallationProviderMetadataInfo$outboundSchema: z.ZodType<
+  CreateInstallationProviderMetadataInfo$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationProviderMetadataInfo
+> = z.object({
+  value: z.string(),
+  source: CreateInstallationSource$outboundSchema,
+  displayName: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationProviderMetadataInfo$ {
+  /** @deprecated use `CreateInstallationProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `CreateInstallationProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `CreateInstallationProviderMetadataInfo$Outbound` instead. */
+  export type Outbound = CreateInstallationProviderMetadataInfo$Outbound;
+}
+
+export function createInstallationProviderMetadataInfoToJSON(
+  createInstallationProviderMetadataInfo:
+    CreateInstallationProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    CreateInstallationProviderMetadataInfo$outboundSchema.parse(
+      createInstallationProviderMetadataInfo,
+    ),
+  );
+}
+
+export function createInstallationProviderMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationProviderMetadataInfo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationProviderMetadataInfo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationProviderMetadataInfo' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateInstallationConnection$inboundSchema: z.ZodType<
   CreateInstallationConnection,
   z.ZodTypeDef,
@@ -1397,6 +3544,9 @@ export const CreateInstallationConnection$inboundSchema: z.ZodType<
     CreateInstallationOAuth2AuthorizationCodeToken$inboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => CreateInstallationProviderMetadataInfo$inboundSchema),
+  ).optional(),
 });
 
 /** @internal */
@@ -1417,6 +3567,9 @@ export type CreateInstallationConnection$Outbound = {
     | CreateInstallationOAuth2AuthorizationCodeToken$Outbound
     | undefined;
   apiKey?: string | undefined;
+  providerMetadata?: {
+    [k: string]: CreateInstallationProviderMetadataInfo$Outbound;
+  } | undefined;
 };
 
 /** @internal */
@@ -1442,6 +3595,9 @@ export const CreateInstallationConnection$outboundSchema: z.ZodType<
     CreateInstallationOAuth2AuthorizationCodeToken$outboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => CreateInstallationProviderMetadataInfo$outboundSchema),
+  ).optional(),
 });
 
 /**
@@ -1474,6 +3630,1021 @@ export function createInstallationConnectionFromJSON(
     jsonString,
     (x) => CreateInstallationConnection$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateInstallationConnection' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationSelectedFieldsAutoConfig$inboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationSelectedFieldsAutoConfig> = z
+    .nativeEnum(CreateInstallationSelectedFieldsAutoConfig);
+
+/** @internal */
+export const CreateInstallationSelectedFieldsAutoConfig$outboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationSelectedFieldsAutoConfig> =
+    CreateInstallationSelectedFieldsAutoConfig$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationSelectedFieldsAutoConfig$ {
+  /** @deprecated use `CreateInstallationSelectedFieldsAutoConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationSelectedFieldsAutoConfig$inboundSchema;
+  /** @deprecated use `CreateInstallationSelectedFieldsAutoConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationSelectedFieldsAutoConfig$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationDefaultPeriodConfig$inboundSchema: z.ZodType<
+  CreateInstallationDefaultPeriodConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  days: z.number().int().optional(),
+  fullHistory: z.boolean().optional(),
+});
+
+/** @internal */
+export type CreateInstallationDefaultPeriodConfig$Outbound = {
+  days?: number | undefined;
+  fullHistory?: boolean | undefined;
+};
+
+/** @internal */
+export const CreateInstallationDefaultPeriodConfig$outboundSchema: z.ZodType<
+  CreateInstallationDefaultPeriodConfig$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationDefaultPeriodConfig
+> = z.object({
+  days: z.number().int().optional(),
+  fullHistory: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationDefaultPeriodConfig$ {
+  /** @deprecated use `CreateInstallationDefaultPeriodConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationDefaultPeriodConfig$inboundSchema;
+  /** @deprecated use `CreateInstallationDefaultPeriodConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationDefaultPeriodConfig$outboundSchema;
+  /** @deprecated use `CreateInstallationDefaultPeriodConfig$Outbound` instead. */
+  export type Outbound = CreateInstallationDefaultPeriodConfig$Outbound;
+}
+
+export function createInstallationDefaultPeriodConfigToJSON(
+  createInstallationDefaultPeriodConfig: CreateInstallationDefaultPeriodConfig,
+): string {
+  return JSON.stringify(
+    CreateInstallationDefaultPeriodConfig$outboundSchema.parse(
+      createInstallationDefaultPeriodConfig,
+    ),
+  );
+}
+
+export function createInstallationDefaultPeriodConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationDefaultPeriodConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationDefaultPeriodConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationDefaultPeriodConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationBackfillConfig$inboundSchema: z.ZodType<
+  CreateInstallationBackfillConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  defaultPeriod: z.lazy(() =>
+    CreateInstallationDefaultPeriodConfig$inboundSchema
+  ),
+});
+
+/** @internal */
+export type CreateInstallationBackfillConfig$Outbound = {
+  defaultPeriod: CreateInstallationDefaultPeriodConfig$Outbound;
+};
+
+/** @internal */
+export const CreateInstallationBackfillConfig$outboundSchema: z.ZodType<
+  CreateInstallationBackfillConfig$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationBackfillConfig
+> = z.object({
+  defaultPeriod: z.lazy(() =>
+    CreateInstallationDefaultPeriodConfig$outboundSchema
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationBackfillConfig$ {
+  /** @deprecated use `CreateInstallationBackfillConfig$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationBackfillConfig$inboundSchema;
+  /** @deprecated use `CreateInstallationBackfillConfig$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationBackfillConfig$outboundSchema;
+  /** @deprecated use `CreateInstallationBackfillConfig$Outbound` instead. */
+  export type Outbound = CreateInstallationBackfillConfig$Outbound;
+}
+
+export function createInstallationBackfillConfigToJSON(
+  createInstallationBackfillConfig: CreateInstallationBackfillConfig,
+): string {
+  return JSON.stringify(
+    CreateInstallationBackfillConfig$outboundSchema.parse(
+      createInstallationBackfillConfig,
+    ),
+  );
+}
+
+export function createInstallationBackfillConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationBackfillConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateInstallationBackfillConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationBackfillConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationReadConfigObject$inboundSchema: z.ZodType<
+  CreateInstallationReadConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objectName: z.string(),
+  schedule: z.string(),
+  destination: z.string(),
+  selectedFields: z.record(z.boolean()),
+  selectedValueMappings: z.record(z.record(z.string())).optional(),
+  selectedFieldMappings: z.record(z.string()),
+  selectedFieldsAuto: CreateInstallationSelectedFieldsAutoConfig$inboundSchema
+    .optional(),
+  backfill: z.lazy(() => CreateInstallationBackfillConfig$inboundSchema)
+    .optional(),
+});
+
+/** @internal */
+export type CreateInstallationReadConfigObject$Outbound = {
+  objectName: string;
+  schedule: string;
+  destination: string;
+  selectedFields: { [k: string]: boolean };
+  selectedValueMappings?: { [k: string]: { [k: string]: string } } | undefined;
+  selectedFieldMappings: { [k: string]: string };
+  selectedFieldsAuto?: string | undefined;
+  backfill?: CreateInstallationBackfillConfig$Outbound | undefined;
+};
+
+/** @internal */
+export const CreateInstallationReadConfigObject$outboundSchema: z.ZodType<
+  CreateInstallationReadConfigObject$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationReadConfigObject
+> = z.object({
+  objectName: z.string(),
+  schedule: z.string(),
+  destination: z.string(),
+  selectedFields: z.record(z.boolean()),
+  selectedValueMappings: z.record(z.record(z.string())).optional(),
+  selectedFieldMappings: z.record(z.string()),
+  selectedFieldsAuto: CreateInstallationSelectedFieldsAutoConfig$outboundSchema
+    .optional(),
+  backfill: z.lazy(() => CreateInstallationBackfillConfig$outboundSchema)
+    .optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationReadConfigObject$ {
+  /** @deprecated use `CreateInstallationReadConfigObject$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationReadConfigObject$inboundSchema;
+  /** @deprecated use `CreateInstallationReadConfigObject$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationReadConfigObject$outboundSchema;
+  /** @deprecated use `CreateInstallationReadConfigObject$Outbound` instead. */
+  export type Outbound = CreateInstallationReadConfigObject$Outbound;
+}
+
+export function createInstallationReadConfigObjectToJSON(
+  createInstallationReadConfigObject: CreateInstallationReadConfigObject,
+): string {
+  return JSON.stringify(
+    CreateInstallationReadConfigObject$outboundSchema.parse(
+      createInstallationReadConfigObject,
+    ),
+  );
+}
+
+export function createInstallationReadConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationReadConfigObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationReadConfigObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationReadConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationReadConfig$inboundSchema: z.ZodType<
+  CreateInstallationReadConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(
+    z.lazy(() => CreateInstallationReadConfigObject$inboundSchema),
+  ),
+});
+
+/** @internal */
+export type CreateInstallationReadConfig$Outbound = {
+  objects: { [k: string]: CreateInstallationReadConfigObject$Outbound };
+};
+
+/** @internal */
+export const CreateInstallationReadConfig$outboundSchema: z.ZodType<
+  CreateInstallationReadConfig$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationReadConfig
+> = z.object({
+  objects: z.record(
+    z.lazy(() => CreateInstallationReadConfigObject$outboundSchema),
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationReadConfig$ {
+  /** @deprecated use `CreateInstallationReadConfig$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationReadConfig$inboundSchema;
+  /** @deprecated use `CreateInstallationReadConfig$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationReadConfig$outboundSchema;
+  /** @deprecated use `CreateInstallationReadConfig$Outbound` instead. */
+  export type Outbound = CreateInstallationReadConfig$Outbound;
+}
+
+export function createInstallationReadConfigToJSON(
+  createInstallationReadConfig: CreateInstallationReadConfig,
+): string {
+  return JSON.stringify(
+    CreateInstallationReadConfig$outboundSchema.parse(
+      createInstallationReadConfig,
+    ),
+  );
+}
+
+export function createInstallationReadConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationReadConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateInstallationReadConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationReadConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate
+  > = z.nativeEnum(
+    CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate,
+  );
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate
+  > =
+    CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$ {
+  /** @deprecated use `CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$inboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyValueDefaultBoolean$inboundSchema:
+  z.ZodType<
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.boolean(),
+    applyOnUpdate:
+      CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$inboundSchema
+        .optional(),
+  });
+
+/** @internal */
+export type CreateInstallationValueDefaultLegacyValueDefaultBoolean$Outbound = {
+  value: boolean;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyValueDefaultBoolean$outboundSchema:
+  z.ZodType<
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean$Outbound,
+    z.ZodTypeDef,
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean
+  > = z.object({
+    value: z.boolean(),
+    applyOnUpdate:
+      CreateInstallationValueDefaultLegacyInstallationsResponse201ApplyOnUpdate$outboundSchema
+        .optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationValueDefaultLegacyValueDefaultBoolean$ {
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultBoolean$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean$inboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultBoolean$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean$outboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultBoolean$Outbound` instead. */
+  export type Outbound =
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean$Outbound;
+}
+
+export function createInstallationValueDefaultLegacyValueDefaultBooleanToJSON(
+  createInstallationValueDefaultLegacyValueDefaultBoolean:
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean,
+): string {
+  return JSON.stringify(
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean$outboundSchema
+      .parse(createInstallationValueDefaultLegacyValueDefaultBoolean),
+  );
+}
+
+export function createInstallationValueDefaultLegacyValueDefaultBooleanFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateInstallationValueDefaultLegacyValueDefaultBoolean,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationValueDefaultLegacyValueDefaultBoolean$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationValueDefaultLegacyValueDefaultBoolean' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate
+  > = z.nativeEnum(
+    CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate,
+  );
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate
+  > =
+    CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$ {
+  /** @deprecated use `CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyValueDefaultInteger$inboundSchema:
+  z.ZodType<
+    CreateInstallationValueDefaultLegacyValueDefaultInteger,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.number().int(),
+    applyOnUpdate:
+      CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema
+        .optional(),
+  });
+
+/** @internal */
+export type CreateInstallationValueDefaultLegacyValueDefaultInteger$Outbound = {
+  value: number;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyValueDefaultInteger$outboundSchema:
+  z.ZodType<
+    CreateInstallationValueDefaultLegacyValueDefaultInteger$Outbound,
+    z.ZodTypeDef,
+    CreateInstallationValueDefaultLegacyValueDefaultInteger
+  > = z.object({
+    value: z.number().int(),
+    applyOnUpdate:
+      CreateInstallationValueDefaultLegacyInstallationsResponseApplyOnUpdate$outboundSchema
+        .optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationValueDefaultLegacyValueDefaultInteger$ {
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultInteger$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationValueDefaultLegacyValueDefaultInteger$inboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultInteger$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationValueDefaultLegacyValueDefaultInteger$outboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultInteger$Outbound` instead. */
+  export type Outbound =
+    CreateInstallationValueDefaultLegacyValueDefaultInteger$Outbound;
+}
+
+export function createInstallationValueDefaultLegacyValueDefaultIntegerToJSON(
+  createInstallationValueDefaultLegacyValueDefaultInteger:
+    CreateInstallationValueDefaultLegacyValueDefaultInteger,
+): string {
+  return JSON.stringify(
+    CreateInstallationValueDefaultLegacyValueDefaultInteger$outboundSchema
+      .parse(createInstallationValueDefaultLegacyValueDefaultInteger),
+  );
+}
+
+export function createInstallationValueDefaultLegacyValueDefaultIntegerFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateInstallationValueDefaultLegacyValueDefaultInteger,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationValueDefaultLegacyValueDefaultInteger$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationValueDefaultLegacyValueDefaultInteger' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate
+  > = z.nativeEnum(
+    CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate,
+  );
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate
+  > =
+    CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$ {
+  /** @deprecated use `CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyValueDefaultString$inboundSchema:
+  z.ZodType<
+    CreateInstallationValueDefaultLegacyValueDefaultString,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.string(),
+    applyOnUpdate:
+      CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema
+        .optional(),
+  });
+
+/** @internal */
+export type CreateInstallationValueDefaultLegacyValueDefaultString$Outbound = {
+  value: string;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacyValueDefaultString$outboundSchema:
+  z.ZodType<
+    CreateInstallationValueDefaultLegacyValueDefaultString$Outbound,
+    z.ZodTypeDef,
+    CreateInstallationValueDefaultLegacyValueDefaultString
+  > = z.object({
+    value: z.string(),
+    applyOnUpdate:
+      CreateInstallationValueDefaultLegacyInstallationsApplyOnUpdate$outboundSchema
+        .optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationValueDefaultLegacyValueDefaultString$ {
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultString$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationValueDefaultLegacyValueDefaultString$inboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultString$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationValueDefaultLegacyValueDefaultString$outboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacyValueDefaultString$Outbound` instead. */
+  export type Outbound =
+    CreateInstallationValueDefaultLegacyValueDefaultString$Outbound;
+}
+
+export function createInstallationValueDefaultLegacyValueDefaultStringToJSON(
+  createInstallationValueDefaultLegacyValueDefaultString:
+    CreateInstallationValueDefaultLegacyValueDefaultString,
+): string {
+  return JSON.stringify(
+    CreateInstallationValueDefaultLegacyValueDefaultString$outboundSchema.parse(
+      createInstallationValueDefaultLegacyValueDefaultString,
+    ),
+  );
+}
+
+export function createInstallationValueDefaultLegacyValueDefaultStringFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateInstallationValueDefaultLegacyValueDefaultString,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationValueDefaultLegacyValueDefaultString$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationValueDefaultLegacyValueDefaultString' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacy$inboundSchema: z.ZodType<
+  CreateInstallationValueDefaultLegacy,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() =>
+    CreateInstallationValueDefaultLegacyValueDefaultString$inboundSchema
+  ),
+  z.lazy(() =>
+    CreateInstallationValueDefaultLegacyValueDefaultInteger$inboundSchema
+  ),
+  z.lazy(() =>
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean$inboundSchema
+  ),
+]);
+
+/** @internal */
+export type CreateInstallationValueDefaultLegacy$Outbound =
+  | CreateInstallationValueDefaultLegacyValueDefaultString$Outbound
+  | CreateInstallationValueDefaultLegacyValueDefaultInteger$Outbound
+  | CreateInstallationValueDefaultLegacyValueDefaultBoolean$Outbound;
+
+/** @internal */
+export const CreateInstallationValueDefaultLegacy$outboundSchema: z.ZodType<
+  CreateInstallationValueDefaultLegacy$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationValueDefaultLegacy
+> = z.union([
+  z.lazy(() =>
+    CreateInstallationValueDefaultLegacyValueDefaultString$outboundSchema
+  ),
+  z.lazy(() =>
+    CreateInstallationValueDefaultLegacyValueDefaultInteger$outboundSchema
+  ),
+  z.lazy(() =>
+    CreateInstallationValueDefaultLegacyValueDefaultBoolean$outboundSchema
+  ),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationValueDefaultLegacy$ {
+  /** @deprecated use `CreateInstallationValueDefaultLegacy$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationValueDefaultLegacy$inboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacy$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationValueDefaultLegacy$outboundSchema;
+  /** @deprecated use `CreateInstallationValueDefaultLegacy$Outbound` instead. */
+  export type Outbound = CreateInstallationValueDefaultLegacy$Outbound;
+}
+
+export function createInstallationValueDefaultLegacyToJSON(
+  createInstallationValueDefaultLegacy: CreateInstallationValueDefaultLegacy,
+): string {
+  return JSON.stringify(
+    CreateInstallationValueDefaultLegacy$outboundSchema.parse(
+      createInstallationValueDefaultLegacy,
+    ),
+  );
+}
+
+export function createInstallationValueDefaultLegacyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationValueDefaultLegacy, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationValueDefaultLegacy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationValueDefaultLegacy' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationDefaultValueForAField$inboundSchema: z.ZodType<
+  CreateInstallationDefaultValueForAField,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  stringValue: z.string().optional(),
+  integerValue: z.number().int().optional(),
+  booleanValue: z.boolean().optional(),
+});
+
+/** @internal */
+export type CreateInstallationDefaultValueForAField$Outbound = {
+  stringValue?: string | undefined;
+  integerValue?: number | undefined;
+  booleanValue?: boolean | undefined;
+};
+
+/** @internal */
+export const CreateInstallationDefaultValueForAField$outboundSchema: z.ZodType<
+  CreateInstallationDefaultValueForAField$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationDefaultValueForAField
+> = z.object({
+  stringValue: z.string().optional(),
+  integerValue: z.number().int().optional(),
+  booleanValue: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationDefaultValueForAField$ {
+  /** @deprecated use `CreateInstallationDefaultValueForAField$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationDefaultValueForAField$inboundSchema;
+  /** @deprecated use `CreateInstallationDefaultValueForAField$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationDefaultValueForAField$outboundSchema;
+  /** @deprecated use `CreateInstallationDefaultValueForAField$Outbound` instead. */
+  export type Outbound = CreateInstallationDefaultValueForAField$Outbound;
+}
+
+export function createInstallationDefaultValueForAFieldToJSON(
+  createInstallationDefaultValueForAField:
+    CreateInstallationDefaultValueForAField,
+): string {
+  return JSON.stringify(
+    CreateInstallationDefaultValueForAField$outboundSchema.parse(
+      createInstallationDefaultValueForAField,
+    ),
+  );
+}
+
+export function createInstallationDefaultValueForAFieldFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateInstallationDefaultValueForAField,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationDefaultValueForAField$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateInstallationDefaultValueForAField' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationWriteOnCreate$inboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationWriteOnCreate
+> = z.nativeEnum(CreateInstallationWriteOnCreate);
+
+/** @internal */
+export const CreateInstallationWriteOnCreate$outboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationWriteOnCreate
+> = CreateInstallationWriteOnCreate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationWriteOnCreate$ {
+  /** @deprecated use `CreateInstallationWriteOnCreate$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationWriteOnCreate$inboundSchema;
+  /** @deprecated use `CreateInstallationWriteOnCreate$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationWriteOnCreate$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationWriteOnUpdate$inboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationWriteOnUpdate
+> = z.nativeEnum(CreateInstallationWriteOnUpdate);
+
+/** @internal */
+export const CreateInstallationWriteOnUpdate$outboundSchema: z.ZodNativeEnum<
+  typeof CreateInstallationWriteOnUpdate
+> = CreateInstallationWriteOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationWriteOnUpdate$ {
+  /** @deprecated use `CreateInstallationWriteOnUpdate$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationWriteOnUpdate$inboundSchema;
+  /** @deprecated use `CreateInstallationWriteOnUpdate$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationWriteOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationFieldSetting$inboundSchema: z.ZodType<
+  CreateInstallationFieldSetting,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  default: z.lazy(() => CreateInstallationDefaultValueForAField$inboundSchema)
+    .optional(),
+  writeOnCreate: CreateInstallationWriteOnCreate$inboundSchema.default(
+    "always",
+  ),
+  writeOnUpdate: CreateInstallationWriteOnUpdate$inboundSchema.default(
+    "always",
+  ),
+});
+
+/** @internal */
+export type CreateInstallationFieldSetting$Outbound = {
+  default?: CreateInstallationDefaultValueForAField$Outbound | undefined;
+  writeOnCreate: string;
+  writeOnUpdate: string;
+};
+
+/** @internal */
+export const CreateInstallationFieldSetting$outboundSchema: z.ZodType<
+  CreateInstallationFieldSetting$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationFieldSetting
+> = z.object({
+  default: z.lazy(() => CreateInstallationDefaultValueForAField$outboundSchema)
+    .optional(),
+  writeOnCreate: CreateInstallationWriteOnCreate$outboundSchema.default(
+    "always",
+  ),
+  writeOnUpdate: CreateInstallationWriteOnUpdate$outboundSchema.default(
+    "always",
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationFieldSetting$ {
+  /** @deprecated use `CreateInstallationFieldSetting$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationFieldSetting$inboundSchema;
+  /** @deprecated use `CreateInstallationFieldSetting$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationFieldSetting$outboundSchema;
+  /** @deprecated use `CreateInstallationFieldSetting$Outbound` instead. */
+  export type Outbound = CreateInstallationFieldSetting$Outbound;
+}
+
+export function createInstallationFieldSettingToJSON(
+  createInstallationFieldSetting: CreateInstallationFieldSetting,
+): string {
+  return JSON.stringify(
+    CreateInstallationFieldSetting$outboundSchema.parse(
+      createInstallationFieldSetting,
+    ),
+  );
+}
+
+export function createInstallationFieldSettingFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationFieldSetting, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateInstallationFieldSetting$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationFieldSetting' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationWriteConfigObject$inboundSchema: z.ZodType<
+  CreateInstallationWriteConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objectName: z.string(),
+  selectedValueDefaults: z.record(
+    z.union([
+      z.lazy(() =>
+        CreateInstallationValueDefaultLegacyValueDefaultString$inboundSchema
+      ),
+      z.lazy(() =>
+        CreateInstallationValueDefaultLegacyValueDefaultInteger$inboundSchema
+      ),
+      z.lazy(() =>
+        CreateInstallationValueDefaultLegacyValueDefaultBoolean$inboundSchema
+      ),
+    ]),
+  ).optional(),
+  selectedFieldSettings: z.record(
+    z.lazy(() => CreateInstallationFieldSetting$inboundSchema),
+  ).optional(),
+});
+
+/** @internal */
+export type CreateInstallationWriteConfigObject$Outbound = {
+  objectName: string;
+  selectedValueDefaults?: {
+    [k: string]:
+      | CreateInstallationValueDefaultLegacyValueDefaultString$Outbound
+      | CreateInstallationValueDefaultLegacyValueDefaultInteger$Outbound
+      | CreateInstallationValueDefaultLegacyValueDefaultBoolean$Outbound;
+  } | undefined;
+  selectedFieldSettings?: {
+    [k: string]: CreateInstallationFieldSetting$Outbound;
+  } | undefined;
+};
+
+/** @internal */
+export const CreateInstallationWriteConfigObject$outboundSchema: z.ZodType<
+  CreateInstallationWriteConfigObject$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationWriteConfigObject
+> = z.object({
+  objectName: z.string(),
+  selectedValueDefaults: z.record(
+    z.union([
+      z.lazy(() =>
+        CreateInstallationValueDefaultLegacyValueDefaultString$outboundSchema
+      ),
+      z.lazy(() =>
+        CreateInstallationValueDefaultLegacyValueDefaultInteger$outboundSchema
+      ),
+      z.lazy(() =>
+        CreateInstallationValueDefaultLegacyValueDefaultBoolean$outboundSchema
+      ),
+    ]),
+  ).optional(),
+  selectedFieldSettings: z.record(
+    z.lazy(() => CreateInstallationFieldSetting$outboundSchema),
+  ).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationWriteConfigObject$ {
+  /** @deprecated use `CreateInstallationWriteConfigObject$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationWriteConfigObject$inboundSchema;
+  /** @deprecated use `CreateInstallationWriteConfigObject$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationWriteConfigObject$outboundSchema;
+  /** @deprecated use `CreateInstallationWriteConfigObject$Outbound` instead. */
+  export type Outbound = CreateInstallationWriteConfigObject$Outbound;
+}
+
+export function createInstallationWriteConfigObjectToJSON(
+  createInstallationWriteConfigObject: CreateInstallationWriteConfigObject,
+): string {
+  return JSON.stringify(
+    CreateInstallationWriteConfigObject$outboundSchema.parse(
+      createInstallationWriteConfigObject,
+    ),
+  );
+}
+
+export function createInstallationWriteConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationWriteConfigObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationWriteConfigObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationWriteConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationWriteConfig$inboundSchema: z.ZodType<
+  CreateInstallationWriteConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(
+    z.lazy(() => CreateInstallationWriteConfigObject$inboundSchema),
+  ).optional(),
+});
+
+/** @internal */
+export type CreateInstallationWriteConfig$Outbound = {
+  objects?:
+    | { [k: string]: CreateInstallationWriteConfigObject$Outbound }
+    | undefined;
+};
+
+/** @internal */
+export const CreateInstallationWriteConfig$outboundSchema: z.ZodType<
+  CreateInstallationWriteConfig$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationWriteConfig
+> = z.object({
+  objects: z.record(
+    z.lazy(() => CreateInstallationWriteConfigObject$outboundSchema),
+  ).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationWriteConfig$ {
+  /** @deprecated use `CreateInstallationWriteConfig$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationWriteConfig$inboundSchema;
+  /** @deprecated use `CreateInstallationWriteConfig$outboundSchema` instead. */
+  export const outboundSchema = CreateInstallationWriteConfig$outboundSchema;
+  /** @deprecated use `CreateInstallationWriteConfig$Outbound` instead. */
+  export type Outbound = CreateInstallationWriteConfig$Outbound;
+}
+
+export function createInstallationWriteConfigToJSON(
+  createInstallationWriteConfig: CreateInstallationWriteConfig,
+): string {
+  return JSON.stringify(
+    CreateInstallationWriteConfig$outboundSchema.parse(
+      createInstallationWriteConfig,
+    ),
+  );
+}
+
+export function createInstallationWriteConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationWriteConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateInstallationWriteConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationWriteConfig' from JSON`,
   );
 }
 
@@ -1535,24 +4706,479 @@ export function createInstallationBaseProxyConfigFromJSON(
 }
 
 /** @internal */
+export const CreateInstallationInstallationsResponseEnabled$inboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsResponseEnabled> = z
+    .nativeEnum(CreateInstallationInstallationsResponseEnabled);
+
+/** @internal */
+export const CreateInstallationInstallationsResponseEnabled$outboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsResponseEnabled> =
+    CreateInstallationInstallationsResponseEnabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsResponseEnabled$ {
+  /** @deprecated use `CreateInstallationInstallationsResponseEnabled$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsResponseEnabled$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsResponseEnabled$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsResponseEnabled$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationInstallationsCreateEvent$inboundSchema:
+  z.ZodType<CreateInstallationInstallationsCreateEvent, z.ZodTypeDef, unknown> =
+    z.object({
+      enabled: CreateInstallationInstallationsResponseEnabled$inboundSchema,
+    });
+
+/** @internal */
+export type CreateInstallationInstallationsCreateEvent$Outbound = {
+  enabled: string;
+};
+
+/** @internal */
+export const CreateInstallationInstallationsCreateEvent$outboundSchema:
+  z.ZodType<
+    CreateInstallationInstallationsCreateEvent$Outbound,
+    z.ZodTypeDef,
+    CreateInstallationInstallationsCreateEvent
+  > = z.object({
+    enabled: CreateInstallationInstallationsResponseEnabled$outboundSchema,
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsCreateEvent$ {
+  /** @deprecated use `CreateInstallationInstallationsCreateEvent$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsCreateEvent$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsCreateEvent$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsCreateEvent$outboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsCreateEvent$Outbound` instead. */
+  export type Outbound = CreateInstallationInstallationsCreateEvent$Outbound;
+}
+
+export function createInstallationInstallationsCreateEventToJSON(
+  createInstallationInstallationsCreateEvent:
+    CreateInstallationInstallationsCreateEvent,
+): string {
+  return JSON.stringify(
+    CreateInstallationInstallationsCreateEvent$outboundSchema.parse(
+      createInstallationInstallationsCreateEvent,
+    ),
+  );
+}
+
+export function createInstallationInstallationsCreateEventFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateInstallationInstallationsCreateEvent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationInstallationsCreateEvent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateInstallationInstallationsCreateEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationInstallationsResponse201Enabled$inboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsResponse201Enabled> = z
+    .nativeEnum(CreateInstallationInstallationsResponse201Enabled);
+
+/** @internal */
+export const CreateInstallationInstallationsResponse201Enabled$outboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsResponse201Enabled> =
+    CreateInstallationInstallationsResponse201Enabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsResponse201Enabled$ {
+  /** @deprecated use `CreateInstallationInstallationsResponse201Enabled$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsResponse201Enabled$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsResponse201Enabled$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsResponse201Enabled$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationInstallationsWatchFieldsAuto$inboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsWatchFieldsAuto> = z
+    .nativeEnum(CreateInstallationInstallationsWatchFieldsAuto);
+
+/** @internal */
+export const CreateInstallationInstallationsWatchFieldsAuto$outboundSchema:
+  z.ZodNativeEnum<typeof CreateInstallationInstallationsWatchFieldsAuto> =
+    CreateInstallationInstallationsWatchFieldsAuto$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsWatchFieldsAuto$ {
+  /** @deprecated use `CreateInstallationInstallationsWatchFieldsAuto$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsWatchFieldsAuto$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsWatchFieldsAuto$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsWatchFieldsAuto$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationInstallationsUpdateEvent$inboundSchema:
+  z.ZodType<CreateInstallationInstallationsUpdateEvent, z.ZodTypeDef, unknown> =
+    z.object({
+      enabled: CreateInstallationInstallationsResponse201Enabled$inboundSchema,
+      watchFieldsAuto:
+        CreateInstallationInstallationsWatchFieldsAuto$inboundSchema.optional(),
+      requiredWatchFields: z.array(z.string()).optional(),
+    });
+
+/** @internal */
+export type CreateInstallationInstallationsUpdateEvent$Outbound = {
+  enabled: string;
+  watchFieldsAuto?: string | undefined;
+  requiredWatchFields?: Array<string> | undefined;
+};
+
+/** @internal */
+export const CreateInstallationInstallationsUpdateEvent$outboundSchema:
+  z.ZodType<
+    CreateInstallationInstallationsUpdateEvent$Outbound,
+    z.ZodTypeDef,
+    CreateInstallationInstallationsUpdateEvent
+  > = z.object({
+    enabled: CreateInstallationInstallationsResponse201Enabled$outboundSchema,
+    watchFieldsAuto:
+      CreateInstallationInstallationsWatchFieldsAuto$outboundSchema.optional(),
+    requiredWatchFields: z.array(z.string()).optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsUpdateEvent$ {
+  /** @deprecated use `CreateInstallationInstallationsUpdateEvent$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsUpdateEvent$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsUpdateEvent$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsUpdateEvent$outboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsUpdateEvent$Outbound` instead. */
+  export type Outbound = CreateInstallationInstallationsUpdateEvent$Outbound;
+}
+
+export function createInstallationInstallationsUpdateEventToJSON(
+  createInstallationInstallationsUpdateEvent:
+    CreateInstallationInstallationsUpdateEvent,
+): string {
+  return JSON.stringify(
+    CreateInstallationInstallationsUpdateEvent$outboundSchema.parse(
+      createInstallationInstallationsUpdateEvent,
+    ),
+  );
+}
+
+export function createInstallationInstallationsUpdateEventFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateInstallationInstallationsUpdateEvent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationInstallationsUpdateEvent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateInstallationInstallationsUpdateEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationInstallationsResponse201ApplicationJSONEnabled$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateInstallationInstallationsResponse201ApplicationJSONEnabled
+  > = z.nativeEnum(
+    CreateInstallationInstallationsResponse201ApplicationJSONEnabled,
+  );
+
+/** @internal */
+export const CreateInstallationInstallationsResponse201ApplicationJSONEnabled$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateInstallationInstallationsResponse201ApplicationJSONEnabled
+  > =
+    CreateInstallationInstallationsResponse201ApplicationJSONEnabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsResponse201ApplicationJSONEnabled$ {
+  /** @deprecated use `CreateInstallationInstallationsResponse201ApplicationJSONEnabled$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsResponse201ApplicationJSONEnabled$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsResponse201ApplicationJSONEnabled$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsResponse201ApplicationJSONEnabled$outboundSchema;
+}
+
+/** @internal */
+export const CreateInstallationInstallationsDeleteEvent$inboundSchema:
+  z.ZodType<CreateInstallationInstallationsDeleteEvent, z.ZodTypeDef, unknown> =
+    z.object({
+      enabled:
+        CreateInstallationInstallationsResponse201ApplicationJSONEnabled$inboundSchema,
+    });
+
+/** @internal */
+export type CreateInstallationInstallationsDeleteEvent$Outbound = {
+  enabled: string;
+};
+
+/** @internal */
+export const CreateInstallationInstallationsDeleteEvent$outboundSchema:
+  z.ZodType<
+    CreateInstallationInstallationsDeleteEvent$Outbound,
+    z.ZodTypeDef,
+    CreateInstallationInstallationsDeleteEvent
+  > = z.object({
+    enabled:
+      CreateInstallationInstallationsResponse201ApplicationJSONEnabled$outboundSchema,
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationInstallationsDeleteEvent$ {
+  /** @deprecated use `CreateInstallationInstallationsDeleteEvent$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationInstallationsDeleteEvent$inboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsDeleteEvent$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationInstallationsDeleteEvent$outboundSchema;
+  /** @deprecated use `CreateInstallationInstallationsDeleteEvent$Outbound` instead. */
+  export type Outbound = CreateInstallationInstallationsDeleteEvent$Outbound;
+}
+
+export function createInstallationInstallationsDeleteEventToJSON(
+  createInstallationInstallationsDeleteEvent:
+    CreateInstallationInstallationsDeleteEvent,
+): string {
+  return JSON.stringify(
+    CreateInstallationInstallationsDeleteEvent$outboundSchema.parse(
+      createInstallationInstallationsDeleteEvent,
+    ),
+  );
+}
+
+export function createInstallationInstallationsDeleteEventFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateInstallationInstallationsDeleteEvent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationInstallationsDeleteEvent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateInstallationInstallationsDeleteEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationSubscribeConfigObject$inboundSchema: z.ZodType<
+  CreateInstallationSubscribeConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  inheritFieldsAndMappings: z.boolean(),
+  objectName: z.string(),
+  destination: z.string(),
+  createEvent: z.lazy(() =>
+    CreateInstallationInstallationsCreateEvent$inboundSchema
+  ).optional(),
+  updateEvent: z.lazy(() =>
+    CreateInstallationInstallationsUpdateEvent$inboundSchema
+  ).optional(),
+  deleteEvent: z.lazy(() =>
+    CreateInstallationInstallationsDeleteEvent$inboundSchema
+  ).optional(),
+});
+
+/** @internal */
+export type CreateInstallationSubscribeConfigObject$Outbound = {
+  inheritFieldsAndMappings: boolean;
+  objectName: string;
+  destination: string;
+  createEvent?: CreateInstallationInstallationsCreateEvent$Outbound | undefined;
+  updateEvent?: CreateInstallationInstallationsUpdateEvent$Outbound | undefined;
+  deleteEvent?: CreateInstallationInstallationsDeleteEvent$Outbound | undefined;
+};
+
+/** @internal */
+export const CreateInstallationSubscribeConfigObject$outboundSchema: z.ZodType<
+  CreateInstallationSubscribeConfigObject$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationSubscribeConfigObject
+> = z.object({
+  inheritFieldsAndMappings: z.boolean(),
+  objectName: z.string(),
+  destination: z.string(),
+  createEvent: z.lazy(() =>
+    CreateInstallationInstallationsCreateEvent$outboundSchema
+  ).optional(),
+  updateEvent: z.lazy(() =>
+    CreateInstallationInstallationsUpdateEvent$outboundSchema
+  ).optional(),
+  deleteEvent: z.lazy(() =>
+    CreateInstallationInstallationsDeleteEvent$outboundSchema
+  ).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationSubscribeConfigObject$ {
+  /** @deprecated use `CreateInstallationSubscribeConfigObject$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateInstallationSubscribeConfigObject$inboundSchema;
+  /** @deprecated use `CreateInstallationSubscribeConfigObject$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationSubscribeConfigObject$outboundSchema;
+  /** @deprecated use `CreateInstallationSubscribeConfigObject$Outbound` instead. */
+  export type Outbound = CreateInstallationSubscribeConfigObject$Outbound;
+}
+
+export function createInstallationSubscribeConfigObjectToJSON(
+  createInstallationSubscribeConfigObject:
+    CreateInstallationSubscribeConfigObject,
+): string {
+  return JSON.stringify(
+    CreateInstallationSubscribeConfigObject$outboundSchema.parse(
+      createInstallationSubscribeConfigObject,
+    ),
+  );
+}
+
+export function createInstallationSubscribeConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateInstallationSubscribeConfigObject,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateInstallationSubscribeConfigObject$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateInstallationSubscribeConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateInstallationSubscribeConfig$inboundSchema: z.ZodType<
+  CreateInstallationSubscribeConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(
+    z.lazy(() => CreateInstallationSubscribeConfigObject$inboundSchema),
+  ),
+});
+
+/** @internal */
+export type CreateInstallationSubscribeConfig$Outbound = {
+  objects: { [k: string]: CreateInstallationSubscribeConfigObject$Outbound };
+};
+
+/** @internal */
+export const CreateInstallationSubscribeConfig$outboundSchema: z.ZodType<
+  CreateInstallationSubscribeConfig$Outbound,
+  z.ZodTypeDef,
+  CreateInstallationSubscribeConfig
+> = z.object({
+  objects: z.record(
+    z.lazy(() => CreateInstallationSubscribeConfigObject$outboundSchema),
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateInstallationSubscribeConfig$ {
+  /** @deprecated use `CreateInstallationSubscribeConfig$inboundSchema` instead. */
+  export const inboundSchema = CreateInstallationSubscribeConfig$inboundSchema;
+  /** @deprecated use `CreateInstallationSubscribeConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateInstallationSubscribeConfig$outboundSchema;
+  /** @deprecated use `CreateInstallationSubscribeConfig$Outbound` instead. */
+  export type Outbound = CreateInstallationSubscribeConfig$Outbound;
+}
+
+export function createInstallationSubscribeConfigToJSON(
+  createInstallationSubscribeConfig: CreateInstallationSubscribeConfig,
+): string {
+  return JSON.stringify(
+    CreateInstallationSubscribeConfig$outboundSchema.parse(
+      createInstallationSubscribeConfig,
+    ),
+  );
+}
+
+export function createInstallationSubscribeConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateInstallationSubscribeConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateInstallationSubscribeConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateInstallationSubscribeConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateInstallationConfigContent$inboundSchema: z.ZodType<
   CreateInstallationConfigContent,
   z.ZodTypeDef,
   unknown
 > = z.object({
   provider: z.string(),
-  read: z.any().optional(),
-  write: z.any().optional(),
+  read: z.lazy(() => CreateInstallationReadConfig$inboundSchema).optional(),
+  write: z.lazy(() => CreateInstallationWriteConfig$inboundSchema).optional(),
   proxy: z.lazy(() => CreateInstallationBaseProxyConfig$inboundSchema)
+    .optional(),
+  subscribe: z.lazy(() => CreateInstallationSubscribeConfig$inboundSchema)
     .optional(),
 });
 
 /** @internal */
 export type CreateInstallationConfigContent$Outbound = {
   provider: string;
-  read?: any | undefined;
-  write?: any | undefined;
+  read?: CreateInstallationReadConfig$Outbound | undefined;
+  write?: CreateInstallationWriteConfig$Outbound | undefined;
   proxy?: CreateInstallationBaseProxyConfig$Outbound | undefined;
+  subscribe?: CreateInstallationSubscribeConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -1562,9 +5188,11 @@ export const CreateInstallationConfigContent$outboundSchema: z.ZodType<
   CreateInstallationConfigContent
 > = z.object({
   provider: z.string(),
-  read: z.any().optional(),
-  write: z.any().optional(),
+  read: z.lazy(() => CreateInstallationReadConfig$outboundSchema).optional(),
+  write: z.lazy(() => CreateInstallationWriteConfig$outboundSchema).optional(),
   proxy: z.lazy(() => CreateInstallationBaseProxyConfig$outboundSchema)
+    .optional(),
+  subscribe: z.lazy(() => CreateInstallationSubscribeConfig$outboundSchema)
     .optional(),
 });
 

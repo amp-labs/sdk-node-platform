@@ -272,6 +272,36 @@ export type ListInstallationsOAuth2AuthorizationCodeToken = {
   scopes?: Array<string> | undefined;
 };
 
+/**
+ * The source of the metadata field
+ */
+export const ListInstallationsSource = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type ListInstallationsSource = ClosedEnum<
+  typeof ListInstallationsSource
+>;
+
+export type ListInstallationsProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: ListInstallationsSource;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
+
 export type ListInstallationsConnection = {
   /**
    * The connection ID.
@@ -319,10 +349,416 @@ export type ListInstallationsConnection = {
    * The API key used while making the connection.
    */
   apiKey?: string | undefined;
+  providerMetadata?:
+    | { [k: string]: ListInstallationsProviderMetadataInfo }
+    | undefined;
+};
+
+/**
+ * If selectedFieldsAuto is set to all, all fields will be read.
+ */
+export const ListInstallationsSelectedFieldsAutoConfig = {
+  All: "all",
+} as const;
+/**
+ * If selectedFieldsAuto is set to all, all fields will be read.
+ */
+export type ListInstallationsSelectedFieldsAutoConfig = ClosedEnum<
+  typeof ListInstallationsSelectedFieldsAutoConfig
+>;
+
+export type ListInstallationsDefaultPeriodConfig = {
+  /**
+   * Number of days in past to backfill from. 0 is no backfill. e.g) if 10, then backfill last 10 days of data. Required if fullHistory is not set.
+   */
+  days?: number | undefined;
+  /**
+   * If true, backfill all history. Required if days is not set.
+   */
+  fullHistory?: boolean | undefined;
+};
+
+export type ListInstallationsBackfillConfig = {
+  defaultPeriod: ListInstallationsDefaultPeriodConfig;
+};
+
+export type ListInstallationsReadConfigObject = {
+  /**
+   * The name of the object to read from.
+   */
+  objectName: string;
+  /**
+   * The schedule for reading the object, in cron syntax.
+   */
+  schedule: string;
+  /**
+   * The name of the destination that the result should be sent to.
+   */
+  destination: string;
+  /**
+   * This is a map of field names to booleans indicating whether they should be read. If a field is already included in `selectedFieldMappings`, it does not need to be included here.
+   */
+  selectedFields: { [k: string]: boolean };
+  /**
+   * This is a map of field names to their value mappings.
+   */
+  selectedValueMappings?: { [k: string]: { [k: string]: string } } | undefined;
+  /**
+   * This is a map of mapToNames to field names. (A mapTo name is the name the builder wants to map a field to when it lands in their destination.)
+   */
+  selectedFieldMappings: { [k: string]: string };
+  /**
+   * If selectedFieldsAuto is set to all, all fields will be read.
+   */
+  selectedFieldsAuto?: ListInstallationsSelectedFieldsAutoConfig | undefined;
+  backfill?: ListInstallationsBackfillConfig | undefined;
+};
+
+export type ListInstallationsReadConfig = {
+  objects: { [k: string]: ListInstallationsReadConfigObject };
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const ListInstallationsValueDefaultLegacyApplyOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type ListInstallationsValueDefaultLegacyApplyOnUpdate = ClosedEnum<
+  typeof ListInstallationsValueDefaultLegacyApplyOnUpdate
+>;
+
+export type ListInstallationsValueDefaultLegacyValueDefaultBoolean = {
+  /**
+   * The value to be used as a default.
+   */
+  value: boolean;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?: ListInstallationsValueDefaultLegacyApplyOnUpdate | undefined;
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate =
+  {
+    Always: "always",
+    Never: "never",
+  } as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate =
+  ClosedEnum<
+    typeof ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate
+  >;
+
+export type ListInstallationsValueDefaultLegacyValueDefaultInteger = {
+  /**
+   * The value to be used as a default.
+   */
+  value: number;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?:
+    | ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate
+    | undefined;
+};
+
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export const ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ *
+ * @remarks
+ * If set to `always`, the default value will be applied when updating a record.
+ * If set to `never`, the default value will not be applied when updating a record,
+ * only when creating a record.
+ * If unspecified, then `always` is assumed.
+ */
+export type ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate =
+  ClosedEnum<
+    typeof ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate
+  >;
+
+export type ListInstallationsValueDefaultLegacyValueDefaultString = {
+  /**
+   * The value to be used as a default.
+   */
+  value: string;
+  /**
+   * Whether the default value should be applied when updating a record.
+   *
+   * @remarks
+   * If set to `always`, the default value will be applied when updating a record.
+   * If set to `never`, the default value will not be applied when updating a record,
+   * only when creating a record.
+   * If unspecified, then `always` is assumed.
+   */
+  applyOnUpdate?:
+    | ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate
+    | undefined;
+};
+
+/**
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export type ListInstallationsValueDefaultLegacy =
+  | ListInstallationsValueDefaultLegacyValueDefaultString
+  | ListInstallationsValueDefaultLegacyValueDefaultInteger
+  | ListInstallationsValueDefaultLegacyValueDefaultBoolean;
+
+/**
+ * Only use one of stringValue, integerValue, booleanValue.
+ */
+export type ListInstallationsDefaultValueForAField = {
+  /**
+   * The default string value to apply to a field
+   */
+  stringValue?: string | undefined;
+  /**
+   * The default integer value to apply to a field
+   */
+  integerValue?: number | undefined;
+  /**
+   * The default boolean value to apply to a field
+   */
+  booleanValue?: boolean | undefined;
+};
+
+/**
+ * Whether the default value should be applied when creating a record.
+ */
+export const ListInstallationsWriteOnCreate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when creating a record.
+ */
+export type ListInstallationsWriteOnCreate = ClosedEnum<
+  typeof ListInstallationsWriteOnCreate
+>;
+
+/**
+ * Whether the default value should be applied when updating a record.
+ */
+export const ListInstallationsWriteOnUpdate = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Whether the default value should be applied when updating a record.
+ */
+export type ListInstallationsWriteOnUpdate = ClosedEnum<
+  typeof ListInstallationsWriteOnUpdate
+>;
+
+export type ListInstallationsFieldSetting = {
+  /**
+   * Only use one of stringValue, integerValue, booleanValue.
+   */
+  default?: ListInstallationsDefaultValueForAField | undefined;
+  /**
+   * Whether the default value should be applied when creating a record.
+   */
+  writeOnCreate?: ListInstallationsWriteOnCreate | undefined;
+  /**
+   * Whether the default value should be applied when updating a record.
+   */
+  writeOnUpdate?: ListInstallationsWriteOnUpdate | undefined;
+};
+
+export type ListInstallationsWriteConfigObject = {
+  /**
+   * The name of the object to write to.
+   */
+  objectName: string;
+  /**
+   * This is a map of field names to default values. These values will be used when writing to the object.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  selectedValueDefaults?: {
+    [k: string]:
+      | ListInstallationsValueDefaultLegacyValueDefaultString
+      | ListInstallationsValueDefaultLegacyValueDefaultInteger
+      | ListInstallationsValueDefaultLegacyValueDefaultBoolean;
+  } | undefined;
+  /**
+   * This is a map of field names to their settings.
+   */
+  selectedFieldSettings?:
+    | { [k: string]: ListInstallationsFieldSetting }
+    | undefined;
+};
+
+export type ListInstallationsWriteConfig = {
+  objects?: { [k: string]: ListInstallationsWriteConfigObject } | undefined;
 };
 
 export type ListInstallationsBaseProxyConfig = {
   enabled?: boolean | undefined;
+};
+
+/**
+ * Conditions to enable create events.
+ */
+export const ListInstallationsEnabled = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Conditions to enable create events.
+ */
+export type ListInstallationsEnabled = ClosedEnum<
+  typeof ListInstallationsEnabled
+>;
+
+export type ListInstallationsCreateEvent = {
+  /**
+   * Conditions to enable create events.
+   */
+  enabled: ListInstallationsEnabled;
+};
+
+/**
+ * Conditions to enable update events.
+ */
+export const ListInstallationsInstallationsEnabled = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Conditions to enable update events.
+ */
+export type ListInstallationsInstallationsEnabled = ClosedEnum<
+  typeof ListInstallationsInstallationsEnabled
+>;
+
+/**
+ * Whether to watch fields all fields automatically.
+ */
+export const ListInstallationsWatchFieldsAuto = {
+  All: "all",
+} as const;
+/**
+ * Whether to watch fields all fields automatically.
+ */
+export type ListInstallationsWatchFieldsAuto = ClosedEnum<
+  typeof ListInstallationsWatchFieldsAuto
+>;
+
+export type ListInstallationsUpdateEvent = {
+  /**
+   * Conditions to enable update events.
+   */
+  enabled: ListInstallationsInstallationsEnabled;
+  /**
+   * Whether to watch fields all fields automatically.
+   */
+  watchFieldsAuto?: ListInstallationsWatchFieldsAuto | undefined;
+  /**
+   * The fields that should be watched.
+   */
+  requiredWatchFields?: Array<string> | undefined;
+};
+
+/**
+ * Conditions to enable delete events.
+ */
+export const ListInstallationsInstallationsResponseEnabled = {
+  Always: "always",
+  Never: "never",
+} as const;
+/**
+ * Conditions to enable delete events.
+ */
+export type ListInstallationsInstallationsResponseEnabled = ClosedEnum<
+  typeof ListInstallationsInstallationsResponseEnabled
+>;
+
+export type ListInstallationsDeleteEvent = {
+  /**
+   * Conditions to enable delete events.
+   */
+  enabled: ListInstallationsInstallationsResponseEnabled;
+};
+
+export type ListInstallationsSubscribeConfigObject = {
+  /**
+   * Whether to inherit fields and mappings from the read config.
+   */
+  inheritFieldsAndMappings: boolean;
+  /**
+   * The name of the object to subscribe to.
+   */
+  objectName: string;
+  /**
+   * The name of the destination that the result should be sent to.
+   */
+  destination: string;
+  createEvent?: ListInstallationsCreateEvent | undefined;
+  updateEvent?: ListInstallationsUpdateEvent | undefined;
+  deleteEvent?: ListInstallationsDeleteEvent | undefined;
+};
+
+export type ListInstallationsSubscribeConfig = {
+  objects: { [k: string]: ListInstallationsSubscribeConfigObject };
 };
 
 export type ListInstallationsConfigContent = {
@@ -330,9 +766,10 @@ export type ListInstallationsConfigContent = {
    * The SaaS API that we are integrating with.
    */
   provider: string;
-  read?: any | undefined;
-  write?: any | undefined;
+  read?: ListInstallationsReadConfig | undefined;
+  write?: ListInstallationsWriteConfig | undefined;
   proxy?: ListInstallationsBaseProxyConfig | undefined;
+  subscribe?: ListInstallationsSubscribeConfig | undefined;
 };
 
 export type ListInstallationsConfig = {
@@ -1082,6 +1519,92 @@ export function listInstallationsOAuth2AuthorizationCodeTokenFromJSON(
 }
 
 /** @internal */
+export const ListInstallationsSource$inboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsSource
+> = z.nativeEnum(ListInstallationsSource);
+
+/** @internal */
+export const ListInstallationsSource$outboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsSource
+> = ListInstallationsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsSource$ {
+  /** @deprecated use `ListInstallationsSource$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsSource$inboundSchema;
+  /** @deprecated use `ListInstallationsSource$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsSource$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsProviderMetadataInfo$inboundSchema: z.ZodType<
+  ListInstallationsProviderMetadataInfo,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  source: ListInstallationsSource$inboundSchema,
+  displayName: z.string().optional(),
+});
+
+/** @internal */
+export type ListInstallationsProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const ListInstallationsProviderMetadataInfo$outboundSchema: z.ZodType<
+  ListInstallationsProviderMetadataInfo$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsProviderMetadataInfo
+> = z.object({
+  value: z.string(),
+  source: ListInstallationsSource$outboundSchema,
+  displayName: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsProviderMetadataInfo$ {
+  /** @deprecated use `ListInstallationsProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `ListInstallationsProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `ListInstallationsProviderMetadataInfo$Outbound` instead. */
+  export type Outbound = ListInstallationsProviderMetadataInfo$Outbound;
+}
+
+export function listInstallationsProviderMetadataInfoToJSON(
+  listInstallationsProviderMetadataInfo: ListInstallationsProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    ListInstallationsProviderMetadataInfo$outboundSchema.parse(
+      listInstallationsProviderMetadataInfo,
+    ),
+  );
+}
+
+export function listInstallationsProviderMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsProviderMetadataInfo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsProviderMetadataInfo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsProviderMetadataInfo' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListInstallationsConnection$inboundSchema: z.ZodType<
   ListInstallationsConnection,
   z.ZodTypeDef,
@@ -1105,6 +1628,9 @@ export const ListInstallationsConnection$inboundSchema: z.ZodType<
     ListInstallationsOAuth2AuthorizationCodeToken$inboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => ListInstallationsProviderMetadataInfo$inboundSchema),
+  ).optional(),
 });
 
 /** @internal */
@@ -1125,6 +1651,9 @@ export type ListInstallationsConnection$Outbound = {
     | ListInstallationsOAuth2AuthorizationCodeToken$Outbound
     | undefined;
   apiKey?: string | undefined;
+  providerMetadata?: {
+    [k: string]: ListInstallationsProviderMetadataInfo$Outbound;
+  } | undefined;
 };
 
 /** @internal */
@@ -1150,6 +1679,9 @@ export const ListInstallationsConnection$outboundSchema: z.ZodType<
     ListInstallationsOAuth2AuthorizationCodeToken$outboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => ListInstallationsProviderMetadataInfo$outboundSchema),
+  ).optional(),
 });
 
 /**
@@ -1182,6 +1714,1007 @@ export function listInstallationsConnectionFromJSON(
     jsonString,
     (x) => ListInstallationsConnection$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListInstallationsConnection' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsSelectedFieldsAutoConfig$inboundSchema:
+  z.ZodNativeEnum<typeof ListInstallationsSelectedFieldsAutoConfig> = z
+    .nativeEnum(ListInstallationsSelectedFieldsAutoConfig);
+
+/** @internal */
+export const ListInstallationsSelectedFieldsAutoConfig$outboundSchema:
+  z.ZodNativeEnum<typeof ListInstallationsSelectedFieldsAutoConfig> =
+    ListInstallationsSelectedFieldsAutoConfig$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsSelectedFieldsAutoConfig$ {
+  /** @deprecated use `ListInstallationsSelectedFieldsAutoConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsSelectedFieldsAutoConfig$inboundSchema;
+  /** @deprecated use `ListInstallationsSelectedFieldsAutoConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsSelectedFieldsAutoConfig$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsDefaultPeriodConfig$inboundSchema: z.ZodType<
+  ListInstallationsDefaultPeriodConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  days: z.number().int().optional(),
+  fullHistory: z.boolean().optional(),
+});
+
+/** @internal */
+export type ListInstallationsDefaultPeriodConfig$Outbound = {
+  days?: number | undefined;
+  fullHistory?: boolean | undefined;
+};
+
+/** @internal */
+export const ListInstallationsDefaultPeriodConfig$outboundSchema: z.ZodType<
+  ListInstallationsDefaultPeriodConfig$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsDefaultPeriodConfig
+> = z.object({
+  days: z.number().int().optional(),
+  fullHistory: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsDefaultPeriodConfig$ {
+  /** @deprecated use `ListInstallationsDefaultPeriodConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsDefaultPeriodConfig$inboundSchema;
+  /** @deprecated use `ListInstallationsDefaultPeriodConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsDefaultPeriodConfig$outboundSchema;
+  /** @deprecated use `ListInstallationsDefaultPeriodConfig$Outbound` instead. */
+  export type Outbound = ListInstallationsDefaultPeriodConfig$Outbound;
+}
+
+export function listInstallationsDefaultPeriodConfigToJSON(
+  listInstallationsDefaultPeriodConfig: ListInstallationsDefaultPeriodConfig,
+): string {
+  return JSON.stringify(
+    ListInstallationsDefaultPeriodConfig$outboundSchema.parse(
+      listInstallationsDefaultPeriodConfig,
+    ),
+  );
+}
+
+export function listInstallationsDefaultPeriodConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsDefaultPeriodConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsDefaultPeriodConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsDefaultPeriodConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsBackfillConfig$inboundSchema: z.ZodType<
+  ListInstallationsBackfillConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  defaultPeriod: z.lazy(() =>
+    ListInstallationsDefaultPeriodConfig$inboundSchema
+  ),
+});
+
+/** @internal */
+export type ListInstallationsBackfillConfig$Outbound = {
+  defaultPeriod: ListInstallationsDefaultPeriodConfig$Outbound;
+};
+
+/** @internal */
+export const ListInstallationsBackfillConfig$outboundSchema: z.ZodType<
+  ListInstallationsBackfillConfig$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsBackfillConfig
+> = z.object({
+  defaultPeriod: z.lazy(() =>
+    ListInstallationsDefaultPeriodConfig$outboundSchema
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsBackfillConfig$ {
+  /** @deprecated use `ListInstallationsBackfillConfig$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsBackfillConfig$inboundSchema;
+  /** @deprecated use `ListInstallationsBackfillConfig$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsBackfillConfig$outboundSchema;
+  /** @deprecated use `ListInstallationsBackfillConfig$Outbound` instead. */
+  export type Outbound = ListInstallationsBackfillConfig$Outbound;
+}
+
+export function listInstallationsBackfillConfigToJSON(
+  listInstallationsBackfillConfig: ListInstallationsBackfillConfig,
+): string {
+  return JSON.stringify(
+    ListInstallationsBackfillConfig$outboundSchema.parse(
+      listInstallationsBackfillConfig,
+    ),
+  );
+}
+
+export function listInstallationsBackfillConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsBackfillConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsBackfillConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsBackfillConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsReadConfigObject$inboundSchema: z.ZodType<
+  ListInstallationsReadConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objectName: z.string(),
+  schedule: z.string(),
+  destination: z.string(),
+  selectedFields: z.record(z.boolean()),
+  selectedValueMappings: z.record(z.record(z.string())).optional(),
+  selectedFieldMappings: z.record(z.string()),
+  selectedFieldsAuto: ListInstallationsSelectedFieldsAutoConfig$inboundSchema
+    .optional(),
+  backfill: z.lazy(() => ListInstallationsBackfillConfig$inboundSchema)
+    .optional(),
+});
+
+/** @internal */
+export type ListInstallationsReadConfigObject$Outbound = {
+  objectName: string;
+  schedule: string;
+  destination: string;
+  selectedFields: { [k: string]: boolean };
+  selectedValueMappings?: { [k: string]: { [k: string]: string } } | undefined;
+  selectedFieldMappings: { [k: string]: string };
+  selectedFieldsAuto?: string | undefined;
+  backfill?: ListInstallationsBackfillConfig$Outbound | undefined;
+};
+
+/** @internal */
+export const ListInstallationsReadConfigObject$outboundSchema: z.ZodType<
+  ListInstallationsReadConfigObject$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsReadConfigObject
+> = z.object({
+  objectName: z.string(),
+  schedule: z.string(),
+  destination: z.string(),
+  selectedFields: z.record(z.boolean()),
+  selectedValueMappings: z.record(z.record(z.string())).optional(),
+  selectedFieldMappings: z.record(z.string()),
+  selectedFieldsAuto: ListInstallationsSelectedFieldsAutoConfig$outboundSchema
+    .optional(),
+  backfill: z.lazy(() => ListInstallationsBackfillConfig$outboundSchema)
+    .optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsReadConfigObject$ {
+  /** @deprecated use `ListInstallationsReadConfigObject$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsReadConfigObject$inboundSchema;
+  /** @deprecated use `ListInstallationsReadConfigObject$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsReadConfigObject$outboundSchema;
+  /** @deprecated use `ListInstallationsReadConfigObject$Outbound` instead. */
+  export type Outbound = ListInstallationsReadConfigObject$Outbound;
+}
+
+export function listInstallationsReadConfigObjectToJSON(
+  listInstallationsReadConfigObject: ListInstallationsReadConfigObject,
+): string {
+  return JSON.stringify(
+    ListInstallationsReadConfigObject$outboundSchema.parse(
+      listInstallationsReadConfigObject,
+    ),
+  );
+}
+
+export function listInstallationsReadConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsReadConfigObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsReadConfigObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsReadConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsReadConfig$inboundSchema: z.ZodType<
+  ListInstallationsReadConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(
+    z.lazy(() => ListInstallationsReadConfigObject$inboundSchema),
+  ),
+});
+
+/** @internal */
+export type ListInstallationsReadConfig$Outbound = {
+  objects: { [k: string]: ListInstallationsReadConfigObject$Outbound };
+};
+
+/** @internal */
+export const ListInstallationsReadConfig$outboundSchema: z.ZodType<
+  ListInstallationsReadConfig$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsReadConfig
+> = z.object({
+  objects: z.record(
+    z.lazy(() => ListInstallationsReadConfigObject$outboundSchema),
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsReadConfig$ {
+  /** @deprecated use `ListInstallationsReadConfig$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsReadConfig$inboundSchema;
+  /** @deprecated use `ListInstallationsReadConfig$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsReadConfig$outboundSchema;
+  /** @deprecated use `ListInstallationsReadConfig$Outbound` instead. */
+  export type Outbound = ListInstallationsReadConfig$Outbound;
+}
+
+export function listInstallationsReadConfigToJSON(
+  listInstallationsReadConfig: ListInstallationsReadConfig,
+): string {
+  return JSON.stringify(
+    ListInstallationsReadConfig$outboundSchema.parse(
+      listInstallationsReadConfig,
+    ),
+  );
+}
+
+export function listInstallationsReadConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsReadConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsReadConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsReadConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyApplyOnUpdate$inboundSchema:
+  z.ZodNativeEnum<typeof ListInstallationsValueDefaultLegacyApplyOnUpdate> = z
+    .nativeEnum(ListInstallationsValueDefaultLegacyApplyOnUpdate);
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyApplyOnUpdate$outboundSchema:
+  z.ZodNativeEnum<typeof ListInstallationsValueDefaultLegacyApplyOnUpdate> =
+    ListInstallationsValueDefaultLegacyApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsValueDefaultLegacyApplyOnUpdate$ {
+  /** @deprecated use `ListInstallationsValueDefaultLegacyApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsValueDefaultLegacyApplyOnUpdate$inboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsValueDefaultLegacyApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyValueDefaultBoolean$inboundSchema:
+  z.ZodType<
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.boolean(),
+    applyOnUpdate:
+      ListInstallationsValueDefaultLegacyApplyOnUpdate$inboundSchema.optional(),
+  });
+
+/** @internal */
+export type ListInstallationsValueDefaultLegacyValueDefaultBoolean$Outbound = {
+  value: boolean;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyValueDefaultBoolean$outboundSchema:
+  z.ZodType<
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean$Outbound,
+    z.ZodTypeDef,
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean
+  > = z.object({
+    value: z.boolean(),
+    applyOnUpdate:
+      ListInstallationsValueDefaultLegacyApplyOnUpdate$outboundSchema
+        .optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsValueDefaultLegacyValueDefaultBoolean$ {
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultBoolean$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean$inboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultBoolean$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean$outboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultBoolean$Outbound` instead. */
+  export type Outbound =
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean$Outbound;
+}
+
+export function listInstallationsValueDefaultLegacyValueDefaultBooleanToJSON(
+  listInstallationsValueDefaultLegacyValueDefaultBoolean:
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean,
+): string {
+  return JSON.stringify(
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean$outboundSchema.parse(
+      listInstallationsValueDefaultLegacyValueDefaultBoolean,
+    ),
+  );
+}
+
+export function listInstallationsValueDefaultLegacyValueDefaultBooleanFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListInstallationsValueDefaultLegacyValueDefaultBoolean,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsValueDefaultLegacyValueDefaultBoolean$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsValueDefaultLegacyValueDefaultBoolean' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate
+  > = z.nativeEnum(
+    ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate,
+  );
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate
+  > =
+    ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$ {
+  /** @deprecated use `ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyValueDefaultInteger$inboundSchema:
+  z.ZodType<
+    ListInstallationsValueDefaultLegacyValueDefaultInteger,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.number().int(),
+    applyOnUpdate:
+      ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$inboundSchema
+        .optional(),
+  });
+
+/** @internal */
+export type ListInstallationsValueDefaultLegacyValueDefaultInteger$Outbound = {
+  value: number;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyValueDefaultInteger$outboundSchema:
+  z.ZodType<
+    ListInstallationsValueDefaultLegacyValueDefaultInteger$Outbound,
+    z.ZodTypeDef,
+    ListInstallationsValueDefaultLegacyValueDefaultInteger
+  > = z.object({
+    value: z.number().int(),
+    applyOnUpdate:
+      ListInstallationsValueDefaultLegacyInstallationsResponseApplyOnUpdate$outboundSchema
+        .optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsValueDefaultLegacyValueDefaultInteger$ {
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultInteger$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsValueDefaultLegacyValueDefaultInteger$inboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultInteger$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsValueDefaultLegacyValueDefaultInteger$outboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultInteger$Outbound` instead. */
+  export type Outbound =
+    ListInstallationsValueDefaultLegacyValueDefaultInteger$Outbound;
+}
+
+export function listInstallationsValueDefaultLegacyValueDefaultIntegerToJSON(
+  listInstallationsValueDefaultLegacyValueDefaultInteger:
+    ListInstallationsValueDefaultLegacyValueDefaultInteger,
+): string {
+  return JSON.stringify(
+    ListInstallationsValueDefaultLegacyValueDefaultInteger$outboundSchema.parse(
+      listInstallationsValueDefaultLegacyValueDefaultInteger,
+    ),
+  );
+}
+
+export function listInstallationsValueDefaultLegacyValueDefaultIntegerFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListInstallationsValueDefaultLegacyValueDefaultInteger,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsValueDefaultLegacyValueDefaultInteger$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsValueDefaultLegacyValueDefaultInteger' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate
+  > = z.nativeEnum(
+    ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate,
+  );
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate
+  > =
+    ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$ {
+  /** @deprecated use `ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyValueDefaultString$inboundSchema:
+  z.ZodType<
+    ListInstallationsValueDefaultLegacyValueDefaultString,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.string(),
+    applyOnUpdate:
+      ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$inboundSchema
+        .optional(),
+  });
+
+/** @internal */
+export type ListInstallationsValueDefaultLegacyValueDefaultString$Outbound = {
+  value: string;
+  applyOnUpdate?: string | undefined;
+};
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacyValueDefaultString$outboundSchema:
+  z.ZodType<
+    ListInstallationsValueDefaultLegacyValueDefaultString$Outbound,
+    z.ZodTypeDef,
+    ListInstallationsValueDefaultLegacyValueDefaultString
+  > = z.object({
+    value: z.string(),
+    applyOnUpdate:
+      ListInstallationsValueDefaultLegacyInstallationsApplyOnUpdate$outboundSchema
+        .optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsValueDefaultLegacyValueDefaultString$ {
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultString$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsValueDefaultLegacyValueDefaultString$inboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultString$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsValueDefaultLegacyValueDefaultString$outboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacyValueDefaultString$Outbound` instead. */
+  export type Outbound =
+    ListInstallationsValueDefaultLegacyValueDefaultString$Outbound;
+}
+
+export function listInstallationsValueDefaultLegacyValueDefaultStringToJSON(
+  listInstallationsValueDefaultLegacyValueDefaultString:
+    ListInstallationsValueDefaultLegacyValueDefaultString,
+): string {
+  return JSON.stringify(
+    ListInstallationsValueDefaultLegacyValueDefaultString$outboundSchema.parse(
+      listInstallationsValueDefaultLegacyValueDefaultString,
+    ),
+  );
+}
+
+export function listInstallationsValueDefaultLegacyValueDefaultStringFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListInstallationsValueDefaultLegacyValueDefaultString,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsValueDefaultLegacyValueDefaultString$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListInstallationsValueDefaultLegacyValueDefaultString' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacy$inboundSchema: z.ZodType<
+  ListInstallationsValueDefaultLegacy,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() =>
+    ListInstallationsValueDefaultLegacyValueDefaultString$inboundSchema
+  ),
+  z.lazy(() =>
+    ListInstallationsValueDefaultLegacyValueDefaultInteger$inboundSchema
+  ),
+  z.lazy(() =>
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean$inboundSchema
+  ),
+]);
+
+/** @internal */
+export type ListInstallationsValueDefaultLegacy$Outbound =
+  | ListInstallationsValueDefaultLegacyValueDefaultString$Outbound
+  | ListInstallationsValueDefaultLegacyValueDefaultInteger$Outbound
+  | ListInstallationsValueDefaultLegacyValueDefaultBoolean$Outbound;
+
+/** @internal */
+export const ListInstallationsValueDefaultLegacy$outboundSchema: z.ZodType<
+  ListInstallationsValueDefaultLegacy$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsValueDefaultLegacy
+> = z.union([
+  z.lazy(() =>
+    ListInstallationsValueDefaultLegacyValueDefaultString$outboundSchema
+  ),
+  z.lazy(() =>
+    ListInstallationsValueDefaultLegacyValueDefaultInteger$outboundSchema
+  ),
+  z.lazy(() =>
+    ListInstallationsValueDefaultLegacyValueDefaultBoolean$outboundSchema
+  ),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsValueDefaultLegacy$ {
+  /** @deprecated use `ListInstallationsValueDefaultLegacy$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsValueDefaultLegacy$inboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacy$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsValueDefaultLegacy$outboundSchema;
+  /** @deprecated use `ListInstallationsValueDefaultLegacy$Outbound` instead. */
+  export type Outbound = ListInstallationsValueDefaultLegacy$Outbound;
+}
+
+export function listInstallationsValueDefaultLegacyToJSON(
+  listInstallationsValueDefaultLegacy: ListInstallationsValueDefaultLegacy,
+): string {
+  return JSON.stringify(
+    ListInstallationsValueDefaultLegacy$outboundSchema.parse(
+      listInstallationsValueDefaultLegacy,
+    ),
+  );
+}
+
+export function listInstallationsValueDefaultLegacyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsValueDefaultLegacy, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsValueDefaultLegacy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsValueDefaultLegacy' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsDefaultValueForAField$inboundSchema: z.ZodType<
+  ListInstallationsDefaultValueForAField,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  stringValue: z.string().optional(),
+  integerValue: z.number().int().optional(),
+  booleanValue: z.boolean().optional(),
+});
+
+/** @internal */
+export type ListInstallationsDefaultValueForAField$Outbound = {
+  stringValue?: string | undefined;
+  integerValue?: number | undefined;
+  booleanValue?: boolean | undefined;
+};
+
+/** @internal */
+export const ListInstallationsDefaultValueForAField$outboundSchema: z.ZodType<
+  ListInstallationsDefaultValueForAField$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsDefaultValueForAField
+> = z.object({
+  stringValue: z.string().optional(),
+  integerValue: z.number().int().optional(),
+  booleanValue: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsDefaultValueForAField$ {
+  /** @deprecated use `ListInstallationsDefaultValueForAField$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsDefaultValueForAField$inboundSchema;
+  /** @deprecated use `ListInstallationsDefaultValueForAField$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsDefaultValueForAField$outboundSchema;
+  /** @deprecated use `ListInstallationsDefaultValueForAField$Outbound` instead. */
+  export type Outbound = ListInstallationsDefaultValueForAField$Outbound;
+}
+
+export function listInstallationsDefaultValueForAFieldToJSON(
+  listInstallationsDefaultValueForAField:
+    ListInstallationsDefaultValueForAField,
+): string {
+  return JSON.stringify(
+    ListInstallationsDefaultValueForAField$outboundSchema.parse(
+      listInstallationsDefaultValueForAField,
+    ),
+  );
+}
+
+export function listInstallationsDefaultValueForAFieldFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsDefaultValueForAField, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsDefaultValueForAField$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsDefaultValueForAField' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsWriteOnCreate$inboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsWriteOnCreate
+> = z.nativeEnum(ListInstallationsWriteOnCreate);
+
+/** @internal */
+export const ListInstallationsWriteOnCreate$outboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsWriteOnCreate
+> = ListInstallationsWriteOnCreate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsWriteOnCreate$ {
+  /** @deprecated use `ListInstallationsWriteOnCreate$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsWriteOnCreate$inboundSchema;
+  /** @deprecated use `ListInstallationsWriteOnCreate$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsWriteOnCreate$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsWriteOnUpdate$inboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsWriteOnUpdate
+> = z.nativeEnum(ListInstallationsWriteOnUpdate);
+
+/** @internal */
+export const ListInstallationsWriteOnUpdate$outboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsWriteOnUpdate
+> = ListInstallationsWriteOnUpdate$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsWriteOnUpdate$ {
+  /** @deprecated use `ListInstallationsWriteOnUpdate$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsWriteOnUpdate$inboundSchema;
+  /** @deprecated use `ListInstallationsWriteOnUpdate$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsWriteOnUpdate$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsFieldSetting$inboundSchema: z.ZodType<
+  ListInstallationsFieldSetting,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  default: z.lazy(() => ListInstallationsDefaultValueForAField$inboundSchema)
+    .optional(),
+  writeOnCreate: ListInstallationsWriteOnCreate$inboundSchema.default("always"),
+  writeOnUpdate: ListInstallationsWriteOnUpdate$inboundSchema.default("always"),
+});
+
+/** @internal */
+export type ListInstallationsFieldSetting$Outbound = {
+  default?: ListInstallationsDefaultValueForAField$Outbound | undefined;
+  writeOnCreate: string;
+  writeOnUpdate: string;
+};
+
+/** @internal */
+export const ListInstallationsFieldSetting$outboundSchema: z.ZodType<
+  ListInstallationsFieldSetting$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsFieldSetting
+> = z.object({
+  default: z.lazy(() => ListInstallationsDefaultValueForAField$outboundSchema)
+    .optional(),
+  writeOnCreate: ListInstallationsWriteOnCreate$outboundSchema.default(
+    "always",
+  ),
+  writeOnUpdate: ListInstallationsWriteOnUpdate$outboundSchema.default(
+    "always",
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsFieldSetting$ {
+  /** @deprecated use `ListInstallationsFieldSetting$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsFieldSetting$inboundSchema;
+  /** @deprecated use `ListInstallationsFieldSetting$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsFieldSetting$outboundSchema;
+  /** @deprecated use `ListInstallationsFieldSetting$Outbound` instead. */
+  export type Outbound = ListInstallationsFieldSetting$Outbound;
+}
+
+export function listInstallationsFieldSettingToJSON(
+  listInstallationsFieldSetting: ListInstallationsFieldSetting,
+): string {
+  return JSON.stringify(
+    ListInstallationsFieldSetting$outboundSchema.parse(
+      listInstallationsFieldSetting,
+    ),
+  );
+}
+
+export function listInstallationsFieldSettingFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsFieldSetting, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsFieldSetting$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsFieldSetting' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsWriteConfigObject$inboundSchema: z.ZodType<
+  ListInstallationsWriteConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objectName: z.string(),
+  selectedValueDefaults: z.record(
+    z.union([
+      z.lazy(() =>
+        ListInstallationsValueDefaultLegacyValueDefaultString$inboundSchema
+      ),
+      z.lazy(() =>
+        ListInstallationsValueDefaultLegacyValueDefaultInteger$inboundSchema
+      ),
+      z.lazy(() =>
+        ListInstallationsValueDefaultLegacyValueDefaultBoolean$inboundSchema
+      ),
+    ]),
+  ).optional(),
+  selectedFieldSettings: z.record(
+    z.lazy(() => ListInstallationsFieldSetting$inboundSchema),
+  ).optional(),
+});
+
+/** @internal */
+export type ListInstallationsWriteConfigObject$Outbound = {
+  objectName: string;
+  selectedValueDefaults?: {
+    [k: string]:
+      | ListInstallationsValueDefaultLegacyValueDefaultString$Outbound
+      | ListInstallationsValueDefaultLegacyValueDefaultInteger$Outbound
+      | ListInstallationsValueDefaultLegacyValueDefaultBoolean$Outbound;
+  } | undefined;
+  selectedFieldSettings?: {
+    [k: string]: ListInstallationsFieldSetting$Outbound;
+  } | undefined;
+};
+
+/** @internal */
+export const ListInstallationsWriteConfigObject$outboundSchema: z.ZodType<
+  ListInstallationsWriteConfigObject$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsWriteConfigObject
+> = z.object({
+  objectName: z.string(),
+  selectedValueDefaults: z.record(
+    z.union([
+      z.lazy(() =>
+        ListInstallationsValueDefaultLegacyValueDefaultString$outboundSchema
+      ),
+      z.lazy(() =>
+        ListInstallationsValueDefaultLegacyValueDefaultInteger$outboundSchema
+      ),
+      z.lazy(() =>
+        ListInstallationsValueDefaultLegacyValueDefaultBoolean$outboundSchema
+      ),
+    ]),
+  ).optional(),
+  selectedFieldSettings: z.record(
+    z.lazy(() => ListInstallationsFieldSetting$outboundSchema),
+  ).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsWriteConfigObject$ {
+  /** @deprecated use `ListInstallationsWriteConfigObject$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsWriteConfigObject$inboundSchema;
+  /** @deprecated use `ListInstallationsWriteConfigObject$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsWriteConfigObject$outboundSchema;
+  /** @deprecated use `ListInstallationsWriteConfigObject$Outbound` instead. */
+  export type Outbound = ListInstallationsWriteConfigObject$Outbound;
+}
+
+export function listInstallationsWriteConfigObjectToJSON(
+  listInstallationsWriteConfigObject: ListInstallationsWriteConfigObject,
+): string {
+  return JSON.stringify(
+    ListInstallationsWriteConfigObject$outboundSchema.parse(
+      listInstallationsWriteConfigObject,
+    ),
+  );
+}
+
+export function listInstallationsWriteConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsWriteConfigObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsWriteConfigObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsWriteConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsWriteConfig$inboundSchema: z.ZodType<
+  ListInstallationsWriteConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(
+    z.lazy(() => ListInstallationsWriteConfigObject$inboundSchema),
+  ).optional(),
+});
+
+/** @internal */
+export type ListInstallationsWriteConfig$Outbound = {
+  objects?:
+    | { [k: string]: ListInstallationsWriteConfigObject$Outbound }
+    | undefined;
+};
+
+/** @internal */
+export const ListInstallationsWriteConfig$outboundSchema: z.ZodType<
+  ListInstallationsWriteConfig$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsWriteConfig
+> = z.object({
+  objects: z.record(
+    z.lazy(() => ListInstallationsWriteConfigObject$outboundSchema),
+  ).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsWriteConfig$ {
+  /** @deprecated use `ListInstallationsWriteConfig$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsWriteConfig$inboundSchema;
+  /** @deprecated use `ListInstallationsWriteConfig$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsWriteConfig$outboundSchema;
+  /** @deprecated use `ListInstallationsWriteConfig$Outbound` instead. */
+  export type Outbound = ListInstallationsWriteConfig$Outbound;
+}
+
+export function listInstallationsWriteConfigToJSON(
+  listInstallationsWriteConfig: ListInstallationsWriteConfig,
+): string {
+  return JSON.stringify(
+    ListInstallationsWriteConfig$outboundSchema.parse(
+      listInstallationsWriteConfig,
+    ),
+  );
+}
+
+export function listInstallationsWriteConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsWriteConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsWriteConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsWriteConfig' from JSON`,
   );
 }
 
@@ -1242,24 +2775,431 @@ export function listInstallationsBaseProxyConfigFromJSON(
 }
 
 /** @internal */
+export const ListInstallationsEnabled$inboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsEnabled
+> = z.nativeEnum(ListInstallationsEnabled);
+
+/** @internal */
+export const ListInstallationsEnabled$outboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsEnabled
+> = ListInstallationsEnabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsEnabled$ {
+  /** @deprecated use `ListInstallationsEnabled$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsEnabled$inboundSchema;
+  /** @deprecated use `ListInstallationsEnabled$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsEnabled$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsCreateEvent$inboundSchema: z.ZodType<
+  ListInstallationsCreateEvent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: ListInstallationsEnabled$inboundSchema,
+});
+
+/** @internal */
+export type ListInstallationsCreateEvent$Outbound = {
+  enabled: string;
+};
+
+/** @internal */
+export const ListInstallationsCreateEvent$outboundSchema: z.ZodType<
+  ListInstallationsCreateEvent$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsCreateEvent
+> = z.object({
+  enabled: ListInstallationsEnabled$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsCreateEvent$ {
+  /** @deprecated use `ListInstallationsCreateEvent$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsCreateEvent$inboundSchema;
+  /** @deprecated use `ListInstallationsCreateEvent$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsCreateEvent$outboundSchema;
+  /** @deprecated use `ListInstallationsCreateEvent$Outbound` instead. */
+  export type Outbound = ListInstallationsCreateEvent$Outbound;
+}
+
+export function listInstallationsCreateEventToJSON(
+  listInstallationsCreateEvent: ListInstallationsCreateEvent,
+): string {
+  return JSON.stringify(
+    ListInstallationsCreateEvent$outboundSchema.parse(
+      listInstallationsCreateEvent,
+    ),
+  );
+}
+
+export function listInstallationsCreateEventFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsCreateEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsCreateEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsCreateEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsInstallationsEnabled$inboundSchema:
+  z.ZodNativeEnum<typeof ListInstallationsInstallationsEnabled> = z.nativeEnum(
+    ListInstallationsInstallationsEnabled,
+  );
+
+/** @internal */
+export const ListInstallationsInstallationsEnabled$outboundSchema:
+  z.ZodNativeEnum<typeof ListInstallationsInstallationsEnabled> =
+    ListInstallationsInstallationsEnabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsInstallationsEnabled$ {
+  /** @deprecated use `ListInstallationsInstallationsEnabled$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsInstallationsEnabled$inboundSchema;
+  /** @deprecated use `ListInstallationsInstallationsEnabled$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsInstallationsEnabled$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsWatchFieldsAuto$inboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsWatchFieldsAuto
+> = z.nativeEnum(ListInstallationsWatchFieldsAuto);
+
+/** @internal */
+export const ListInstallationsWatchFieldsAuto$outboundSchema: z.ZodNativeEnum<
+  typeof ListInstallationsWatchFieldsAuto
+> = ListInstallationsWatchFieldsAuto$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsWatchFieldsAuto$ {
+  /** @deprecated use `ListInstallationsWatchFieldsAuto$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsWatchFieldsAuto$inboundSchema;
+  /** @deprecated use `ListInstallationsWatchFieldsAuto$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsWatchFieldsAuto$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsUpdateEvent$inboundSchema: z.ZodType<
+  ListInstallationsUpdateEvent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: ListInstallationsInstallationsEnabled$inboundSchema,
+  watchFieldsAuto: ListInstallationsWatchFieldsAuto$inboundSchema.optional(),
+  requiredWatchFields: z.array(z.string()).optional(),
+});
+
+/** @internal */
+export type ListInstallationsUpdateEvent$Outbound = {
+  enabled: string;
+  watchFieldsAuto?: string | undefined;
+  requiredWatchFields?: Array<string> | undefined;
+};
+
+/** @internal */
+export const ListInstallationsUpdateEvent$outboundSchema: z.ZodType<
+  ListInstallationsUpdateEvent$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsUpdateEvent
+> = z.object({
+  enabled: ListInstallationsInstallationsEnabled$outboundSchema,
+  watchFieldsAuto: ListInstallationsWatchFieldsAuto$outboundSchema.optional(),
+  requiredWatchFields: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsUpdateEvent$ {
+  /** @deprecated use `ListInstallationsUpdateEvent$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsUpdateEvent$inboundSchema;
+  /** @deprecated use `ListInstallationsUpdateEvent$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsUpdateEvent$outboundSchema;
+  /** @deprecated use `ListInstallationsUpdateEvent$Outbound` instead. */
+  export type Outbound = ListInstallationsUpdateEvent$Outbound;
+}
+
+export function listInstallationsUpdateEventToJSON(
+  listInstallationsUpdateEvent: ListInstallationsUpdateEvent,
+): string {
+  return JSON.stringify(
+    ListInstallationsUpdateEvent$outboundSchema.parse(
+      listInstallationsUpdateEvent,
+    ),
+  );
+}
+
+export function listInstallationsUpdateEventFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsUpdateEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsUpdateEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsUpdateEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsInstallationsResponseEnabled$inboundSchema:
+  z.ZodNativeEnum<typeof ListInstallationsInstallationsResponseEnabled> = z
+    .nativeEnum(ListInstallationsInstallationsResponseEnabled);
+
+/** @internal */
+export const ListInstallationsInstallationsResponseEnabled$outboundSchema:
+  z.ZodNativeEnum<typeof ListInstallationsInstallationsResponseEnabled> =
+    ListInstallationsInstallationsResponseEnabled$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsInstallationsResponseEnabled$ {
+  /** @deprecated use `ListInstallationsInstallationsResponseEnabled$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsInstallationsResponseEnabled$inboundSchema;
+  /** @deprecated use `ListInstallationsInstallationsResponseEnabled$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsInstallationsResponseEnabled$outboundSchema;
+}
+
+/** @internal */
+export const ListInstallationsDeleteEvent$inboundSchema: z.ZodType<
+  ListInstallationsDeleteEvent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: ListInstallationsInstallationsResponseEnabled$inboundSchema,
+});
+
+/** @internal */
+export type ListInstallationsDeleteEvent$Outbound = {
+  enabled: string;
+};
+
+/** @internal */
+export const ListInstallationsDeleteEvent$outboundSchema: z.ZodType<
+  ListInstallationsDeleteEvent$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsDeleteEvent
+> = z.object({
+  enabled: ListInstallationsInstallationsResponseEnabled$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsDeleteEvent$ {
+  /** @deprecated use `ListInstallationsDeleteEvent$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsDeleteEvent$inboundSchema;
+  /** @deprecated use `ListInstallationsDeleteEvent$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsDeleteEvent$outboundSchema;
+  /** @deprecated use `ListInstallationsDeleteEvent$Outbound` instead. */
+  export type Outbound = ListInstallationsDeleteEvent$Outbound;
+}
+
+export function listInstallationsDeleteEventToJSON(
+  listInstallationsDeleteEvent: ListInstallationsDeleteEvent,
+): string {
+  return JSON.stringify(
+    ListInstallationsDeleteEvent$outboundSchema.parse(
+      listInstallationsDeleteEvent,
+    ),
+  );
+}
+
+export function listInstallationsDeleteEventFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsDeleteEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsDeleteEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsDeleteEvent' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsSubscribeConfigObject$inboundSchema: z.ZodType<
+  ListInstallationsSubscribeConfigObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  inheritFieldsAndMappings: z.boolean(),
+  objectName: z.string(),
+  destination: z.string(),
+  createEvent: z.lazy(() => ListInstallationsCreateEvent$inboundSchema)
+    .optional(),
+  updateEvent: z.lazy(() => ListInstallationsUpdateEvent$inboundSchema)
+    .optional(),
+  deleteEvent: z.lazy(() => ListInstallationsDeleteEvent$inboundSchema)
+    .optional(),
+});
+
+/** @internal */
+export type ListInstallationsSubscribeConfigObject$Outbound = {
+  inheritFieldsAndMappings: boolean;
+  objectName: string;
+  destination: string;
+  createEvent?: ListInstallationsCreateEvent$Outbound | undefined;
+  updateEvent?: ListInstallationsUpdateEvent$Outbound | undefined;
+  deleteEvent?: ListInstallationsDeleteEvent$Outbound | undefined;
+};
+
+/** @internal */
+export const ListInstallationsSubscribeConfigObject$outboundSchema: z.ZodType<
+  ListInstallationsSubscribeConfigObject$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsSubscribeConfigObject
+> = z.object({
+  inheritFieldsAndMappings: z.boolean(),
+  objectName: z.string(),
+  destination: z.string(),
+  createEvent: z.lazy(() => ListInstallationsCreateEvent$outboundSchema)
+    .optional(),
+  updateEvent: z.lazy(() => ListInstallationsUpdateEvent$outboundSchema)
+    .optional(),
+  deleteEvent: z.lazy(() => ListInstallationsDeleteEvent$outboundSchema)
+    .optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsSubscribeConfigObject$ {
+  /** @deprecated use `ListInstallationsSubscribeConfigObject$inboundSchema` instead. */
+  export const inboundSchema =
+    ListInstallationsSubscribeConfigObject$inboundSchema;
+  /** @deprecated use `ListInstallationsSubscribeConfigObject$outboundSchema` instead. */
+  export const outboundSchema =
+    ListInstallationsSubscribeConfigObject$outboundSchema;
+  /** @deprecated use `ListInstallationsSubscribeConfigObject$Outbound` instead. */
+  export type Outbound = ListInstallationsSubscribeConfigObject$Outbound;
+}
+
+export function listInstallationsSubscribeConfigObjectToJSON(
+  listInstallationsSubscribeConfigObject:
+    ListInstallationsSubscribeConfigObject,
+): string {
+  return JSON.stringify(
+    ListInstallationsSubscribeConfigObject$outboundSchema.parse(
+      listInstallationsSubscribeConfigObject,
+    ),
+  );
+}
+
+export function listInstallationsSubscribeConfigObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsSubscribeConfigObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListInstallationsSubscribeConfigObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsSubscribeConfigObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInstallationsSubscribeConfig$inboundSchema: z.ZodType<
+  ListInstallationsSubscribeConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  objects: z.record(
+    z.lazy(() => ListInstallationsSubscribeConfigObject$inboundSchema),
+  ),
+});
+
+/** @internal */
+export type ListInstallationsSubscribeConfig$Outbound = {
+  objects: { [k: string]: ListInstallationsSubscribeConfigObject$Outbound };
+};
+
+/** @internal */
+export const ListInstallationsSubscribeConfig$outboundSchema: z.ZodType<
+  ListInstallationsSubscribeConfig$Outbound,
+  z.ZodTypeDef,
+  ListInstallationsSubscribeConfig
+> = z.object({
+  objects: z.record(
+    z.lazy(() => ListInstallationsSubscribeConfigObject$outboundSchema),
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInstallationsSubscribeConfig$ {
+  /** @deprecated use `ListInstallationsSubscribeConfig$inboundSchema` instead. */
+  export const inboundSchema = ListInstallationsSubscribeConfig$inboundSchema;
+  /** @deprecated use `ListInstallationsSubscribeConfig$outboundSchema` instead. */
+  export const outboundSchema = ListInstallationsSubscribeConfig$outboundSchema;
+  /** @deprecated use `ListInstallationsSubscribeConfig$Outbound` instead. */
+  export type Outbound = ListInstallationsSubscribeConfig$Outbound;
+}
+
+export function listInstallationsSubscribeConfigToJSON(
+  listInstallationsSubscribeConfig: ListInstallationsSubscribeConfig,
+): string {
+  return JSON.stringify(
+    ListInstallationsSubscribeConfig$outboundSchema.parse(
+      listInstallationsSubscribeConfig,
+    ),
+  );
+}
+
+export function listInstallationsSubscribeConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInstallationsSubscribeConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInstallationsSubscribeConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInstallationsSubscribeConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListInstallationsConfigContent$inboundSchema: z.ZodType<
   ListInstallationsConfigContent,
   z.ZodTypeDef,
   unknown
 > = z.object({
   provider: z.string(),
-  read: z.any().optional(),
-  write: z.any().optional(),
+  read: z.lazy(() => ListInstallationsReadConfig$inboundSchema).optional(),
+  write: z.lazy(() => ListInstallationsWriteConfig$inboundSchema).optional(),
   proxy: z.lazy(() => ListInstallationsBaseProxyConfig$inboundSchema)
+    .optional(),
+  subscribe: z.lazy(() => ListInstallationsSubscribeConfig$inboundSchema)
     .optional(),
 });
 
 /** @internal */
 export type ListInstallationsConfigContent$Outbound = {
   provider: string;
-  read?: any | undefined;
-  write?: any | undefined;
+  read?: ListInstallationsReadConfig$Outbound | undefined;
+  write?: ListInstallationsWriteConfig$Outbound | undefined;
   proxy?: ListInstallationsBaseProxyConfig$Outbound | undefined;
+  subscribe?: ListInstallationsSubscribeConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -1269,9 +3209,11 @@ export const ListInstallationsConfigContent$outboundSchema: z.ZodType<
   ListInstallationsConfigContent
 > = z.object({
   provider: z.string(),
-  read: z.any().optional(),
-  write: z.any().optional(),
+  read: z.lazy(() => ListInstallationsReadConfig$outboundSchema).optional(),
+  write: z.lazy(() => ListInstallationsWriteConfig$outboundSchema).optional(),
   proxy: z.lazy(() => ListInstallationsBaseProxyConfig$outboundSchema)
+    .optional(),
+  subscribe: z.lazy(() => ListInstallationsSubscribeConfig$outboundSchema)
     .optional(),
 });
 
