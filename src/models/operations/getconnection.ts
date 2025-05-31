@@ -268,6 +268,34 @@ export type GetConnectionOAuth2AuthorizationCodeToken = {
 };
 
 /**
+ * The source of the metadata field
+ */
+export const GetConnectionSource = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type GetConnectionSource = ClosedEnum<typeof GetConnectionSource>;
+
+export type GetConnectionProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: GetConnectionSource;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
+
+/**
  * Connection
  */
 export type GetConnectionConnection = {
@@ -317,6 +345,9 @@ export type GetConnectionConnection = {
    * The API key used while making the connection.
    */
   apiKey?: string | undefined;
+  providerMetadata?:
+    | { [k: string]: GetConnectionProviderMetadataInfo }
+    | undefined;
 };
 
 export type GetConnectionResponse =
@@ -964,6 +995,90 @@ export function getConnectionOAuth2AuthorizationCodeTokenFromJSON(
 }
 
 /** @internal */
+export const GetConnectionSource$inboundSchema: z.ZodNativeEnum<
+  typeof GetConnectionSource
+> = z.nativeEnum(GetConnectionSource);
+
+/** @internal */
+export const GetConnectionSource$outboundSchema: z.ZodNativeEnum<
+  typeof GetConnectionSource
+> = GetConnectionSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetConnectionSource$ {
+  /** @deprecated use `GetConnectionSource$inboundSchema` instead. */
+  export const inboundSchema = GetConnectionSource$inboundSchema;
+  /** @deprecated use `GetConnectionSource$outboundSchema` instead. */
+  export const outboundSchema = GetConnectionSource$outboundSchema;
+}
+
+/** @internal */
+export const GetConnectionProviderMetadataInfo$inboundSchema: z.ZodType<
+  GetConnectionProviderMetadataInfo,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  source: GetConnectionSource$inboundSchema,
+  displayName: z.string().optional(),
+});
+
+/** @internal */
+export type GetConnectionProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const GetConnectionProviderMetadataInfo$outboundSchema: z.ZodType<
+  GetConnectionProviderMetadataInfo$Outbound,
+  z.ZodTypeDef,
+  GetConnectionProviderMetadataInfo
+> = z.object({
+  value: z.string(),
+  source: GetConnectionSource$outboundSchema,
+  displayName: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetConnectionProviderMetadataInfo$ {
+  /** @deprecated use `GetConnectionProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema = GetConnectionProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `GetConnectionProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema =
+    GetConnectionProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `GetConnectionProviderMetadataInfo$Outbound` instead. */
+  export type Outbound = GetConnectionProviderMetadataInfo$Outbound;
+}
+
+export function getConnectionProviderMetadataInfoToJSON(
+  getConnectionProviderMetadataInfo: GetConnectionProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    GetConnectionProviderMetadataInfo$outboundSchema.parse(
+      getConnectionProviderMetadataInfo,
+    ),
+  );
+}
+
+export function getConnectionProviderMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<GetConnectionProviderMetadataInfo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetConnectionProviderMetadataInfo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetConnectionProviderMetadataInfo' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetConnectionConnection$inboundSchema: z.ZodType<
   GetConnectionConnection,
   z.ZodTypeDef,
@@ -986,6 +1101,9 @@ export const GetConnectionConnection$inboundSchema: z.ZodType<
     GetConnectionOAuth2AuthorizationCodeToken$inboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => GetConnectionProviderMetadataInfo$inboundSchema),
+  ).optional(),
 });
 
 /** @internal */
@@ -1006,6 +1124,9 @@ export type GetConnectionConnection$Outbound = {
     | GetConnectionOAuth2AuthorizationCodeToken$Outbound
     | undefined;
   apiKey?: string | undefined;
+  providerMetadata?:
+    | { [k: string]: GetConnectionProviderMetadataInfo$Outbound }
+    | undefined;
 };
 
 /** @internal */
@@ -1030,6 +1151,9 @@ export const GetConnectionConnection$outboundSchema: z.ZodType<
     GetConnectionOAuth2AuthorizationCodeToken$outboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() => GetConnectionProviderMetadataInfo$outboundSchema),
+  ).optional(),
 });
 
 /**

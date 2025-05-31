@@ -9,6 +9,36 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The source of the metadata field
+ */
+export const GenerateConnectionSource = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type GenerateConnectionSource = ClosedEnum<
+  typeof GenerateConnectionSource
+>;
+
+export type GenerateConnectionProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: GenerateConnectionSource;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
+
 export type BasicAuth = {
   /**
    * The username to use for the connection.
@@ -96,6 +126,9 @@ export type GenerateConnectionGenerateConnectionRequest = {
    * The ID of the provider workspace that this connection belongs to.
    */
   providerWorkspaceRef?: string | undefined;
+  providerMetadata?:
+    | { [k: string]: GenerateConnectionProviderMetadataInfo }
+    | undefined;
   /**
    * The name of the user group that has access to this installation.
    */
@@ -364,6 +397,36 @@ export type GenerateConnectionOAuth2AuthorizationCodeToken = {
 };
 
 /**
+ * The source of the metadata field
+ */
+export const GenerateConnectionConnectionsSource = {
+  Input: "input",
+  Token: "token",
+  Provider: "provider",
+} as const;
+/**
+ * The source of the metadata field
+ */
+export type GenerateConnectionConnectionsSource = ClosedEnum<
+  typeof GenerateConnectionConnectionsSource
+>;
+
+export type GenerateConnectionConnectionsProviderMetadataInfo = {
+  /**
+   * The value of the metadata field
+   */
+  value: string;
+  /**
+   * The source of the metadata field
+   */
+  source: GenerateConnectionConnectionsSource;
+  /**
+   * The human-readable name for the field
+   */
+  displayName?: string | undefined;
+};
+
+/**
  * Created
  */
 export type GenerateConnectionConnection = {
@@ -413,11 +476,101 @@ export type GenerateConnectionConnection = {
    * The API key used while making the connection.
    */
   apiKey?: string | undefined;
+  providerMetadata?: {
+    [k: string]: GenerateConnectionConnectionsProviderMetadataInfo;
+  } | undefined;
 };
 
 export type GenerateConnectionResponse =
   | GenerateConnectionConnection
   | GenerateConnectionAPIProblem;
+
+/** @internal */
+export const GenerateConnectionSource$inboundSchema: z.ZodNativeEnum<
+  typeof GenerateConnectionSource
+> = z.nativeEnum(GenerateConnectionSource);
+
+/** @internal */
+export const GenerateConnectionSource$outboundSchema: z.ZodNativeEnum<
+  typeof GenerateConnectionSource
+> = GenerateConnectionSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GenerateConnectionSource$ {
+  /** @deprecated use `GenerateConnectionSource$inboundSchema` instead. */
+  export const inboundSchema = GenerateConnectionSource$inboundSchema;
+  /** @deprecated use `GenerateConnectionSource$outboundSchema` instead. */
+  export const outboundSchema = GenerateConnectionSource$outboundSchema;
+}
+
+/** @internal */
+export const GenerateConnectionProviderMetadataInfo$inboundSchema: z.ZodType<
+  GenerateConnectionProviderMetadataInfo,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  source: GenerateConnectionSource$inboundSchema,
+  displayName: z.string().optional(),
+});
+
+/** @internal */
+export type GenerateConnectionProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const GenerateConnectionProviderMetadataInfo$outboundSchema: z.ZodType<
+  GenerateConnectionProviderMetadataInfo$Outbound,
+  z.ZodTypeDef,
+  GenerateConnectionProviderMetadataInfo
+> = z.object({
+  value: z.string(),
+  source: GenerateConnectionSource$outboundSchema,
+  displayName: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GenerateConnectionProviderMetadataInfo$ {
+  /** @deprecated use `GenerateConnectionProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema =
+    GenerateConnectionProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `GenerateConnectionProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema =
+    GenerateConnectionProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `GenerateConnectionProviderMetadataInfo$Outbound` instead. */
+  export type Outbound = GenerateConnectionProviderMetadataInfo$Outbound;
+}
+
+export function generateConnectionProviderMetadataInfoToJSON(
+  generateConnectionProviderMetadataInfo:
+    GenerateConnectionProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    GenerateConnectionProviderMetadataInfo$outboundSchema.parse(
+      generateConnectionProviderMetadataInfo,
+    ),
+  );
+}
+
+export function generateConnectionProviderMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<GenerateConnectionProviderMetadataInfo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GenerateConnectionProviderMetadataInfo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GenerateConnectionProviderMetadataInfo' from JSON`,
+  );
+}
 
 /** @internal */
 export const BasicAuth$inboundSchema: z.ZodType<
@@ -782,6 +935,9 @@ export const GenerateConnectionGenerateConnectionRequest$inboundSchema:
     unknown
   > = z.object({
     providerWorkspaceRef: z.string().optional(),
+    providerMetadata: z.record(
+      z.lazy(() => GenerateConnectionProviderMetadataInfo$inboundSchema),
+    ).optional(),
     groupName: z.string().optional(),
     groupRef: z.string(),
     consumerName: z.string().optional(),
@@ -801,6 +957,9 @@ export const GenerateConnectionGenerateConnectionRequest$inboundSchema:
 /** @internal */
 export type GenerateConnectionGenerateConnectionRequest$Outbound = {
   providerWorkspaceRef?: string | undefined;
+  providerMetadata?: {
+    [k: string]: GenerateConnectionProviderMetadataInfo$Outbound;
+  } | undefined;
   groupName?: string | undefined;
   groupRef: string;
   consumerName?: string | undefined;
@@ -821,6 +980,9 @@ export const GenerateConnectionGenerateConnectionRequest$outboundSchema:
     GenerateConnectionGenerateConnectionRequest
   > = z.object({
     providerWorkspaceRef: z.string().optional(),
+    providerMetadata: z.record(
+      z.lazy(() => GenerateConnectionProviderMetadataInfo$outboundSchema),
+    ).optional(),
     groupName: z.string().optional(),
     groupRef: z.string(),
     consumerName: z.string().optional(),
@@ -1519,6 +1681,103 @@ export function generateConnectionOAuth2AuthorizationCodeTokenFromJSON(
 }
 
 /** @internal */
+export const GenerateConnectionConnectionsSource$inboundSchema: z.ZodNativeEnum<
+  typeof GenerateConnectionConnectionsSource
+> = z.nativeEnum(GenerateConnectionConnectionsSource);
+
+/** @internal */
+export const GenerateConnectionConnectionsSource$outboundSchema:
+  z.ZodNativeEnum<typeof GenerateConnectionConnectionsSource> =
+    GenerateConnectionConnectionsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GenerateConnectionConnectionsSource$ {
+  /** @deprecated use `GenerateConnectionConnectionsSource$inboundSchema` instead. */
+  export const inboundSchema =
+    GenerateConnectionConnectionsSource$inboundSchema;
+  /** @deprecated use `GenerateConnectionConnectionsSource$outboundSchema` instead. */
+  export const outboundSchema =
+    GenerateConnectionConnectionsSource$outboundSchema;
+}
+
+/** @internal */
+export const GenerateConnectionConnectionsProviderMetadataInfo$inboundSchema:
+  z.ZodType<
+    GenerateConnectionConnectionsProviderMetadataInfo,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.string(),
+    source: GenerateConnectionConnectionsSource$inboundSchema,
+    displayName: z.string().optional(),
+  });
+
+/** @internal */
+export type GenerateConnectionConnectionsProviderMetadataInfo$Outbound = {
+  value: string;
+  source: string;
+  displayName?: string | undefined;
+};
+
+/** @internal */
+export const GenerateConnectionConnectionsProviderMetadataInfo$outboundSchema:
+  z.ZodType<
+    GenerateConnectionConnectionsProviderMetadataInfo$Outbound,
+    z.ZodTypeDef,
+    GenerateConnectionConnectionsProviderMetadataInfo
+  > = z.object({
+    value: z.string(),
+    source: GenerateConnectionConnectionsSource$outboundSchema,
+    displayName: z.string().optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GenerateConnectionConnectionsProviderMetadataInfo$ {
+  /** @deprecated use `GenerateConnectionConnectionsProviderMetadataInfo$inboundSchema` instead. */
+  export const inboundSchema =
+    GenerateConnectionConnectionsProviderMetadataInfo$inboundSchema;
+  /** @deprecated use `GenerateConnectionConnectionsProviderMetadataInfo$outboundSchema` instead. */
+  export const outboundSchema =
+    GenerateConnectionConnectionsProviderMetadataInfo$outboundSchema;
+  /** @deprecated use `GenerateConnectionConnectionsProviderMetadataInfo$Outbound` instead. */
+  export type Outbound =
+    GenerateConnectionConnectionsProviderMetadataInfo$Outbound;
+}
+
+export function generateConnectionConnectionsProviderMetadataInfoToJSON(
+  generateConnectionConnectionsProviderMetadataInfo:
+    GenerateConnectionConnectionsProviderMetadataInfo,
+): string {
+  return JSON.stringify(
+    GenerateConnectionConnectionsProviderMetadataInfo$outboundSchema.parse(
+      generateConnectionConnectionsProviderMetadataInfo,
+    ),
+  );
+}
+
+export function generateConnectionConnectionsProviderMetadataInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GenerateConnectionConnectionsProviderMetadataInfo,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GenerateConnectionConnectionsProviderMetadataInfo$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GenerateConnectionConnectionsProviderMetadataInfo' from JSON`,
+  );
+}
+
+/** @internal */
 export const GenerateConnectionConnection$inboundSchema: z.ZodType<
   GenerateConnectionConnection,
   z.ZodTypeDef,
@@ -1542,6 +1801,11 @@ export const GenerateConnectionConnection$inboundSchema: z.ZodType<
     GenerateConnectionOAuth2AuthorizationCodeToken$inboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() =>
+      GenerateConnectionConnectionsProviderMetadataInfo$inboundSchema
+    ),
+  ).optional(),
 });
 
 /** @internal */
@@ -1562,6 +1826,9 @@ export type GenerateConnectionConnection$Outbound = {
     | GenerateConnectionOAuth2AuthorizationCodeToken$Outbound
     | undefined;
   apiKey?: string | undefined;
+  providerMetadata?: {
+    [k: string]: GenerateConnectionConnectionsProviderMetadataInfo$Outbound;
+  } | undefined;
 };
 
 /** @internal */
@@ -1587,6 +1854,11 @@ export const GenerateConnectionConnection$outboundSchema: z.ZodType<
     GenerateConnectionOAuth2AuthorizationCodeToken$outboundSchema
   ).optional(),
   apiKey: z.string().optional(),
+  providerMetadata: z.record(
+    z.lazy(() =>
+      GenerateConnectionConnectionsProviderMetadataInfo$outboundSchema
+    ),
+  ).optional(),
 });
 
 /**

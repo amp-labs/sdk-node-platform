@@ -15,7 +15,6 @@ export * from "./deleteconnection.js";
 export * from "./deletedestination.js";
 export * from "./deleteinstallation.js";
 export * from "./deleteintegration.js";
-export * from "./deleteproject.js";
 export * from "./deleteproviderapp.js";
 export * from "./generateconnection.js";
 export * from "./generateuploadurl.js";

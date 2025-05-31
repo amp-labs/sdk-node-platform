@@ -8,7 +8,7 @@
 ```typescript
 const value: operations.Log[] = [
   {
-    timestamp: "2023-07-13T21:34:44.816Z",
+    timestamp: "2023-07-13T21:34:44.816354Z",
     message: {
       msg: "This is a log message",
     },

@@ -121,17 +121,23 @@ async function run() {
                 mapToDisplayName: "People",
                 requiredFields: [
                   {
-                    fieldName: "<value>",
-                    mapToName: "account_id",
-                    mapToDisplayName: "Account ID",
+                    mapToName: "<value>",
                   },
                   {
                     fieldName: "<value>",
                     mapToName: "account_id",
                     mapToDisplayName: "Account ID",
                   },
+                  {
+                    mapToName: "<value>",
+                  },
                 ],
                 optionalFields: [
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
                   {
                     mapToName: "<value>",
                   },
@@ -151,9 +157,7 @@ async function run() {
                 mapToDisplayName: "People",
                 requiredFields: [
                   {
-                    fieldName: "<value>",
-                    mapToName: "account_id",
-                    mapToDisplayName: "Account ID",
+                    mapToName: "<value>",
                   },
                   {
                     fieldName: "<value>",
@@ -161,17 +165,50 @@ async function run() {
                     mapToDisplayName: "Account ID",
                   },
                   {
-                    fieldName: "<value>",
-                    mapToName: "account_id",
-                    mapToDisplayName: "Account ID",
+                    mapToName: "<value>",
                   },
                 ],
                 optionalFields: [
                   {
-                    mapToName: "<value>",
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
                   },
                   {
                     mapToName: "<value>",
+                  },
+                ],
+                backfill: {
+                  defaultPeriod: {
+                    days: 30,
+                    fullHistory: false,
+                  },
+                },
+              },
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                schedule: "<value>",
+                mapToName: "people",
+                mapToDisplayName: "People",
+                requiredFields: [
+                  {
+                    mapToName: "<value>",
+                  },
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
+                  {
+                    mapToName: "<value>",
+                  },
+                ],
+                optionalFields: [
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
                   },
                   {
                     mapToName: "<value>",
@@ -195,24 +232,24 @@ async function run() {
                   allowAnyFields: true,
                 },
               },
-              {
-                objectName: "<value>",
-                inheritMapping: true,
-                valueDefaults: {
-                  allowAnyFields: true,
-                },
-              },
-              {
-                objectName: "<value>",
-                inheritMapping: true,
-                valueDefaults: {
-                  allowAnyFields: true,
-                },
-              },
             ],
           },
           subscribe: {
             objects: [
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                inheritFieldsAndMapping: true,
+                updateEvent: {
+                  watchFieldsAuto: "all",
+                  requiredWatchFields: [
+                    "[\"name\",\"domain\"]",
+                  ],
+                },
+                otherEvents: [
+                  "[\"object.merged\",\"object.restored\"]",
+                ],
+              },
               {
                 objectName: "<value>",
                 destination: "<value>",
@@ -290,17 +327,23 @@ async function run() {
                 mapToDisplayName: "People",
                 requiredFields: [
                   {
-                    fieldName: "<value>",
-                    mapToName: "account_id",
-                    mapToDisplayName: "Account ID",
+                    mapToName: "<value>",
                   },
                   {
                     fieldName: "<value>",
                     mapToName: "account_id",
                     mapToDisplayName: "Account ID",
                   },
+                  {
+                    mapToName: "<value>",
+                  },
                 ],
                 optionalFields: [
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
                   {
                     mapToName: "<value>",
                   },
@@ -320,9 +363,7 @@ async function run() {
                 mapToDisplayName: "People",
                 requiredFields: [
                   {
-                    fieldName: "<value>",
-                    mapToName: "account_id",
-                    mapToDisplayName: "Account ID",
+                    mapToName: "<value>",
                   },
                   {
                     fieldName: "<value>",
@@ -330,17 +371,50 @@ async function run() {
                     mapToDisplayName: "Account ID",
                   },
                   {
-                    fieldName: "<value>",
-                    mapToName: "account_id",
-                    mapToDisplayName: "Account ID",
+                    mapToName: "<value>",
                   },
                 ],
                 optionalFields: [
                   {
-                    mapToName: "<value>",
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
                   },
                   {
                     mapToName: "<value>",
+                  },
+                ],
+                backfill: {
+                  defaultPeriod: {
+                    days: 30,
+                    fullHistory: false,
+                  },
+                },
+              },
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                schedule: "<value>",
+                mapToName: "people",
+                mapToDisplayName: "People",
+                requiredFields: [
+                  {
+                    mapToName: "<value>",
+                  },
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
+                  },
+                  {
+                    mapToName: "<value>",
+                  },
+                ],
+                optionalFields: [
+                  {
+                    fieldName: "<value>",
+                    mapToName: "account_id",
+                    mapToDisplayName: "Account ID",
                   },
                   {
                     mapToName: "<value>",
@@ -364,24 +438,24 @@ async function run() {
                   allowAnyFields: true,
                 },
               },
-              {
-                objectName: "<value>",
-                inheritMapping: true,
-                valueDefaults: {
-                  allowAnyFields: true,
-                },
-              },
-              {
-                objectName: "<value>",
-                inheritMapping: true,
-                valueDefaults: {
-                  allowAnyFields: true,
-                },
-              },
             ],
           },
           subscribe: {
             objects: [
+              {
+                objectName: "<value>",
+                destination: "<value>",
+                inheritFieldsAndMapping: true,
+                updateEvent: {
+                  watchFieldsAuto: "all",
+                  requiredWatchFields: [
+                    "[\"name\",\"domain\"]",
+                  ],
+                },
+                otherEvents: [
+                  "[\"object.merged\",\"object.restored\"]",
+                ],
+              },
               {
                 objectName: "<value>",
                 destination: "<value>",

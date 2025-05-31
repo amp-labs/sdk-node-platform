@@ -20,6 +20,14 @@ let value: OAuth2Options = {
     workspaceRefField: "account-id",
     consumerRefField: "user-id",
     scopesField: "scopes",
+    otherFields: [
+      {
+        name: "<value>",
+        displayName: "Yesenia.Mertz58",
+        path: "owner.siteId",
+        capture: "https:\/\/(?<result>[^.]+)\.docusign\.net",
+      },
+    ],
   },
   docsURL: "https://docs.example.com/client-credentials",
   authURLParams: {

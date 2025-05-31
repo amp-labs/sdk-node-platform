@@ -253,13 +253,13 @@ export type ListIntegrationsProxyIntegration = {
 };
 
 /**
- * If always, the integration will subscribe to create events.
+ * If always, the integration will subscribe to create events by default.
  */
 export const ListIntegrationsIntegrationsResponse200Enabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to create events.
+ * If always, the integration will subscribe to create events by default.
  */
 export type ListIntegrationsIntegrationsResponse200Enabled = ClosedEnum<
   typeof ListIntegrationsIntegrationsResponse200Enabled
@@ -267,19 +267,19 @@ export type ListIntegrationsIntegrationsResponse200Enabled = ClosedEnum<
 
 export type ListIntegrationsCreateEvent = {
   /**
-   * If always, the integration will subscribe to create events.
+   * If always, the integration will subscribe to create events by default.
    */
   enabled?: ListIntegrationsIntegrationsResponse200Enabled | undefined;
 };
 
 /**
- * If always, the integration will subscribe to update events.
+ * If always, the integration will subscribe to update events by default.
  */
 export const ListIntegrationsEnabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to update events.
+ * If always, the integration will subscribe to update events by default.
  */
 export type ListIntegrationsEnabled = ClosedEnum<
   typeof ListIntegrationsEnabled
@@ -300,7 +300,7 @@ export type ListIntegrationsWatchFieldsAuto = ClosedEnum<
 
 export type ListIntegrationsUpdateEvent = {
   /**
-   * If always, the integration will subscribe to update events.
+   * If always, the integration will subscribe to update events by default.
    */
   enabled?: ListIntegrationsEnabled | undefined;
   /**
@@ -311,13 +311,13 @@ export type ListIntegrationsUpdateEvent = {
 };
 
 /**
- * If always, the integration will subscribe to delete events.
+ * If always, the integration will subscribe to delete events by default.
  */
 export const ListIntegrationsIntegrationsEnabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to delete events.
+ * If always, the integration will subscribe to delete events by default.
  */
 export type ListIntegrationsIntegrationsEnabled = ClosedEnum<
   typeof ListIntegrationsIntegrationsEnabled
@@ -325,7 +325,7 @@ export type ListIntegrationsIntegrationsEnabled = ClosedEnum<
 
 export type ListIntegrationsDeleteEvent = {
   /**
-   * If always, the integration will subscribe to delete events.
+   * If always, the integration will subscribe to delete events by default.
    */
   enabled?: ListIntegrationsIntegrationsEnabled | undefined;
 };

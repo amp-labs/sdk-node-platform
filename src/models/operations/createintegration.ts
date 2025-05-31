@@ -161,31 +161,31 @@ export type ProxyIntegration = {
 };
 
 /**
- * If always, the integration will subscribe to create events.
+ * If always, the integration will subscribe to create events by default.
  */
 export const Enabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to create events.
+ * If always, the integration will subscribe to create events by default.
  */
 export type Enabled = ClosedEnum<typeof Enabled>;
 
 export type CreateEvent = {
   /**
-   * If always, the integration will subscribe to create events.
+   * If always, the integration will subscribe to create events by default.
    */
   enabled?: Enabled | undefined;
 };
 
 /**
- * If always, the integration will subscribe to update events.
+ * If always, the integration will subscribe to update events by default.
  */
 export const CreateIntegrationEnabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to update events.
+ * If always, the integration will subscribe to update events by default.
  */
 export type CreateIntegrationEnabled = ClosedEnum<
   typeof CreateIntegrationEnabled
@@ -204,7 +204,7 @@ export type WatchFieldsAuto = ClosedEnum<typeof WatchFieldsAuto>;
 
 export type UpdateEvent = {
   /**
-   * If always, the integration will subscribe to update events.
+   * If always, the integration will subscribe to update events by default.
    */
   enabled?: CreateIntegrationEnabled | undefined;
   /**
@@ -215,13 +215,13 @@ export type UpdateEvent = {
 };
 
 /**
- * If always, the integration will subscribe to delete events.
+ * If always, the integration will subscribe to delete events by default.
  */
 export const CreateIntegrationIntegrationsEnabled = {
   Always: "always",
 } as const;
 /**
- * If always, the integration will subscribe to delete events.
+ * If always, the integration will subscribe to delete events by default.
  */
 export type CreateIntegrationIntegrationsEnabled = ClosedEnum<
   typeof CreateIntegrationIntegrationsEnabled
@@ -229,7 +229,7 @@ export type CreateIntegrationIntegrationsEnabled = ClosedEnum<
 
 export type DeleteEvent = {
   /**
-   * If always, the integration will subscribe to delete events.
+   * If always, the integration will subscribe to delete events by default.
    */
   enabled?: CreateIntegrationIntegrationsEnabled | undefined;
 };
